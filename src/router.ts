@@ -12,7 +12,7 @@ router.beforeEach(async (to) => {
   const { profile } = storeToRefs(useAuthStore())
   const { getUserData } = useAuthStore()
 
-  if (localStorage.getItem('auth_token') && !profile.value) {
+  if (to.path.startsWith.toString() === '/admin' && localStorage.getItem('auth_token') && !profile.value) {
     // console.log('fetching user data')
     await getUserData()
   }
@@ -24,8 +24,8 @@ router.beforeEach(async (to) => {
   if (to.name === '/' && !profile.value) {
     return { name: '/auth/login' }
   } else if ((to.name === '/auth/login' || to.name === '/auth/register') && profile.value) {
-    return { 
-      name: '/'
+    return {
+      name: '/',
     }
   }
 })
