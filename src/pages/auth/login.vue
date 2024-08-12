@@ -3,6 +3,8 @@ import { RouterLink } from 'vue-router'
 import SolarLetterLinear from '~icons/solar/letter-linear'
 import SolarLockPasswordLinear from '~icons/solar/lock-password-linear'
 import { useAuthStore } from '@/stores/authStore'
+import SolarEyeClosedLinear from '~icons/solar/eye-closed-linear'
+import SolarEyeLinear from '~icons/solar/eye-linear'
 
 const { login } = useAuthStore()
 
@@ -13,6 +15,8 @@ const loginData = ref<{
   email: '',
   password: '',
 })
+
+const showPassword = ref(false)
 
 async function handleLogin() {
   await login(loginData.value)
@@ -54,9 +58,13 @@ async function handleLogin() {
                 v-model="loginData.password"
                 required
                 class="w-full bg-transparent focus:outline-none"
-                type="text"
+                :type="showPassword? 'text' : 'password' "
                 placeholder="Masukkan password"
               >
+              <button type="button" @click="showPassword = !showPassword">
+                <SolarEyeClosedLinear v-if="showPassword" />
+                <SolarEyeLinear v-else />
+              </button>
             </label>
           </abbr>
           <div class="flex justify-end">

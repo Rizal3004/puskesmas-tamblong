@@ -5,6 +5,7 @@ import { usePatientsStore } from '@/stores/patientsStore'
 import DeleteDialog from '@/components/Pasien/DeleteDialog.vue'
 
 const { patientsList } = storeToRefs(usePatientsStore())
+const { deletePatientByAuthId } = usePatientsStore()
 
 const searchText = ref('')
 
@@ -13,9 +14,10 @@ const pasienList2 = computed(() => {
     return pasien.name?.toLowerCase().includes(searchText.value.toLowerCase())
   })
 })
-async function handleDelete(pasienId: number) {
+async function handleDelete(authId: string) {
   // await axiosInstance.delete(`/patients/${pasienId}`)
   // fetchData()
+  await deletePatientByAuthId(authId)
 }
 </script>
 
@@ -64,7 +66,7 @@ async function handleDelete(pasienId: number) {
             <td class="text-start">
               <div class="flex items-center gap-2 pl-10">
                 <abbr title="Hapus Pasien">
-                  <DeleteDialog :pasienId="pasien.id" @delete="handleDelete" />
+                  <DeleteDialog :pasienId="pasien.id" @delete="() => handleDelete(pasien.user_id)" />
                 </abbr>
               </div>
             </td>
