@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 import { useToast } from 'vue-toast-notification'
 import { supabase } from '@/supabase'
 import type { Doctor2, DoctorForm } from '@/types/Doctor'
+import jpegToPng from '@/utils/jpegToPng'
 
 export const useDoctorStore = defineStore('Doctor', () => {
   const router = useRouter()
@@ -46,11 +47,13 @@ export const useDoctorStore = defineStore('Doctor', () => {
       return
     }
 
+    const imageFile2 = await jpegToPng(imageFile as File)
+
     const doctorId = data?.id
 
-    const ImageExt = imageFile?.name.split('.').pop()
+    const ImageExt = imageFile2?.name.split('.').pop()
 
-    await supabase.storage.from('avatars').upload(`doctor/${doctorId}.${ImageExt}`, imageFile!)
+    await supabase.storage.from('avatars').upload(`doctor/${doctorId}.${ImageExt}`, imageFile2!)
 
     const imgUrl = supabase.storage.from('avatars').getPublicUrl(`doctor/${doctorId}.${ImageExt}`).data.publicUrl
     doctorList.value.push({
