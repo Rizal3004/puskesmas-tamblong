@@ -41,7 +41,7 @@ async function handleRegister() {
 
 <template>
   <div class="h-screen grid md:grid-cols-2">
-    <div class="bg-slate-700 hidden md:block h-screen">
+    <div class="bg-slate-700 hidden md:block h-screen overflow-hidden">
       <img src="/images/image2.jpg" alt="">
     </div>
     <div class="md:px-44 px-6 flex flex-col gap-8 justify-center relative">

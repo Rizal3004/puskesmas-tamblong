@@ -21,7 +21,7 @@ async function handleLogin() {
 
 <template>
   <div class="h-screen grid sm:grid-cols-2">
-    <div class="bg-slate-700 hidden md:block h-screen">
+    <div class="bg-slate-700 hidden md:block h-screen overflow-hidden">
       <img src="/images/image1.jpg" alt="">
     </div>
     <div class="px-6 md:px-44 flex flex-col gap-8 justify-center relative">

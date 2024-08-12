@@ -12,7 +12,7 @@ router.beforeEach(async (to) => {
   const { profile } = storeToRefs(useAuthStore())
   const { getUserData } = useAuthStore()
 
-  if (to.path.startsWith.toString() === '/admin' && localStorage.getItem('auth_token') && !profile.value) {
+  if (!(to.path.startsWith.toString() === '/admin') && localStorage.getItem('auth_token') && !profile.value) {
     // console.log('fetching user data')
     await getUserData()
   }
