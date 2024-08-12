@@ -79,7 +79,10 @@ export const useDoctorStore = defineStore('Doctor', () => {
 
     if (error) {
       console.error(error.message)
-      console.error(error.code)
+      if (error.code === '23503') {
+        toast.error('Gagal menghapus dokter karena masih terdapat pasien yang terhubung dengan dokter ini')
+        return
+      }
       console.error(error.hint)
       toast.error('Gagal menghapus dokter')
       return
