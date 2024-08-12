@@ -1,0 +1,86 @@
+<script setup lang="ts">
+import {
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogOverlay,
+  DialogPortal,
+  DialogRoot,
+  DialogTitle,
+  DialogTrigger,
+} from 'radix-vue'
+import SolarCheckCircleBoldDuotone from '~icons/solar/check-circle-bold-duotone'
+
+defineProps<{
+  bookingActivityId: number
+}>()
+const emit = defineEmits<{
+  delete: [bookingActivityId: number, penyakit: string, resep: string]
+}>()
+const penyakit = ref('')
+const resep = ref('')
+</script>
+
+<template>
+  <DialogRoot>
+    <DialogTrigger
+      class=""
+    >
+      <SolarCheckCircleBoldDuotone class="text-green-500" />
+    </DialogTrigger>
+    <DialogPortal>
+      <DialogOverlay class="bg-blackA9 data-[state=open]:animate-overlayShow fixed inset-0 z-30" />
+      <DialogContent
+        class="data-[state=open]:animate-contentShow fixed top-[50%] left-[50%] max-h-[85vh] w-[90vw] max-w-[450px] translate-x-[-50%] translate-y-[-50%] rounded-[6px] bg-white p-[25px] shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] focus:outline-none z-[100]"
+      >
+        <DialogTitle class="text-mauve12 m-0 text-[17px] font-semibold">
+          Konfirmasi Selesai
+        </DialogTitle>
+        <DialogDescription class="text-mauve11 mt-[10px] mb-5 text-[15px] leading-normal">
+          <div class="flex flex-col gap-2">
+            <p>
+              Masukkan penyakit dan resep yang diberikan kepada pasien
+            </p>
+            <label class="flex flex-col gap-1">
+              Penyakit
+              <input
+                v-model="penyakit"
+                placeholder="Masukkan Penyakit"
+                type="text"
+                class="border px-2 py-1 rounded-md"
+                required
+              >
+            </label>
+            <label class="flex flex-col gap-1">
+              Resep
+              <textarea
+                v-model="resep"
+                placeholder="Masukkan Resep"
+                class="border px-2 py-1 rounded-md"
+                required
+              />
+            </label>
+          </div>
+        </DialogDescription>
+        <div class="mt-[25px] flex gap-4 justify-end">
+          <DialogClose asChild>
+            <button
+              class="bg-slate-100 text-slate-600 hover:bg-slate-200 focus:shadow-slate-300 transition-all duration-300 inline-flex h-[35px] items-center justify-center rounded-[4px] px-[15px] font-semibold leading-none focus:shadow-[0_0_0_2px] focus:outline-none"
+            >
+              Batal
+            </button>
+          </DialogClose>
+          <DialogClose asChild>
+            <button
+              type="button"
+              class="bg-green-200 reen hover:bg-green-400 hover:text-green-800 transition-all duration-300 focus:shadow-green-300 inline-flex h-[35px] items-center justify-center rounded-[4px] px-[15px] font-semibold leading-none focus:shadow-[0_0_0_2px] focus:outline-none"
+              @click="emit('delete', bookingActivityId, penyakit, resep)"
+            >
+              Selesai
+            </button>
+          </DialogClose>
+        </div>
+      </DialogContent>
+    </DialogPortal>
+  </DialogRoot>
+</template>

@@ -1,0 +1,87 @@
+<script lang="ts" setup>
+import SolarPhoneBoldDuotone from '~icons/solar/phone-bold-duotone'
+import SolarMailboxBoldDuotone from '~icons/solar/mailbox-bold-duotone'
+import IcBaselineFacebook from '~icons/ic/baseline-facebook'
+import Fa6BrandsXTwitter from '~icons/fa6-brands/x-twitter'
+import PhInstagramLogoDuotone from '~icons/ph/instagram-logo-duotone'
+import SolarArrowUpLinear from '~icons/solar/arrow-up-linear'
+</script>
+
+<template>
+  <footer id="kontak" class="py-20 px-6 flex md:block gap-6 flex-col md:px-36">
+    <div class="grid md:grid-cols-3 gap-10">
+      <div class="space-y-4" data-aos="fade-right">
+        <h4 class="text-2xl font-bold">Contact info</h4>
+        <p>Fusce at libero iaculis, venenatis augue quis, pharetra lorem. Curabitur ut dolor eu elit consequat ultricies.</p>
+        <div class="space-y-2">
+          <div class="flex items-center gap-2">
+            <div class="flex items-center justify-center rounded-full bg-slate-700 size-8">
+              <SolarPhoneBoldDuotone class="text-white" />
+            </div>
+            <span>123123123123</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <div class="flex items-center justify-center rounded-full bg-slate-700 size-8">
+              <SolarMailboxBoldDuotone class="text-white" />
+            </div>
+            <span>123123123123</span>
+          </div>
+        </div>
+      </div>
+      <div class="space-y-4" data-aos="fade-up">
+        <h4 class="text-2xl font-bold">Latest News</h4>
+        <div class="space-y-4">
+          <div class="flex items-center gap-2">
+            <div class="avatar">
+              <div class="rounded-full w-12">
+                <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg">
+              </div>
+            </div>
+            <div class="space-y-1">
+              <h5>Amazing Technology</h5>
+              <p class="text-sm font-light">March 08, 2018</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
+            <div class="avatar">
+              <div class="rounded-full w-12">
+                <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg">
+              </div>
+            </div>
+            <div class="space-y-1">
+              <h5>Amazing Technology</h5>
+              <p class="text-sm font-light">March 08, 2018</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="space-y-4" data-aos="fade-left">
+        <h4 class="text-2xl font-bold">Opening Hours</h4>
+        <div class="space-y-2">
+          <p>Monday - Friday: 06:00 AM - 10:00 PM</p>
+          <p>Monday - Friday: 06:00 AM - 10:00 PM</p>
+          <p>Monday - Friday: 06:00 AM - 10:00 PM</p>
+        </div>
+        <div class="flex items-center gap-4">
+          <IcBaselineFacebook />
+          <Fa6BrandsXTwitter />
+          <PhInstagramLogoDuotone />
+        </div>
+      </div>
+    </div>
+    <a href="#" class="divider divider-end">
+      <div class="p-2 border flex items-center gap-2 rounded-md">
+        <p>Back to top</p>
+        <SolarArrowUpLinear />
+      </div>
+    </a>
+    <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-10">
+      <p>Copyright © 2024 Telkom University | Design : Rizal Ihsan</p>
+      <div class="flex items-center gap-4">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+  </footer>
+</template>
