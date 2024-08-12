@@ -78,7 +78,9 @@ export const useDoctorStore = defineStore('Doctor', () => {
     const { error } = await supabase.from('doctor').delete().eq('id', id)
 
     if (error) {
-      console.error(error)
+      console.error(error.message)
+      console.error(error.code)
+      console.error(error.hint)
       toast.error('Gagal menghapus dokter')
       return
     }
