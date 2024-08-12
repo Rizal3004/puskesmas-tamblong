@@ -73,7 +73,7 @@ function checkIfDoctorIsAvailable({ doctorId, date, startsAt, endsAt }: { doctor
 
 async function handleBooking() {
   await addBookingActivity(bookingFormData)
-  router.push('/jadwal-pengobatan')
+  router.go(0)
 }
 </script>
 

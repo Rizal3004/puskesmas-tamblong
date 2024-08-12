@@ -26,6 +26,7 @@ const bookingHours = computed(() => {
 
 async function handleArrived(bookingId: number) {
   await handlePatientArrived(bookingId)
+  router.go(0)
 }
 
 onMounted(() => {
@@ -37,8 +38,8 @@ onMounted(() => {
 
 <template>
   <Header />
-  <div class="px-36 py-4 space-y-3">
-    <div class="w-8/12">
+  <div class="px-6 md:px-36 py-4 space-y-3">
+    <div class="md:w-8/12">
       <RouterLink to="/" class="flex items-center gap-3 text-slate-700 px-3.5 py-1 rounded-md transition-all duration-500 hover:bg-slate-100 w-fit">
         <SolarArrowLeftLinear class="" />
         <span class="">Kembali</span>

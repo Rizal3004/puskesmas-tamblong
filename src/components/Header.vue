@@ -50,6 +50,9 @@ const { userBooking } = useAuthStore()
         </RouterLink>
       </template>
     </div>
+    <RouterLink to="/jadwal-pengobatan" class="block md:hidden px-4 py-1 bg-slate-700 text-white rounded-md">
+      Jadwal Pengobatan
+    </RouterLink>
     <!-- <RouterLink to="/mobile-navigation">
       <SolarHamburgerMenuLinear />
     </RouterLink> -->

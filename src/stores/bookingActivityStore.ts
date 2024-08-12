@@ -3,13 +3,15 @@ import { useAuthStore } from '@/stores/authStore'
 import { supabase } from '@/supabase'
 import type { BookingActivity, BookingActivityForm } from '@/types/BookingActivity'
 import getCurrentTime from '@/utils/getCurrentTime'
+import { useToast } from 'vue-toast-notification'
 
 export const useBookingActivityStore = defineStore('BookingActivity', () => {
-  const { setUserBooking } = useAuthStore()
   // Store untuk data aktivitas booking
   const bookingActivityList = ref<BookingActivity[]>([])
-
+  
   const addBookingActivity = async (data: BookingActivityForm) => {
+    const toast = useToast()
+    const { setUserBooking } = useAuthStore()
     const { data: bh } = await supabase.from('booking_hours').insert({
       starts_at: data.starts_at,
       ends_at: data.ends_at,
@@ -47,6 +49,8 @@ export const useBookingActivityStore = defineStore('BookingActivity', () => {
     }
 
     bookingActivityList.value.push(newBookingActivity)
+    setUserBooking(newBookingActivity)
+    // toast.success('Anda telah melakukan booking dokter, silahkan melihat detail booking anda dengan menekan tombol "jadwal pengobatan"')
   }
 
   const getBookingActivitybyId = (id: number) => {
@@ -64,6 +68,7 @@ export const useBookingActivityStore = defineStore('BookingActivity', () => {
   }
 
   const getBookingActivity = async () => {
+    const { setUserBooking } = useAuthStore()
     const { profile } = useAuthStore()
 
     // Ambil data aktivitas booking dari table booking_activity
