@@ -1,7 +1,5 @@
 <script lang="ts" setup>
 import { useRouter } from 'vue-router'
-import { AxiosError } from 'axios'
-import axiosInstance from '@/axios'
 import jpegToPng from '@/utils/jpegToPng'
 import convertToHHMMSS from '@/utils/convertToHHMMSS'
 
@@ -31,64 +29,33 @@ const dokterFormData = reactive<{
   foto: null,
 })
 
-async function fetchData() {
-  const { data } = await axiosInstance.get('/poli')
-  poliList.value = data
-
-  const { data: dokterData } = await axiosInstance.get<{
-    poli: {
-      name: string
-    }
-  } & {
-    id: number
-    jam_kerja_start: Date | null
-    jam_kerja_end: Date | null
-    name: string | null
-    phone: string | null
-    email: string | null
-    foto: string | null
-    poli_id: number
-  }>(`/doctors/${dokterId}`)
-
-  dokterFormData.nama = dokterData.name!
-  dokterFormData.poliId = dokterData.poli_id.toString()
-  dokterFormData.jamMulai = convertToHHMMSS(dokterData.jam_kerja_start!.toString())
-  dokterFormData.jamSelesai = convertToHHMMSS(dokterData.jam_kerja_end!.toString())
-  dokterFormData.email = dokterData.email!
-  dokterFormData.noTelp = dokterData.phone!
-}
-
 function photoChange(e: Event) {
   dokterFormData.foto = (e.target as HTMLInputElement)?.files![0]
 }
 
 async function handleSubmit() {
-  const formData = new FormData()
-  formData.append('nama', dokterFormData.nama)
-  formData.append('poliId', dokterFormData.poliId)
-  formData.append('jamMulai', dokterFormData.jamMulai)
-  formData.append('jamSelesai', dokterFormData.jamSelesai)
-  formData.append('email', dokterFormData.email)
-  formData.append('noTelp', dokterFormData.noTelp)
-  if (dokterFormData.foto) {
-    const fotoInPng = await jpegToPng(dokterFormData.foto)
-    formData.append('foto', fotoInPng!)
-  }
+  // const formData = new FormData()
+  // formData.append('nama', dokterFormData.nama)
+  // formData.append('poliId', dokterFormData.poliId)
+  // formData.append('jamMulai', dokterFormData.jamMulai)
+  // formData.append('jamSelesai', dokterFormData.jamSelesai)
+  // formData.append('email', dokterFormData.email)
+  // formData.append('noTelp', dokterFormData.noTelp)
+  // if (dokterFormData.foto) {
+  //   const fotoInPng = await jpegToPng(dokterFormData.foto)
+  //   formData.append('foto', fotoInPng!)
+  // }
 
-  try {
-    await axiosInstance.patch(`/doctors/${dokterId}`, formData)
-    router.push('/admin/dokter')
-  } catch (error) {
-    if (error instanceof AxiosError) {
-      console.error(error.response?.data)
-      console.error(error.message)
-    }
-  }
+  // try {
+  //   await axiosInstance.patch(`/doctors/${dokterId}`, formData)
+  //   router.push('/admin/dokter')
+  // } catch (error) {
+  //   if (error instanceof AxiosError) {
+  //     console.error(error.response?.data)
+  //     console.error(error.message)
+  //   }
+  // }
 }
-
-onMounted(() => {
-  fetchData()
-})
 </script>
 
 <template>
