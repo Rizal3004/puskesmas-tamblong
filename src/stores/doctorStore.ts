@@ -74,10 +74,25 @@ export const useDoctorStore = defineStore('Doctor', () => {
     return doctorList.value.find(doctor => doctor.id === id)
   }
 
+  const deleteDoctor = async (id: number) => {
+    const { error } = await supabase.from('doctor').delete().eq('id', id)
+
+    if (error) {
+      console.error(error)
+      toast.error('Gagal menghapus dokter')
+      return
+    }
+
+    const doctorIndex = doctorList.value.findIndex(doctor => doctor.id === id)
+    doctorList.value.splice(doctorIndex, 1)
+    toast.success('Berhasil menghapus dokter')
+  }
+
   return {
     doctorList,
     getAllDoctors,
     createDoctor,
     getDoctorById,
+    deleteDoctor,
   }
 })

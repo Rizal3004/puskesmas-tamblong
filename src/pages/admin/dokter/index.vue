@@ -3,11 +3,13 @@ import { storeToRefs } from 'pinia'
 import { useDoctorStore } from '@/stores/doctorStore'
 import { usePoliStore } from '@/stores/poliStore'
 import MaterialSymbolsLightEditSquareRounded from '~icons/material-symbols-light/edit-square-rounded'
+import DeleteDialog from '@/components/Dokter/DeleteDialog.vue'
 
 const { doctorList } = storeToRefs(useDoctorStore())
+const { deleteDoctor } = useDoctorStore()
 const { getPoliById } = usePoliStore()
 async function handleDelete(dokterId: number) {
-
+  await deleteDoctor(dokterId)
 }
 </script>
 
@@ -58,7 +60,7 @@ async function handleDelete(dokterId: number) {
                 <RouterLink :to="`/admin/dokter/${dokter.id}/update`">
                   <MaterialSymbolsLightEditSquareRounded />
                 </RouterLink>
-                <DokterDeleteDialog :dokterId="dokter.id" @delete="handleDelete" />
+                <DeleteDialog :dokterId="dokter.id" @delete="handleDelete" />
               </div>
             </td>
           </tr>
