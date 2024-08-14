@@ -127,9 +127,9 @@ async function handleDone(bookingActivityId: number, penyakit: string, resep: st
             </td>
             <td class="text-start">
               <div class="flex items-center gap-2 pl-10">
-                <RouterLink :to="`/admin/booking/${ba.id}`">
+                <!-- <RouterLink :to="`/admin/booking/${ba.id}`">
                   <SolarPenBoldDuotone class="text-orange-400" />
-                </RouterLink>
+                </RouterLink> -->
                 <BookingDoneConfirmationDialog :bookingActivityId="ba.id" @delete="handleDone" />
                 <BookingDeleteDialog :bookingActivityId="ba.id" @delete="handleCancel" />
               </div>

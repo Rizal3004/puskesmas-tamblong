@@ -68,7 +68,7 @@ async function handleLogin() {
             </label>
           </abbr>
           <div class="flex justify-end">
-            <RouterLink to="/auth/forget-password" class="text-sm text-slate-600">Lupa Password</RouterLink>
+            <!-- <RouterLink to="/auth/forget-password" class="text-sm text-slate-600">Lupa Password</RouterLink> -->
           </div>
           <button type="submit" class="bg-sky-500 w-full text-white py-1.5 rounded-md">Login</button>
         </form>

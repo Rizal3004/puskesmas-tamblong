@@ -17,7 +17,7 @@ const bookingActivities2 = computed(() => {
   return bookingActivityList.value.filter((ba) => {
     return ba.status === 'done'
   }).map((ba) => {
-    const patient = getPatientById(ba.pasien_id)
+    const patient = getPatientById(ba.pasien_id.toString())
     const doctor = getDoctorById(ba.dokter_id)
     const poli = getPoliById(doctor!.poli_id!)
     return {

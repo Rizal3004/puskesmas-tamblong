@@ -1,45 +1,51 @@
-<!-- <script lang="ts" setup>
-import { useBookingActivityStore } from '@/stores/bookingActivityStore'
+<script lang="ts" setup>
 
-const router = useRouter()
 
-const { getBookingActivitybyId, handleChangeBookingDate } = useBookingActivityStore()
-const bookingId = Number((useRoute().params as { id: string }).id,
-)
+// import { useBookingActivityStore } from '@/stores/bookingActivityStore'
 
-const bookingActivityUpdateForm = reactive({
-  date: '',
-  jamMulai: '',
-  jamSelesai: '',
-})
+// const router = useRouter()
 
-function handleSubmit() {
-  handleChangeBookingDate(bookingId, bookingActivityUpdateForm.date)
-  handleChangeBookingHour(bookingId, {
-    starts_at: bookingActivityUpdateForm.jamMulai,
-    ends_at: bookingActivityUpdateForm.jamSelesai,
-  })
+// const { getBookingActivitybyId, handleChangeBookingDate } = useBookingActivityStore()
+// const bookingId = Number((useRoute().params as { id: string }).id,
+// )
 
-  router.go(-1)
-}
+// const bookingActivityUpdateForm = reactive({
+//   date: '',
+//   jamMulai: '',
+//   jamSelesai: '',
+// })
 
-onMounted(async () => {
-  const ba = getBookingActivitybyId(bookingId)
-  if (!ba) return
-  const bh = getBookingHourById(ba?.booking_hours_id)
-  if (!bh) return
-  bookingActivityUpdateForm.date = ba.date.split('T')[0]
+// function handleSubmit() {
+//   handleChangeBookingDate(bookingId, bookingActivityUpdateForm.date)
+//   handleChangeBookingHour(bookingId, {
+//     starts_at: bookingActivityUpdateForm.jamMulai,
+//     ends_at: bookingActivityUpdateForm.jamSelesai,
+//   })
 
-  bookingActivityUpdateForm.jamMulai = bh?.starts_at
-  bookingActivityUpdateForm.jamSelesai = bh?.ends_at
-})
+//   router.go(-1)
+// }
 
-definePage({
-  name: 'EditDataBooking',
-})
+// onMounted(async () => {
+//   const ba = getBookingActivitybyId(bookingId)
+//   if (!ba) return
+//   const bh = getBookingHourById(ba?.booking_hours_id)
+//   if (!bh) return
+//   bookingActivityUpdateForm.date = ba.date.split('T')[0]
+
+//   bookingActivityUpdateForm.jamMulai = bh?.starts_at
+//   bookingActivityUpdateForm.jamSelesai = bh?.ends_at
+// })
+
+// definePage({
+//   name: 'EditDataBooking',
+// }) 
 </script>
 
 <template>
+  <div class="">
+    tes
+  </div>
+  <!--
   <button
     type="button"
     class="flex items-center gap-2 hover:bg-slate-100 px-4 py-1 rounded-xl text-sm -translate-x-10 transition-all duration-300 w-fit"
@@ -81,9 +87,5 @@ definePage({
         <button type="submit" class="w-full h-10 bg-blue-400 rounded-md text-white"> Ganti Jadwal </button>
       </div>
     </form>
-  </div>
-</template> -->
-
-<template>
-  tes
-</template>
+  </div>-->
+</template> 
