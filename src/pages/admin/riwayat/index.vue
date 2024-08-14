@@ -4,13 +4,11 @@ import { storeToRefs } from 'pinia'
 import { useBookingActivityStore } from '@/stores/bookingActivityStore'
 import { usePatientsStore } from '@/stores/patientsStore'
 import { useDoctorStore } from '@/stores/doctorStore'
-import { useBookingHoursStore } from '@/stores/bookingHoursStore'
 import { usePoliStore } from '@/stores/poliStore'
 
 const { bookingActivityList } = storeToRefs(useBookingActivityStore())
 const { getPatientById } = usePatientsStore()
 const { getDoctorById } = useDoctorStore()
-const { getBookingHourById } = useBookingHoursStore()
 const { getPoliById } = usePoliStore()
 
 const searchText = ref('')
@@ -21,13 +19,11 @@ const bookingActivities2 = computed(() => {
   }).map((ba) => {
     const patient = getPatientById(ba.pasien_id)
     const doctor = getDoctorById(ba.dokter_id)
-    const bookingHour = getBookingHourById(ba.booking_hours_id)
     const poli = getPoliById(doctor!.poli_id!)
     return {
       ...ba,
       patient,
       doctor,
-      bookingHour,
       poli,
     }
   })
@@ -75,8 +71,8 @@ const bookingActivities2 = computed(() => {
             <td class="text-start">{{ ba.doctor?.name }}</td>
             <td class="text-start">{{ ba.poli?.name }}</td>
             <td class="text-start">{{ ba.date }}</td>
-            <td class="text-start">{{ ba.bookingHour?.starts_at }}</td>
-            <td class="text-start">{{ ba.bookingHour?.ends_at }}</td>
+            <td class="text-start">{{ ba.starts_at }}</td>
+            <td class="text-start">{{ ba.ends_at }}</td>
             <td class="text-start">{{ ba.keluhan }}</td>
             <td class="text-start">{{ ba.penyakit }}</td>
             <td class="text-start">{{ ba.resep }}</td>

@@ -6,11 +6,10 @@ import SolarPen2BoldDuotone from '~icons/solar/pen-2-bold-duotone'
 import SolarCloseSquareLineDuotone from '~icons/solar/close-square-line-duotone'
 import SolarCheckSquareLineDuotone from '~icons/solar/check-square-line-duotone'
 import Header from '@/components/Header.vue'
-import { supabase } from '@/supabase'
+import validateInputNumber from '@/utils/validateInputNumber'
 
 const { changeAddress, changePhone, changePassword, changeEmail, logout } = useAuthStore()
 const { profile } = storeToRefs(useAuthStore())
-const profileEmail = ref('')
 const router = useRouter()
 
 const isEditEmail = ref(false)
@@ -48,18 +47,16 @@ function handleLogout() {
   router.push('/auth/login')
 }
 
-onMounted(async () => {
-  const { data: { user } } = await supabase.auth.getUser(localStorage.getItem('auth_token')!)
-  emailText.value = user?.email ?? ''
-  profileEmail.value = user?.email ?? ''
-  if (!profile.value) {
-    router.push('/auth/login')
-  }
+onMounted(() => {
+  emailText.value = profile.value?.email ?? ''
+  addressText.value = profile.value?.address ?? ''
+  phoneText.value = profile.value?.phone ?? ''
+  passwordText.value = profile.value?.password ?? ''
 })
 </script>
 
 <template>
-  <Header class="" />
+  <Header />
   <div class="px-36 py-4 space-y-3">
     <RouterLink to="/" class="flex items-center gap-3 text-slate-700 px-3.5 py-1 rounded-md transition-all duration-500 hover:bg-slate-100 w-fit">
       <SolarArrowLeftLinear class="" />
@@ -67,10 +64,10 @@ onMounted(async () => {
     </RouterLink>
     <h1 class="text-2xl font-semibold">Profile</h1>
     <table v-if="profile" class="w-8/12 [&>*>*]:border [&>*>*]:text-start [&>*>*]:px-2">
-      <tr>
+      <!-- <tr>
         <th>ID</th>
         <td>{{ profile.id }}</td>
-      </tr>
+      </tr> -->
       <tr>
         <th>Nama</th>
         <td>{{ profile.name }}</td>
@@ -84,7 +81,7 @@ onMounted(async () => {
         <td>
           <div v-if="!isEditEmail" class="flex justify-between">
             <p>
-              {{ profileEmail ?? 'Belum diatur' }}
+              {{ profile.email ?? 'Belum diatur' }}
             </p>
             <button @click="isEditEmail = true">
               <SolarPen2BoldDuotone class="text-orange-400" />
@@ -154,7 +151,8 @@ onMounted(async () => {
             <input
               ref="phoneEl"
               v-model="phoneText"
-              type="number"
+              type="text"
+              @keypress="validateInputNumber"
               class="px-1 py-1 w-full border"
               placeholder="Masukkan nomor baru anda"
             >
@@ -200,7 +198,10 @@ onMounted(async () => {
         </td>
       </tr>
     </table>
-    <button class="px-3 py-1 bg-red-500 text-white rounded-md" @click="handleLogout">Logout</button>
+    <div class="flex gap-5">
+      <button class="px-3 py-1 bg-red-500 text-white rounded-md" @click="handleLogout">Logout</button>
+      <RouterLink to="/profile/riwayat" class="px-3 py-1 bg-zinc-100 border border-zinc-400 rounded-md">Riwayat berobat</RouterLink>
+    </div>
   </div>
 </template>
 

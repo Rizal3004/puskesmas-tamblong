@@ -6,13 +6,11 @@ import type { BookingActivityForm } from '@/types/BookingActivity'
 import { useDoctorStore } from '@/stores/doctorStore'
 import { usePoliStore } from '@/stores/poliStore'
 import { useBookingActivityStore } from '@/stores/bookingActivityStore'
-import { useBookingHoursStore } from '@/stores/bookingHoursStore'
 
 const router = useRouter()
 const { profile } = useAuthStore()
 const { doctorList } = storeToRefs(useDoctorStore())
 const { getBookingActivityByDoctorIdAndDate } = useBookingActivityStore()
-const { getBookingHourById } = useBookingHoursStore()
 const { poliList } = usePoliStore()
 const { addBookingActivity } = useBookingActivityStore()
 
@@ -39,8 +37,8 @@ const doctorList2 = computed(() => {
       isAvailable: checkIfDoctorIsAvailable({
         doctorId: d.id,
         date: bookingFormData.date!,
-        startsAt: bookingFormData.starts_at,
-        endsAt: bookingFormData.ends_at,
+        startsAt: bookingFormData.starts_at!,
+        endsAt: bookingFormData.ends_at!,
       }),
     }
   }).filter((d) => {
@@ -53,13 +51,10 @@ function checkIfDoctorIsAvailable({ doctorId, date, startsAt, endsAt }: { doctor
   if (!ba) return true
 
   const isAvailable = ba.some((b) => {
-    const bookingHour = getBookingHourById(b.booking_hours_id)
-    if (!bookingHour) return false
-
     const startsAtTime = new Date(`${date}T${startsAt}`).getTime()
     const endsAtTime = new Date(`${date}T${endsAt}`).getTime()
-    const bookingStartsAtTime = new Date(`${date}T${bookingHour.starts_at}`).getTime()
-    const bookingEndsAtTime = new Date(`${date}T${bookingHour.ends_at}`).getTime()
+    const bookingStartsAtTime = new Date(`${date}T${b.starts_at}`).getTime()
+    const bookingEndsAtTime = new Date(`${date}T${b.ends_at}`).getTime()
 
     // TODO: check if the booking is overlapping
     if (startsAtTime >= bookingStartsAtTime && startsAtTime <= bookingEndsAtTime) return false
@@ -112,8 +107,8 @@ async function handleBooking() {
           <label class="flex flex-col gap-1">
             Jam Booking
             <SelectTime
-              v-model:startsAt="bookingFormData.starts_at"
-              v-model:endsAt="bookingFormData.ends_at"
+              v-model:startsAt="bookingFormData.starts_at!"
+              v-model:endsAt="bookingFormData.ends_at!"
             />
           </label>
           <label class="flex flex-col gap-1">

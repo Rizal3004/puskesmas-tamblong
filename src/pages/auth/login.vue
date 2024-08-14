@@ -12,8 +12,8 @@ const loginData = ref<{
   email: string
   password: string
 }>({
-  email: '',
-  password: '',
+  email: 'asep@example.com',
+  password: 'admin001',
 })
 
 const showPassword = ref(false)
@@ -58,7 +58,7 @@ async function handleLogin() {
                 v-model="loginData.password"
                 required
                 class="w-full bg-transparent focus:outline-none"
-                :type="showPassword? 'text' : 'password' "
+                :type="showPassword ? 'text' : 'password' "
                 placeholder="Masukkan password"
               >
               <button type="button" @click="showPassword = !showPassword">

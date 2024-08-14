@@ -1,11 +1,12 @@
 <script lang="ts" setup>
 import { RouterLink } from 'vue-router'
+import { storeToRefs } from 'pinia'
 import MaterialSymbolsMail from '~icons/material-symbols/mail'
 import IcBaselineWhatsapp from '~icons/ic/baseline-whatsapp'
 import { useAuthStore } from '@/stores/authStore'
 import SolarHamburgerMenuLinear from '~icons/solar/hamburger-menu-linear'
 
-const { userBooking } = useAuthStore()
+const { userBooking } = storeToRefs(useAuthStore())
 </script>
 
 <template>

@@ -1,36 +1,59 @@
 import { defineStore } from 'pinia'
-import { supabase } from '@/supabase'
+import { useToast } from 'vue-toast-notification'
 import type { Patient } from '@/types/Patient'
+import apiFetch from '@/ofetch'
 
 export const usePatientsStore = defineStore('Patients', () => {
   const patientsList = ref<Patient[]>([])
 
   const getAllPatients = async () => {
-    const { data } = await supabase.from('patients').select('*')
-    patientsList.value = data as Patient[]
+    const { patients } = await apiFetch<{ patients: Patient[] }>('/patients')
+    patientsList.value = patients
   }
-  const getPatientById = (id: number) => {
-    return patientsList.value.find(patient => patient.id === id)
+
+  const getPatientById = (id: string) => {
+    const patient = patientsList.value.find(patient => patient.id.toString() === id)
+    return patient
   }
 
   const deletePatientByAuthId = async (authId: string) => {
-    const { error } = await supabase.auth.admin.deleteUser(authId)
-    if (error) {
-      console.log(error)
-      return
-    }
-
-    await supabase.from('patients').delete().eq('user_id', authId)
+    const toast = useToast()
+    await apiFetch(`/patients/${authId}`, {
+      method: 'DELETE',
+      onResponseError: (error) => {
+        console.error(error)
+        toast.error(error.response._data)
+      },
+    })
 
     patientsList.value = patientsList.value.filter((patient) => {
-      return patient.user_id !== authId
+      return patient.id.toString() !== authId
     })
-  } 
+  }
+
+  const updatePatientEmailAndPassword = async ({ patientId, email, password }: { patientId: number, email: string, password: string }) => {
+    await apiFetch(`/patients/${patientId}/email`, {
+      method: 'PATCH',
+      body: { email },
+    })
+    await apiFetch(`/patients/${patientId}/password`, {
+      method: 'PATCH',
+      body: { password },
+    })
+
+    patientsList.value = patientsList.value.map((patient) => {
+      if (patient.id === patientId) {
+        return { ...patient, email, password }
+      }
+      return patient
+    })
+  }
 
   return {
     patientsList,
     getAllPatients,
     getPatientById,
     deletePatientByAuthId,
+    updatePatientEmailAndPassword,
   }
 })

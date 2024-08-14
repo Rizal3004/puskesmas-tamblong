@@ -7,6 +7,8 @@ import SolarUserRoundedLinear from '~icons/solar/user-rounded-linear'
 import SolarCardOutline from '~icons/solar/card-outline'
 import type { PatientForm } from '@/types/Patient'
 import { useAuthStore } from '@/stores/authStore'
+import SolarEyeClosedLinear from '~icons/solar/eye-closed-linear'
+import SolarEyeLinear from '~icons/solar/eye-linear'
 
 const { signup } = useAuthStore()
 const toast = useToast()
@@ -18,6 +20,9 @@ const formDataRegister = reactive<PatientForm>({
   password: '',
 })
 const passwordConfirmation = ref('')
+
+const showPassword = ref(false)
+const showPasswordConfirmation = ref(false)
 
 function validateForm() {
   if (formDataRegister.password !== passwordConfirmation.value) {
@@ -98,9 +103,13 @@ async function handleRegister() {
                 v-model="formDataRegister.password"
                 required
                 class="w-full bg-transparent focus:outline-none"
-                type="password"
+                :type="showPassword ? 'text' : 'password' "
                 placeholder="Masukkan password"
               >
+              <button type="button" @click="showPassword = !showPassword">
+                <SolarEyeClosedLinear v-if="showPassword" />
+                <SolarEyeLinear v-else />
+              </button>
             </label>
           </abbr>
           <abbr title="Konfirmasi Password">
@@ -110,9 +119,13 @@ async function handleRegister() {
                 v-model="passwordConfirmation"
                 required
                 class="w-full bg-transparent focus:outline-none"
-                type="password"
+                :type="showPasswordConfirmation ? 'text' : 'password' "
                 placeholder="Masukkan password"
               >
+              <button type="button" @click="showPasswordConfirmation = !showPasswordConfirmation">
+                <SolarEyeClosedLinear v-if="showPasswordConfirmation" />
+                <SolarEyeLinear v-else />
+              </button>
             </label>
           </abbr>
           <button type="submit" class="bg-sky-500 w-full text-white py-1.5 rounded-md">Daftar</button>

@@ -8,6 +8,7 @@ import Header from '@/components/Header.vue'
 import Hero from '@/components/Hero.vue'
 import BookingForm from '@/components/BookingForm.vue'
 import Footer from '@/components/Footer.vue'
+import { baseURL } from '@/ofetch'
 
 const { getPoliById, poliList } = usePoliStore()
 const { doctorList } = useDoctorStore()
@@ -81,7 +82,7 @@ const computedDoctors = computed(() => {
             class="flex-col overflow-hidden border shadow-lg carousel-item rounded-lg"
             data-aos="fade-up"
           >
-            <img :src="dokter.imgUrl" alt="Burger" class="object-cover w-full aspect-square">
+            <img :src="`${baseURL}/doctors/image/${dokter.id}`" alt="Burger" class="object-cover w-full aspect-square">
             <div class="px-3 pt-2">
               <p class="text-xl mb-1 capitalize">
                 {{ dokter.name }}

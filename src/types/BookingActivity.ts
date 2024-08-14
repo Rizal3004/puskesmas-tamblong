@@ -1,5 +1,3 @@
-import type { BookingHour } from '@/types/BookingHour'
-
 export interface BookingActivity {
   date: string
   dokter_id: number
@@ -11,12 +9,12 @@ export interface BookingActivity {
   penyakit: string | null
   arrived_at: string | null
   resep: string | null
-  booking_hours_id: number
   created_at: string | null
   id: number
+  starts_at: string
+  ends_at: string
   status: 'booked' | 'canceled' | 'done'
 }
 
 export type BookingActivityForm =
-  Omit<Partial<BookingActivity>, 'id' | 'created_at' | 'status' | 'booking_hours_id' | 'resep' | 'penyakit'>
-  & Omit<BookingHour, 'id'>
+  Omit<Partial<BookingActivity>, 'id' | 'created_at' | 'status' | 'resep' | 'penyakit'>

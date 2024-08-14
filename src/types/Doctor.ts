@@ -8,6 +8,6 @@ export interface Doctor {
   poli_id: number
 }
 
-export type Doctor2 = Doctor & { imgUrl: string }
+// export type Doctor2 = Doctor & { imgUrl: string }
 
 export type DoctorForm = Omit<Doctor, 'id'> & { imageFile?: File }

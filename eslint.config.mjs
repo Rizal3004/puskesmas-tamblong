@@ -28,6 +28,7 @@ export default antfu(
       'antfu/if-newline': 'off',
       'unused-imports/no-unused-vars': 'warn',
       'ts/consistent-type-definitions': 'off',
+      'node/prefer-global/buffer': 'off'
     },
   },
 )

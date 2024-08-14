@@ -3,6 +3,7 @@ import { storeToRefs } from 'pinia'
 import formatDate from '@/utils/formatDate'
 import { usePatientsStore } from '@/stores/patientsStore'
 import DeleteDialog from '@/components/Pasien/DeleteDialog.vue'
+import MaterialSymbolsEdit from '~icons/material-symbols/edit'
 
 const { patientsList } = storeToRefs(usePatientsStore())
 const { deletePatientByAuthId } = usePatientsStore()
@@ -15,6 +16,7 @@ const pasienList2 = computed(() => {
   })
 })
 async function handleDelete(authId: string) {
+  console.log(authId)
   // await axiosInstance.delete(`/patients/${pasienId}`)
   // fetchData()
   await deletePatientByAuthId(authId)
@@ -60,13 +62,16 @@ async function handleDelete(authId: string) {
             <!-- <td class="text-start">{{ pasien.email }}</td> -->
             <td class="text-start">
               <template v-if="pasien.birthdate">
-                {{ formatDate(pasien.birthdate) }}
+                {{ pasien.birthdate }}
               </template>
             </td>
             <td class="text-start">
               <div class="flex items-center gap-2 pl-10">
+                <RouterLink :to="`/admin/pasien/${pasien.id}/update`">
+                  <MaterialSymbolsEdit />
+                </RouterLink>
                 <abbr title="Hapus Pasien">
-                  <DeleteDialog :pasienId="pasien.id" @delete="() => handleDelete(pasien.user_id)" />
+                  <DeleteDialog :pasienId="pasien.id" @delete="() => handleDelete(pasien.id.toString())" />
                 </abbr>
               </div>
             </td>

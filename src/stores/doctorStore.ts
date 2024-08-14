@@ -1,25 +1,20 @@
 import { defineStore } from 'pinia'
 import { useToast } from 'vue-toast-notification'
-import { supabase } from '@/supabase'
-import type { Doctor2, DoctorForm } from '@/types/Doctor'
+import type { Doctor, DoctorForm } from '@/types/Doctor'
 import jpegToPng from '@/utils/jpegToPng'
+import apiFetch from '@/ofetch'
 
 export const useDoctorStore = defineStore('Doctor', () => {
-  const router = useRouter()
   const toast = useToast()
 
   // Store untuk data dokter
-  const doctorList = ref<Doctor2[]>([])
+  const doctorList = ref<Doctor[]>([])
 
   // Fungsi untuk mengambil data dokter dari table doctor
   const getAllDoctors = async () => {
-    const { data } = await supabase.from('doctor').select('*')
-    doctorList.value = data!.map((doctor) => {
-      return {
-        ...doctor,
-        imgUrl: (supabase.storage.from('avatars').getPublicUrl(`doctor/${doctor.id}.png`)).data.publicUrl,
-      } as Doctor2
-    })
+    const doctors = await apiFetch<Doctor[]>('/doctors')
+
+    doctorList.value = doctors
   }
 
   const createDoctor = async (doctor: DoctorForm) => {
@@ -32,40 +27,29 @@ export const useDoctorStore = defineStore('Doctor', () => {
       phone,
       poli_id,
     } = doctor
-    const { data, error } = await supabase.from('doctor').insert({
-      email,
-      poli_id,
-      jam_kerja_end,
-      jam_kerja_start,
-      name,
-      phone,
-    }).select('id').single()
 
-    if (error) {
-      console.error(error)
-      toast.error('Gagal menambahkan dokter')
-      return
-    }
+    const formData = new FormData()
+    formData.append('email', email!)
+    formData.append('jam_kerja_end', jam_kerja_end!)
+    formData.append('jam_kerja_start', jam_kerja_start!)
+    formData.append('name', name!)
+    formData.append('phone', phone!)
+    formData.append('poli_id', String(poli_id))
+
 
     const imageFile2 = await jpegToPng(imageFile as File)
 
-    const doctorId = data?.id
+    formData.append('imageFile', imageFile2)
 
-    const ImageExt = imageFile2?.name.split('.').pop()
-
-    await supabase.storage.from('avatars').upload(`doctor/${doctorId}.${ImageExt}`, imageFile2!)
-
-    const imgUrl = supabase.storage.from('avatars').getPublicUrl(`doctor/${doctorId}.${ImageExt}`).data.publicUrl
-    doctorList.value.push({
-      id: doctorId!,
-      email,
-      jam_kerja_end,
-      jam_kerja_start,
-      name,
-      phone,
-      poli_id,
-      imgUrl,
+    const { doctor: doctor2 } = await apiFetch<{ doctor: Doctor }>('/doctors', {
+      method: 'POST',
+      body: formData,
+      onResponseError: (error) => {
+        return console.error(error)
+      },
     })
+
+    doctorList.value.push(doctor2)
 
     toast.success('Berhasil menambahkan dokter')
   }
@@ -75,18 +59,13 @@ export const useDoctorStore = defineStore('Doctor', () => {
   }
 
   const deleteDoctor = async (id: number) => {
-    const { error } = await supabase.from('doctor').delete().eq('id', id)
-
-    if (error) {
-      console.error(error.message)
-      if (error.code === '23503') {
-        toast.error('Gagal menghapus dokter karena masih terdapat pasien yang terhubung dengan dokter ini')
-        return
-      }
-      console.error(error.hint)
-      toast.error('Gagal menghapus dokter')
-      return
-    }
+    await apiFetch(`/doctors/${id}/deactivate`, {
+      method: 'POST',
+      onResponseError: (error) => {
+        console.error(error)
+        toast.error(error.response._data)
+      },
+    })
 
     const doctorIndex = doctorList.value.findIndex(doctor => doctor.id === id)
     doctorList.value.splice(doctorIndex, 1)

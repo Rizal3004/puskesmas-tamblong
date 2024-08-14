@@ -24,7 +24,7 @@ const emit = defineEmits<{
     <DialogTrigger
       class=""
     >
-      <MaterialSymbolsDeleteSharp />
+      <MaterialSymbolsDeleteSharp class="text-red-500" />
     </DialogTrigger>
     <DialogPortal>
       <DialogOverlay class="bg-blackA9 data-[state=open]:animate-overlayShow fixed inset-0 z-30" />

@@ -1,16 +1,9 @@
 <script lang="ts" setup>
 import { storeToRefs } from 'pinia'
 import { useDoctorStore } from '@/stores/doctorStore'
-import { usePoliStore } from '@/stores/poliStore'
-import MaterialSymbolsLightEditSquareRounded from '~icons/material-symbols-light/edit-square-rounded'
-import DeleteDialog from '@/components/Dokter/DeleteDialog.vue'
+import DokterTR from '@/components/Dokter/DokterTR.vue'
 
 const { doctorList } = storeToRefs(useDoctorStore())
-const { deleteDoctor } = useDoctorStore()
-const { getPoliById } = usePoliStore()
-async function handleDelete(dokterId: number) {
-  await deleteDoctor(dokterId)
-}
 </script>
 
 <template>
@@ -44,26 +37,7 @@ async function handleDelete(dokterId: number) {
           <tr class="h-1">
             <td colSpan="9" />
           </tr>
-          <tr v-for="dokter in doctorList" :key="dokter.id">
-            <td class="text-start">{{ dokter.id }}</td>
-            <td class="text-start">{{ dokter.name }}</td>
-            <td class="text-start">{{ getPoliById(dokter.poli_id)?.name }}</td>
-            <td class="text-start">{{ dokter.jam_kerja_start }}</td>
-            <td class="text-start">{{ dokter.jam_kerja_end }}</td>
-            <td class="text-start">{{ dokter.phone }}</td>
-            <td class="text-start">{{ dokter.email }}</td>
-            <td class="text-start">
-              <img :src="dokter.imgUrl" alt="Foto dokter" class="w-16 aspect-video object-cover">
-            </td>
-            <td class="text-start">
-              <div class="flex items-center gap-2 pl-10">
-                <RouterLink :to="`/admin/dokter/${dokter.id}/update`">
-                  <MaterialSymbolsLightEditSquareRounded />
-                </RouterLink>
-                <DeleteDialog :dokterId="dokter.id" @delete="handleDelete" />
-              </div>
-            </td>
-          </tr>
+          <DokterTR :dokter v-for="dokter in doctorList" :key="dokter.id" />
         </tbody>
       </table>
     </div>

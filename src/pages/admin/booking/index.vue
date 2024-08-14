@@ -6,30 +6,27 @@ import formatDate from '@/utils/formatDate'
 import { useBookingActivityStore } from '@/stores/bookingActivityStore'
 import { usePatientsStore } from '@/stores/patientsStore'
 import { useDoctorStore } from '@/stores/doctorStore'
-import { useBookingHoursStore } from '@/stores/bookingHoursStore'
 import BookingDoneConfirmationDialog from '@/components/Booking/DoneConfirmationDialog.vue'
 import BookingDeleteDialog from '@/components/Booking/DeleteDialog.vue'
 import MaterialSymbolsCheckRounded from '~icons/material-symbols/check-rounded'
 import MaterialSymbolsNestClockFarsightAnalogOutlineRounded from '~icons/material-symbols/nest-clock-farsight-analog-outline-rounded'
 import ShowKeluhan from '@/components/Booking/ShowKeluhan.vue'
+import extractTime from '@/utils/extractTime'
 
 const { bookingActivityList } = storeToRefs(useBookingActivityStore())
 const { handleDoneBooking, handleCancelBooking } = useBookingActivityStore()
 const { getPatientById } = usePatientsStore()
 const { getDoctorById } = useDoctorStore()
-const { getBookingHourById } = useBookingHoursStore()
 
 const searchText = ref('')
 const bookingActivities2 = computed(() => {
   return bookingActivityList.value?.map((ba) => {
-    const patient = getPatientById(ba.pasien_id)
+    const patient = getPatientById(ba.pasien_id.toString())
     const doctor = getDoctorById(ba.dokter_id)
-    const bookingHour = getBookingHourById(ba.booking_hours_id)
     return {
       ...ba,
       patient,
       doctor,
-      bookingHour,
     }
   }).filter((ba) => {
     const activeBooking = ba.status === 'booked'
@@ -62,6 +59,7 @@ async function handleCancel(bookingActivityId: number) {
 async function handleDone(bookingActivityId: number, penyakit: string, resep: string) {
   await handleDoneBooking(bookingActivityId, { resep, penyakit })
 }
+
 </script>
 
 <template>
@@ -117,9 +115,9 @@ async function handleDone(bookingActivityId: number, penyakit: string, resep: st
             <td class="text-start">{{ ba.patient_type === 'umum' ? 'Umum' : `BPJS (${ba.bpjs_number})` }}</td>
             <td class="text-start">{{ ba.patient?.phone }}</td>
             <td class="text-start">{{ ba.doctor?.name }}</td>
-            <td class="text-start">{{ formatDate(ba.date) }}</td>
-            <td class="text-start">{{ ba.bookingHour?.starts_at }} - {{ ba.bookingHour?.ends_at }}</td>
-            <td class="text-start">{{ ba.arrived_at }}</td>
+            <td class="text-start">{{ ba.date }}</td>
+            <td class="text-start">{{ ba?.starts_at }} - {{ ba?.ends_at }}</td>
+            <td class="text-start">{{ ba.arrived_at ? extractTime(ba.arrived_at) : '' }}</td>
             <!-- <td class="text-start">{{ ba.status }}</td> -->
             <td class="text-start">
               <div class="flex items-center gap-2">

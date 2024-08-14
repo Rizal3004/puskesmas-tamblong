@@ -3,6 +3,7 @@ import { useToast } from 'vue-toast-notification'
 import { useDoctorStore } from '@/stores/doctorStore'
 import { usePoliStore } from '@/stores/poliStore'
 import type { DoctorForm } from '@/types/Doctor'
+import validateInputNumber from '@/utils/validateInputNumber'
 
 const router = useRouter()
 const { createDoctor } = useDoctorStore()
@@ -103,7 +104,12 @@ async function handleSubmit() {
         </div>
         <div class="flex flex-col">
           <label>No Telp</label>
-          <input v-model="dokterData.phone" type="number" class="border py-1 px-3 rounded-md">
+          <input
+            v-model="dokterData.phone"
+            type="text"
+            class="border py-1 px-3 rounded-md"
+            @keypress="validateInputNumber"
+          >
         </div>
         <div class="flex flex-col">
           <label>Foto</label>

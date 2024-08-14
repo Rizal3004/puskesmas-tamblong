@@ -5,9 +5,9 @@ export interface Patient {
   name: string | null
   nik: string | null
   password: string
+  email: string
   phone: string | null
-  user_id: string
 }
 
-export type PatientForm = Omit<Patient, 'id' | 'user_id' | 'address' | 'birthdate' | 'phone'> & { email: string }
-export type PatientUpdateForm = Omit<Patient, 'id' | 'user_id' | 'email'>
+export type PatientForm = Omit<Patient, 'id' | 'address' | 'birthdate' | 'phone'> & { email: string }
+export type PatientUpdateForm = Omit<Patient, 'id' | 'email'>

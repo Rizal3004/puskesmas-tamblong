@@ -3,15 +3,13 @@ import { storeToRefs } from 'pinia'
 import { useAuthStore } from '@/stores/authStore'
 import SolarArrowLeftLinear from '~icons/solar/arrow-left-linear'
 import formatDate from '@/utils/formatDate'
-import { useBookingHoursStore } from '@/stores/bookingHoursStore'
 import { useDoctorStore } from '@/stores/doctorStore'
 import Header from '@/components/Header.vue'
 import { useBookingActivityStore } from '@/stores/bookingActivityStore'
 
 const router = useRouter()
 const { userBooking } = storeToRefs(useAuthStore())
-const { handlePatientArrived } = useBookingActivityStore()
-const { getBookingHourById } = useBookingHoursStore()
+const { handlePatientArrived, handleCancelBooking } = useBookingActivityStore()
 const { getDoctorById } = useDoctorStore()
 
 const doctor = computed(() => {
@@ -19,14 +17,19 @@ const doctor = computed(() => {
   return doctor2
 })
 
-const bookingHours = computed(() => {
-  const bookingHour2 = getBookingHourById(userBooking.value!.booking_hours_id!)
-  return bookingHour2
-})
+// const bookingHours = computed(() => {
+//   const bookingHour2 = getBookingHourById(userBooking.value!.booking_hours_id!)
+//   return bookingHour2
+// })
 
 async function handleArrived(bookingId: number) {
   await handlePatientArrived(bookingId)
   router.go(0)
+}
+
+async function handleCancel(bookingId: number) {
+  await handleCancelBooking(bookingId)
+  router.push('/')
 }
 
 onMounted(() => {
@@ -46,7 +49,7 @@ onMounted(() => {
       </RouterLink>
       <h1 class="text-2xl font-semibold">Jadwal Pengobatan</h1>
       <p>Pasien diharapkan datang 15 menit sebelum waktu yang ditentukan</p>
-      <div v-if="userBooking && bookingHours" class="">
+      <div v-if="userBooking" class="">
         <table class="[&>*>*]:border [&>*>*]:text-start [&>*>*]:px-2">
           <tr>
             <th>Tanggal</th>
@@ -58,11 +61,11 @@ onMounted(() => {
           </tr>
           <tr>
             <th>Jam mulai</th>
-            <td>{{ bookingHours.starts_at }}</td>
+            <td>{{ userBooking.starts_at }}</td>
           </tr>
           <tr>
             <th>Jam berakhir</th>
-            <td>{{ bookingHours.ends_at }}</td>
+            <td>{{ userBooking.ends_at }}</td>
           </tr>
           <tr>
             <th>Jenis pasien</th>
@@ -78,7 +81,10 @@ onMounted(() => {
           </tr>
         </table>
         <p class="text-end text-sm mt-2" v-if="!userBooking.arrived_at">Klik Tombol 'Sampai ke Puskesmas' jika anda telah berada di puskesmas</p>
-        <div class="flex justify-end mt-4">
+        <div class="flex justify-between mt-4">
+          <button type="button" class="bg-red-300 px-4 rounded-md" @click="() => handleCancel(userBooking!.id)">
+            Batalkan booking
+          </button>
           <button v-if="!userBooking.arrived_at" class="bg-green-300 text-sm px-2 py-1 rounded-md" @click="() => handleArrived(userBooking!.id)">
             Sampai ke Puskesmas
           </button>

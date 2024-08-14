@@ -15,7 +15,7 @@ defineProps<{
   pasienId: number
 }>()
 const emit = defineEmits<{
-  delete: [pasienId: number]
+  delete: []
 }>()
 </script>
 
@@ -49,7 +49,7 @@ const emit = defineEmits<{
             <button
               type="button"
               class="bg-red-200 text-red-600 hover:bg-red-400 hover:text-red-800 transition-all duration-300 focus:shadow-red-300 inline-flex h-[35px] items-center justify-center rounded-[4px] px-[15px] font-semibold leading-none focus:shadow-[0_0_0_2px] focus:outline-none"
-              @click="emit('delete', pasienId)"
+              @click="emit('delete')"
             >
               hapus
             </button>

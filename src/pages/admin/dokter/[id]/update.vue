@@ -1,16 +1,13 @@
 <script lang="ts" setup>
 import { useRouter } from 'vue-router'
-import jpegToPng from '@/utils/jpegToPng'
-import convertToHHMMSS from '@/utils/convertToHHMMSS'
+import validateInputNumber from '@/utils/validateInputNumber'
+import { usePoliStore } from '@/stores/poliStore'
 
+const { poliList } = usePoliStore()
 const router = useRouter()
 const route = useRoute()
 const dokterId = (route.params as object as { id: number }).id
 
-const poliList = ref<{
-  id: number
-  name: string
-}[]>([])
 const dokterFormData = reactive<{
   nama: string
   poliId: string
@@ -34,27 +31,7 @@ function photoChange(e: Event) {
 }
 
 async function handleSubmit() {
-  // const formData = new FormData()
-  // formData.append('nama', dokterFormData.nama)
-  // formData.append('poliId', dokterFormData.poliId)
-  // formData.append('jamMulai', dokterFormData.jamMulai)
-  // formData.append('jamSelesai', dokterFormData.jamSelesai)
-  // formData.append('email', dokterFormData.email)
-  // formData.append('noTelp', dokterFormData.noTelp)
-  // if (dokterFormData.foto) {
-  //   const fotoInPng = await jpegToPng(dokterFormData.foto)
-  //   formData.append('foto', fotoInPng!)
-  // }
 
-  // try {
-  //   await axiosInstance.patch(`/doctors/${dokterId}`, formData)
-  //   router.push('/admin/dokter')
-  // } catch (error) {
-  //   if (error instanceof AxiosError) {
-  //     console.error(error.response?.data)
-  //     console.error(error.message)
-  //   }
-  // }
 }
 </script>
 
@@ -119,7 +96,12 @@ async function handleSubmit() {
       </div>
       <div class="flex flex-col">
         <label>No Telp</label>
-        <input v-model="dokterFormData.noTelp" type="number" class="border py-1 px-3 rounded-md">
+        <input
+          v-model="dokterFormData.noTelp"
+          type="text"
+          class="border py-1 px-3 rounded-md"
+          @keypress="validateInputNumber"
+        >
       </div>
       <div class="flex flex-col">
         <label>Foto</label>
