@@ -1,16 +1,10 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import { storeToRefs } from 'pinia'
-import SolarPenBoldDuotone from '~icons/solar/pen-bold-duotone'
 import { useBookingActivityStore } from '@/stores/bookingActivityStore'
 import { usePatientsStore } from '@/stores/patientsStore'
 import { useDoctorStore } from '@/stores/doctorStore'
-import BookingDoneConfirmationDialog from '@/components/Booking/DoneConfirmationDialog.vue'
-import BookingDeleteDialog from '@/components/Booking/DeleteDialog.vue'
-import MaterialSymbolsCheckRounded from '~icons/material-symbols/check-rounded'
-import MaterialSymbolsNestClockFarsightAnalogOutlineRounded from '~icons/material-symbols/nest-clock-farsight-analog-outline-rounded'
 import ShowKeluhan from '@/components/Booking/ShowKeluhan.vue'
-import extractTime from '@/utils/extractTime'
 import { useAuthStore } from '@/stores/authStore'
 import Header from '@/components/Header.vue'
 
@@ -18,6 +12,8 @@ const { bookingActivityList } = storeToRefs(useBookingActivityStore())
 const { profile } = useAuthStore()
 const { getPatientById } = usePatientsStore()
 const { getDoctorById } = useDoctorStore()
+
+const router = useRouter()
 
 const bookingActivities2 = computed(() => {
   return bookingActivityList.value?.map((ba) => {
@@ -56,8 +52,17 @@ const bookingActivities2 = computed(() => {
 
 <template>
   <div class="">
-    <Header class="" />
+    <!-- <Header class="" /> -->
     <div class="px-36 py-4 space-y-3 border-t">
+      <button
+        type="button"
+        href="/admin/doctors"
+        class="flex items-center gap-2 hover:bg-slate-100 px-4 py-1 rounded-xl text-sm -translate-x-10 transition-all duration-300 w-fit"
+        @click="router.go(-1)"
+      >
+        <img src="https://api.iconify.design/material-symbols-light:arrow-back-rounded.svg?color=%236e6e6e" alt="">
+        Kembali
+      </button>
       <div class="flex justify-between">
         <h1 class="text-2xl font-semibold">Riwayat Booking</h1>
       </div>
@@ -75,6 +80,7 @@ const bookingActivities2 = computed(() => {
               <th class="text-start">Jam</th>
               <th class="text-start">Status</th>
               <th class="text-start">Keluhan</th>
+              <th class="text-start" />
             </tr>
           </thead>
           <tbody class="text-sm">
@@ -105,6 +111,9 @@ const bookingActivities2 = computed(() => {
                   {{ ba.keluhan }}
                   <ShowKeluhan :keluhan="ba.keluhan!" />
                 </div>
+              </td>
+              <td>
+                <RouterLink :to="`/profile/riwayat/${ba.id}`" class="bg-sky-200 px-3 py-0.5 rounded-md">Detail</RouterLink>
               </td>
             </tr>
           </tbody>

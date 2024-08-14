@@ -56,8 +56,8 @@ export const useBookingActivityStore = defineStore('BookingActivity', () => {
     toast.success('Anda telah melakukan booking dokter, silahkan melihat detail booking anda dengan menekan tombol "jadwal pengobatan"')
   }
 
-  const getBookingActivitybyId = (id: number) => {
-    const ba = bookingActivityList.value.find(ba => ba.id === id)
+  const getBookingActivitybyId = (id: string) => {
+    const ba = bookingActivityList.value.find(ba => ba.id.toString() === id)
     return ba
   }
 

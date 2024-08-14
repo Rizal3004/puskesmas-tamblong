@@ -35,6 +35,9 @@ importers:
       vue-router:
         specifier: ^4.3.3
         version: 4.4.3(vue@3.4.37(typescript@5.4.5))
+      vue-to-print:
+        specifier: ^1.1.0
+        version: 1.1.0(vue@3.4.37(typescript@5.4.5))
       vue-toast-notification:
         specifier: ^3.1.2
         version: 3.1.2(vue@3.4.37(typescript@5.4.5))
@@ -2713,6 +2716,11 @@ packages:
     resolution: {integrity: sha512-sv6wmNKx2j3aqJQDMxLFzs/u/mjA9Z5LCgy6BE0f7yFWMjrPLnS/sPNn8ARY/FXw6byV18EFutn5lTO6+UsV5A==}
     peerDependencies:
       vue: ^3.2.0
+
+  vue-to-print@1.1.0:
+    resolution: {integrity: sha512-k6/4TQ9x2yIzV7PR2DPKySJ0fz04wtfK4pd/JSD1Lr6Z0qYoM5NP4NqzfR/d9pLFGlBrhHjO6W1UyeE95zrKpA==}
+    peerDependencies:
+      vue: ^3.0.0
 
   vue-toast-notification@3.1.2:
     resolution: {integrity: sha512-oNRL/W9aaHoeScp+iTIW7k09vM16/+8aptp2maa+7qTB43JuxmAgKdXKFYtf+uvSNOYYq2BIWgLCeJ61pwom/A==}
@@ -5572,6 +5580,10 @@ snapshots:
   vue-router@4.4.3(vue@3.4.37(typescript@5.4.5)):
     dependencies:
       '@vue/devtools-api': 6.6.3
+      vue: 3.4.37(typescript@5.4.5)
+
+  vue-to-print@1.1.0(vue@3.4.37(typescript@5.4.5)):
+    dependencies:
       vue: 3.4.37(typescript@5.4.5)
 
   vue-toast-notification@3.1.2(vue@3.4.37(typescript@5.4.5)):

@@ -32,6 +32,7 @@ declare module 'vue-router/auto-routes' {
     '/auth/register': RouteRecordInfo<'/auth/register', '/auth/register', Record<never, never>, Record<never, never>>,
     '/jadwal-pengobatan/': RouteRecordInfo<'/jadwal-pengobatan/', '/jadwal-pengobatan', Record<never, never>, Record<never, never>>,
     '/profile/': RouteRecordInfo<'/profile/', '/profile', Record<never, never>, Record<never, never>>,
-    '/profile/riwayat': RouteRecordInfo<'/profile/riwayat', '/profile/riwayat', Record<never, never>, Record<never, never>>,
+    '/profile/riwayat/': RouteRecordInfo<'/profile/riwayat/', '/profile/riwayat', Record<never, never>, Record<never, never>>,
+    '/profile/riwayat/[id]/': RouteRecordInfo<'/profile/riwayat/[id]/', '/profile/riwayat/:id', { id: ParamValue<true> }, { id: ParamValue<false> }>,
   }
 }
