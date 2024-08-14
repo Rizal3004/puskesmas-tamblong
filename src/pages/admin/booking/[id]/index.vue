@@ -1,11 +1,9 @@
-<script lang="ts" setup>
+<!-- <script lang="ts" setup>
 import { useBookingActivityStore } from '@/stores/bookingActivityStore'
-import { useBookingHoursStore } from '@/stores/bookingHoursStore'
 
 const router = useRouter()
 
 const { getBookingActivitybyId, handleChangeBookingDate } = useBookingActivityStore()
-const { getBookingHourById, handleChangeBookingHour } = useBookingHoursStore()
 const bookingId = Number((useRoute().params as { id: string }).id,
 )
 
@@ -84,4 +82,8 @@ definePage({
       </div>
     </form>
   </div>
+</template> -->
+
+<template>
+  tes
 </template>
