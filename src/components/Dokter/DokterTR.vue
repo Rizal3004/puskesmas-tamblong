@@ -44,7 +44,7 @@ onMounted(() => {
     <td class="text-start">{{ dokter.phone }}</td>
     <td class="text-start">{{ dokter.email }}</td>
     <td class="text-start">
-      <img :src="`${baseURL}/doctors/image/${dokter.id}`" alt="Foto dokter" class="w-16 aspect-video object-cover">
+      <img :src="`${baseURL}doctors/image/${dokter.id}`" alt="Foto dokter" class="w-16 aspect-video object-cover">
     </td>
     <td class="text-start">
       <div class="flex items-center gap-2 pl-10">

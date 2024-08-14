@@ -82,7 +82,7 @@ const computedDoctors = computed(() => {
             class="flex-col overflow-hidden border shadow-lg carousel-item rounded-lg"
             data-aos="fade-up"
           >
-            <img :src="`${baseURL}/doctors/image/${dokter.id}`" alt="Burger" class="object-cover w-full aspect-square">
+            <img :src="`${baseURL}doctors/image/${dokter.id}`" alt="Burger" class="object-cover w-full aspect-square">
             <div class="px-3 pt-2">
               <p class="text-xl mb-1 capitalize">
                 {{ dokter.name }}
