@@ -2,8 +2,28 @@
 import { storeToRefs } from 'pinia'
 import { useDoctorStore } from '@/stores/doctorStore'
 import DokterTR from '@/components/Dokter/DokterTR.vue'
+import { usePoliStore } from '@/stores/poliStore'
 
 const { doctorList } = storeToRefs(useDoctorStore())
+const { getPoliById, poliList } = usePoliStore()
+
+const doctorName = ref('')
+const poliId = ref<number>()
+
+const doctorListFiltered = computed(() => {
+  return doctorList.value.map((dokter) => {
+    const poli = getPoliById(dokter.poli_id)
+    return {
+      ...dokter,
+      poli,
+    }
+  }).filter((dokter) => {
+    if (dokter.name?.toLowerCase().includes(doctorName.value.toLowerCase()) && (!poliId.value || dokter.poli_id === poliId.value)) {
+      return true
+    }
+    return false
+  })
+})
 </script>
 
 <template>
@@ -13,8 +33,17 @@ const { doctorList } = storeToRefs(useDoctorStore())
       <div class="flex items-center gap-8">
         <div class="">
           <label htmlFor="search">Cari Dokter:</label>
-          <input id="search" class="rounded-md px-2 py-0.5 border mx-2" type="text">
+          <input
+            id="search"
+            v-model="doctorName"
+            class="rounded-md px-2 py-0.5 border mx-2"
+            type="text"
+          >
         </div>
+        <select v-model="poliId" class="border px-4 py-1 rounded-md">
+          <option :value="undefined">Semua Poli</option>
+          <option :value="poli.id" v-for="poli in poliList" :key="poli.id">{{ poli.name }}</option>
+        </select>
         <RouterLink to="/admin/dokter/create" href="/admin/doctors/create" class="bg-green-200 rounded-md px-2 py-0.5">Tambah Dokter</RouterLink>
       </div>
     </div>
@@ -37,7 +66,7 @@ const { doctorList } = storeToRefs(useDoctorStore())
           <tr class="h-1">
             <td colSpan="9" />
           </tr>
-          <DokterTR :dokter v-for="dokter in doctorList" :key="dokter.id" />
+          <DokterTR v-for="dokter in doctorListFiltered" :key="dokter.id" :dokter />
         </tbody>
       </table>
     </div>

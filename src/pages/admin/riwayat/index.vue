@@ -59,13 +59,14 @@ const bookingActivities2 = computed(() => {
             <th class="text-start">Keluhan</th>
             <th class="text-start">Penyakit</th>
             <th class="text-start">Resep</th>
+            <th class="text-start" />
           </tr>
         </thead>
         <tbody class="text-sm">
           <tr class="h-1">
             <td colSpan="9" />
           </tr>
-          <tr v-for="ba in bookingActivities2" :key="ba.id">
+          <tr v-for="ba in bookingActivities2" :key="ba.id" class="">
             <td class="text-start">{{ ba.id }}</td>
             <td class="text-start">{{ ba.patient?.name }}</td>
             <td class="text-start">{{ ba.doctor?.name }}</td>
@@ -76,6 +77,11 @@ const bookingActivities2 = computed(() => {
             <td class="text-start">{{ ba.keluhan }}</td>
             <td class="text-start">{{ ba.penyakit }}</td>
             <td class="text-start">{{ ba.resep }}</td>
+            <td>
+              <div class=" py-1">
+                <RouterLink :to="`/admin/riwayat/${ba.id}`" class="bg-sky-200 px-3 py-0.5 rounded-md">Detail</RouterLink>
+              </div>
+            </td>
           </tr>
         </tbody>
       </table>

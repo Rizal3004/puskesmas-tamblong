@@ -24,7 +24,8 @@ const { userBooking } = storeToRefs(useAuthStore())
     </div>
   </div>
   <div class="sticky top-0 z-50 flex md:px-36 px-4 py-2 md:py-4 bg-white">
-    <div class="flex-1">
+    <div class="flex-1 flex items-center gap-2">
+      <img src="/logo_puskesmas-tamblong.png" alt="" class="w-9 object-contain aspect-square">
       <h1 class="text-base md:text-xl font-semibold">
         Puskesmas Tamblong
       </h1>

@@ -45,7 +45,7 @@ function handlePrint2() {
 
 <template>
   <div>
-    <div class="px-36 py-4 space-y-3 border-t">
+    <div class="px-36 py-4 space-y-3">
       <button
         type="button"
         href="/admin/doctors"

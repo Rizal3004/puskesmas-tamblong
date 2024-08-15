@@ -9,10 +9,10 @@ import SolarArrowUpLinear from '~icons/solar/arrow-up-linear'
 
 <template>
   <footer id="kontak" class="py-20 px-6 flex md:block gap-6 flex-col md:px-36">
-    <div class="grid md:grid-cols-3 gap-10">
+    <div class="grid md:grid-cols-2 gap-10">
       <div class="space-y-4" data-aos="fade-right">
         <h4 class="text-2xl font-bold">Contact info</h4>
-        <p>Fusce at libero iaculis, venenatis augue quis, pharetra lorem. Curabitur ut dolor eu elit consequat ultricies.</p>
+        <p>Hubungi kami di nomor telepon atau email untuk informasi lebih lanjut.</p>
         <div class="space-y-2">
           <div class="flex items-center gap-2">
             <div class="flex items-center justify-center rounded-full bg-slate-700 size-8">
@@ -28,7 +28,7 @@ import SolarArrowUpLinear from '~icons/solar/arrow-up-linear'
           </div>
         </div>
       </div>
-      <div class="space-y-4" data-aos="fade-up">
+      <!-- <div class="space-y-4" data-aos="fade-up">
         <h4 class="text-2xl font-bold">Latest News</h4>
         <div class="space-y-4">
           <div class="flex items-center gap-2">
@@ -54,7 +54,7 @@ import SolarArrowUpLinear from '~icons/solar/arrow-up-linear'
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
       <div class="space-y-4" data-aos="fade-left">
         <h4 class="text-2xl font-bold">Opening Hours</h4>
         <div class="space-y-2">
@@ -69,9 +69,10 @@ import SolarArrowUpLinear from '~icons/solar/arrow-up-linear'
         </div>
       </div>
     </div>
-    <a href="#" class="divider divider-end">
+    <a href="#" class="flex items-center">
+      <div class="w-full h-0.5 bg-zinc-200" />
       <div class="p-2 border flex items-center gap-2 rounded-md">
-        <p>Back to top</p>
+        <p class="text-nowrap">Back to top</p>
         <SolarArrowUpLinear />
       </div>
     </a>

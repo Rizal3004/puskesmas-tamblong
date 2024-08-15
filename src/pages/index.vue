@@ -35,13 +35,13 @@ const computedDoctors = computed(() => {
           Selamat Datang di Puskesmas Tamblong
         </h2>
         <div class="space-y-2" data-aos="fade-up">
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          <p>Puskesmas adalah pusat layanan kesehatan pertama untuk masyarakat di setiap daerah. Mereka menyediakan pemeriksaan, pengobatan, dan edukasi kesehatan.</p>
+          <p>Dengan peran penting dalam pencegahan penyakit, Puskesmas juga menjalankan program imunisasi. Mereka memastikan akses kesehatan yang mudah dan terjangkau bagi semua.</p>
         </div>
         <div class="flex gap-4" data-aos="fade-up">
           <div class="avatar">
-            <div class="w-16 rounded-full overflow-hidden">
-              <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg">
+            <div class="w-16 rounded-full aspect-square overflow-hidden">
+              <img src="https://plus.unsplash.com/premium_photo-1661764878654-3d0fc2eefcca?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
             </div>
           </div>
           <div>
