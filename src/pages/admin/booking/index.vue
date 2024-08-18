@@ -1,8 +1,6 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import { storeToRefs } from 'pinia'
-import SolarPenBoldDuotone from '~icons/solar/pen-bold-duotone'
-import formatDate from '@/utils/formatDate'
 import { useBookingActivityStore } from '@/stores/bookingActivityStore'
 import { usePatientsStore } from '@/stores/patientsStore'
 import { useDoctorStore } from '@/stores/doctorStore'
@@ -12,11 +10,15 @@ import MaterialSymbolsCheckRounded from '~icons/material-symbols/check-rounded'
 import MaterialSymbolsNestClockFarsightAnalogOutlineRounded from '~icons/material-symbols/nest-clock-farsight-analog-outline-rounded'
 import ShowKeluhan from '@/components/Booking/ShowKeluhan.vue'
 import extractTime from '@/utils/extractTime'
+import { usePoliStore } from '@/stores/poliStore'
 
 const { bookingActivityList } = storeToRefs(useBookingActivityStore())
 const { handleDoneBooking, handleCancelBooking } = useBookingActivityStore()
 const { getPatientById } = usePatientsStore()
 const { getDoctorById } = useDoctorStore()
+const { poliList } = usePoliStore()
+
+const poliId = ref<number>()
 
 const searchText = ref('')
 const bookingActivities2 = computed(() => {
@@ -30,7 +32,7 @@ const bookingActivities2 = computed(() => {
     }
   }).filter((ba) => {
     const activeBooking = ba.status === 'booked'
-    if (ba.patient?.name?.toLowerCase().startsWith(searchText.value) && activeBooking) {
+    if (ba.patient?.name?.toLowerCase().startsWith(searchText.value) && activeBooking && (!poliId.value || ba.doctor?.poli_id === poliId.value)) {
       return true
     }
     return false
@@ -75,6 +77,10 @@ async function handleDone(bookingActivityId: number, penyakit: string, resep: st
             type="text"
           >
         </div>
+        <select v-model="poliId" class="border px-4 py-1 rounded-md">
+          <option :value="undefined">Semua Poli</option>
+          <option :value="poli.id" v-for="poli in poliList" :key="poli.id">{{ poli.name }}</option>
+        </select>
       </div>
     </div>
     <div class="border rounded-md px-2 pb-3">
@@ -130,7 +136,7 @@ async function handleDone(bookingActivityId: number, penyakit: string, resep: st
                 <!-- <RouterLink :to="`/admin/booking/${ba.id}`">
                   <SolarPenBoldDuotone class="text-orange-400" />
                 </RouterLink> -->
-                <BookingDoneConfirmationDialog :bookingActivityId="ba.id" @delete="handleDone" />
+                <BookingDoneConfirmationDialog :bookingActivityId="ba.id" @done="handleDone" />
                 <BookingDeleteDialog :bookingActivityId="ba.id" @delete="handleCancel" />
               </div>
             </td>

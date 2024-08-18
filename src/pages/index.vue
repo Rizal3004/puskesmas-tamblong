@@ -9,6 +9,7 @@ import Hero from '@/components/Hero.vue'
 import BookingForm from '@/components/BookingForm.vue'
 import Footer from '@/components/Footer.vue'
 import { baseURL } from '@/ofetch'
+import DokterCardDialog from '@/components/Dokter/DokterCardDialog.vue'
 
 const { getPoliById, poliList } = usePoliStore()
 const { doctorList } = useDoctorStore()
@@ -25,8 +26,8 @@ const computedDoctors = computed(() => {
 </script>
 
 <template>
-  <div>
-    <Header />
+  <div class="">
+    <Header class="-z-20" />
     <Hero />
     <!-- About ===================================================================================== -->
     <div id="about" class="px-6 md:px-36 pt-10 md:pt-0 md:h-[80dvh] md:flex items-center bg-[#f5f5f5] relative overflow-hidden">
@@ -90,10 +91,12 @@ const computedDoctors = computed(() => {
               <p>{{ getPoliById(dokter.poli_id)?.name }}</p>
               <p class="text-sm">{{ dokter.jam_kerja_start!.toString() }} - {{ dokter.jam_kerja_end!.toString() }}</p>
             </div>
-            <div class="divider !my-0 !py-0" />
-            <div class="px-3 pb-2 text-sm">
+            <!-- <div class="px-3 pb-2 text-sm">
               <p>{{ dokter.phone }}</p>
               <p>{{ dokter.email }}</p>
+            </div> -->
+            <div class="flex justify-center py-4">
+              <DokterCardDialog :dokter />
             </div>
           </div>
         </template>

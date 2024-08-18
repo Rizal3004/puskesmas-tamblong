@@ -60,6 +60,15 @@ export const useBookingActivityStore = defineStore('BookingActivity', () => {
     const ba = bookingActivityList.value.find(ba => ba.id.toString() === id)
     return ba
   }
+  
+  const getBookingActivityByDoctorId = (doctorId: number) => {
+    const baList = bookingActivityList.value.filter(ba => ba.dokter_id === doctorId)
+    if (baList.length > 0) {
+      return baList
+    } else {
+      return null
+    }
+  }
 
   const getBookingActivityByDoctorIdAndDate = (doctorId: number, date: string) => {
     const ba = bookingActivityList.value.filter(ba => ba.dokter_id === doctorId && ba.date === date)
@@ -127,10 +136,6 @@ export const useBookingActivityStore = defineStore('BookingActivity', () => {
   }
 
   const handlePatientArrived = async (bookingId: number) => {
-    // await supabase.from('booking_activity').update({
-    //   arrived_at: getCurrentTime(),
-    // }).eq('id', bookingId)
-
     await apiFetch(`/booking-activities/${bookingId}/arrived`, {
       method: 'PATCH',
     })
@@ -156,5 +161,6 @@ export const useBookingActivityStore = defineStore('BookingActivity', () => {
     handleChangeBookingDate,
     getBookingActivityByDoctorIdAndDate,
     handlePatientArrived,
+    getBookingActivityByDoctorId,
   }
 })

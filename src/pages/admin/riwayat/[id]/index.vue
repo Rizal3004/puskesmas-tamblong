@@ -105,13 +105,15 @@ function handlePrint2() {
             <th>Poli</th>
             <th>Penyakit</th>
             <th>Resep</th>
+            <th>Aturan Minum</th>
           </tr>
           <tr>
             <td>{{ ba?.date }}</td>
             <td>{{ ba?.doctor?.name }}</td>
             <td>{{ ba?.poli?.name }}</td>
             <td>{{ ba?.penyakit }}</td>
-            <td>{{ ba?.resep }}</td>
+            <td>{{ ba?.resep?.split('::')[0] }}</td>
+            <td>{{ ba?.resep?.split('::')[1] }}</td>
           </tr>
         </table>
         <div class="mt-6 flex justify-end">

@@ -1,0 +1,99 @@
+<script setup lang="ts">
+import { start } from 'node:repl'
+import {
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogOverlay,
+  DialogPortal,
+  DialogRoot,
+  DialogTitle,
+  DialogTrigger,
+} from 'radix-vue'
+import type { Doctor } from '@/types/Doctor'
+import LucideX from '~icons/lucide/x'
+import { useBookingActivityStore } from '@/stores/bookingActivityStore'
+import { usePoliStore } from '@/stores/poliStore'
+import createTimeSlots from '@/utils/createTimeSlots'
+import parseTimeRange from '@/utils/parseTimeRange'
+import createTimeFromString from '@/utils/createTimeFromString'
+import isTime1GreaterThanTime2 from '@/utils/isTime1GreaterThanTime2'
+import isTime1GreaterThanOrEqualToTime2 from '@/utils/isTime1GreaterThanOrEqualToTime2'
+
+const props = defineProps<{
+  dokter: Doctor
+}>()
+
+const { getBookingActivityByDoctorId } = useBookingActivityStore()
+const { getPoliById } = usePoliStore()
+
+const baList = getBookingActivityByDoctorId(props.dokter.id)
+
+const computedTimeSlots = computed(() => {
+  const dokterStartTime = createTimeFromString(props.dokter.jam_kerja_start!)
+  const dokterEndTime = createTimeFromString(props.dokter.jam_kerja_end!)
+  return createTimeSlots().map((slot) => {
+    const { startTime, endTime } = parseTimeRange(slot.name)
+    if (isTime1GreaterThanTime2(dokterStartTime, startTime) || isTime1GreaterThanTime2(endTime, dokterEndTime)) return false
+    const isBooked = baList?.some((ba) => {
+      const baStartsAt = createTimeFromString(ba.starts_at)
+      const baEndsAt = createTimeFromString(ba.ends_at)
+      console.log('baStartsAt', baStartsAt.toLocaleTimeString())
+      console.log('startTime', startTime.toLocaleTimeString())
+      console.log('baEndsAt', baEndsAt.toLocaleTimeString())
+      console.log('endTime', endTime.toLocaleTimeString())
+      return isTime1GreaterThanOrEqualToTime2(startTime, baEndsAt) && isTime1GreaterThanOrEqualToTime2(baStartsAt, endTime)
+    })
+    return {
+      ...slot,
+      isBooked,
+    }
+  })
+})
+</script>
+
+<template>
+  <DialogRoot>
+    <DialogTrigger
+      class="text-grass11 font-semibold shadow-blackA7 hover:bg-mauve3 inline-flex h-[35px] items-center justify-center rounded-[4px] bg-white px-[15px] leading-none border focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
+    >
+      Lihat
+    </DialogTrigger>
+    <DialogPortal>
+      <DialogOverlay class="bg-blackA9 data-[state=open]:animate-overlayShow fixed inset-0 z-30" />
+      <DialogContent
+        class="data-[state=open]:animate-contentShow fixed top-[50%] left-[50%] max-h-[85vh] w-[90vw] max-w-[450px] translate-x-[-50%] translate-y-[-50%] rounded-[6px] bg-white p-[25px] shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] focus:outline-none z-[100]"
+      >
+        <DialogTitle class="text-mauve12 m-0 text-[17px] font-semibold">
+          Data Dokter
+        </DialogTitle>
+        <div class="">
+          <p>Nama: {{ dokter.name }}</p>
+          <p>Jam kerja mulai: {{ dokter.jam_kerja_start }}</p>
+          <p>Jam kerja selesai: {{ dokter.jam_kerja_end }}</p>
+          <p>Poli: {{ getPoliById(dokter.poli_id)?.name }}</p>
+          <select>
+            <template v-for="slot in computedTimeSlots">
+              <option v-if="slot" :key="slot.id" :value="slot.id">{{ slot.name }}{{ slot.isBooked }}</option>
+            </template>
+          </select>
+        </div>
+        <div class="mt-[25px] flex justify-end">
+          <DialogClose asChild>
+            <button
+              class="bg-green4 text-green11 hover:bg-green5 focus:shadow-green7 inline-flex h-[35px] items-center justify-center rounded-[4px] px-[15px] font-semibold leading-none focus:shadow-[0_0_0_2px] focus:outline-none"
+            >
+              Save changes
+            </button>
+          </DialogClose>
+        </div>
+        <DialogClose
+          class="text-grass11 hover:bg-green4 focus:shadow-green7 absolute top-[10px] right-[10px] inline-flex h-[25px] w-[25px] appearance-none items-center justify-center rounded-full focus:shadow-[0_0_0_2px] focus:outline-none"
+          aria-label="Close"
+        >
+          <LucideX />
+        </DialogClose>
+      </DialogContent>
+    </DialogPortal>
+  </DialogRoot>
+</template>

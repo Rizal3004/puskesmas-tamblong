@@ -59,6 +59,7 @@ const bookingActivities2 = computed(() => {
             <th class="text-start">Keluhan</th>
             <th class="text-start">Penyakit</th>
             <th class="text-start">Resep</th>
+            <th class="text-start">Aturan Minum</th>
             <th class="text-start" />
           </tr>
         </thead>
@@ -76,7 +77,8 @@ const bookingActivities2 = computed(() => {
             <td class="text-start">{{ ba.ends_at }}</td>
             <td class="text-start">{{ ba.keluhan }}</td>
             <td class="text-start">{{ ba.penyakit }}</td>
-            <td class="text-start">{{ ba.resep }}</td>
+            <td class="text-start">{{ ba.resep?.split('::')[0] }}</td>
+            <td class="text-start">{{ ba.resep?.split('::')[1] }}</td>
             <td>
               <div class=" py-1">
                 <RouterLink :to="`/admin/riwayat/${ba.id}`" class="bg-sky-200 px-3 py-0.5 rounded-md">Detail</RouterLink>

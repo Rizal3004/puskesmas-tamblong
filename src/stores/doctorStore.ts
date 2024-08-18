@@ -36,7 +36,6 @@ export const useDoctorStore = defineStore('Doctor', () => {
     formData.append('phone', phone!)
     formData.append('poli_id', String(poli_id))
 
-
     const imageFile2 = await jpegToPng(imageFile as File)
 
     formData.append('imageFile', imageFile2)
@@ -56,6 +55,36 @@ export const useDoctorStore = defineStore('Doctor', () => {
 
   const getDoctorById = (id: number) => {
     return doctorList.value.find(doctor => doctor.id === id)
+  }
+
+  const updateDoctor = async (id: number, doctor: Partial<DoctorForm>) => {
+
+    const formData = new FormData()
+    formData.append('email', doctor.email!)
+    formData.append('jam_kerja_end', doctor.jam_kerja_end!)
+    formData.append('jam_kerja_start', doctor.jam_kerja_start!)
+    formData.append('name', doctor.name!)
+    formData.append('phone', doctor.phone!)
+    formData.append('poli_id', String(doctor.poli_id))
+    formData.append('imageFile', doctor.imageFile as File)
+
+    await apiFetch(`/doctors/${id}`, {
+      method: 'PATCH',
+      body: formData,
+      onResponseError: (error) => {
+        console.error(error)
+        toast.error('bejir')
+        toast.error(error.response._data)
+      },
+    })
+
+    const doctorIndex = doctorList.value.findIndex(doctor => doctor.id === id)
+    doctorList.value[doctorIndex] = {
+      ...doctorList.value[doctorIndex],
+      ...doctor,
+    }
+
+    toast.success('Berhasil mengubah dokter')
   }
 
   const deleteDoctor = async (id: number) => {
@@ -78,5 +107,6 @@ export const useDoctorStore = defineStore('Doctor', () => {
     createDoctor,
     getDoctorById,
     deleteDoctor,
+    updateDoctor,
   }
 })

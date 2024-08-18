@@ -2,37 +2,44 @@
 import { useRouter } from 'vue-router'
 import validateInputNumber from '@/utils/validateInputNumber'
 import { usePoliStore } from '@/stores/poliStore'
+import { useDoctorStore } from '@/stores/doctorStore'
+import type { DoctorForm } from '@/types/Doctor'
 
+const { getDoctorById, updateDoctor } = useDoctorStore()
 const { poliList } = usePoliStore()
 const router = useRouter()
 const route = useRoute()
-const dokterId = (route.params as object as { id: number }).id
+const dokterId = Number((route.params as object as { id: string }).id)
 
-const dokterFormData = reactive<{
-  nama: string
-  poliId: string
-  jamMulai: string
-  jamSelesai: string
-  email: string
-  noTelp: string
-  foto: File | null
-}>({
-  nama: '',
-  poliId: '',
-  jamMulai: '',
-  jamSelesai: '',
+const dokterFormData = reactive<Partial<DoctorForm>>({
+  name: '',
+  poli_id: undefined,
+  jam_kerja_start: '',
+  jam_kerja_end: '',
   email: '',
-  noTelp: '',
-  foto: null,
+  phone: '',
+  imageFile: undefined,
 })
 
 function photoChange(e: Event) {
-  dokterFormData.foto = (e.target as HTMLInputElement)?.files![0]
+  dokterFormData.imageFile = (e.target as HTMLInputElement)?.files![0]
 }
 
 async function handleSubmit() {
-
+  updateDoctor(dokterId, dokterFormData)
 }
+
+onMounted(() => {
+  const dokter = getDoctorById(dokterId)
+  if (!dokter) return
+  dokterFormData.name = dokter.name!
+  dokterFormData.poli_id = dokter.poli_id!
+  dokterFormData.jam_kerja_start = dokter.jam_kerja_start!
+  dokterFormData.jam_kerja_end = dokter.jam_kerja_end!
+  dokterFormData.email = dokter.email!
+  dokterFormData.phone = dokter.phone!
+  console.log(dokterFormData)
+})
 </script>
 
 <template>
@@ -53,7 +60,7 @@ async function handleSubmit() {
       <div class="flex flex-col">
         <label>Nama</label>
         <input
-          v-model="dokterFormData.nama"
+          v-model="dokterFormData.name"
           placeholder="Nama Dokter"
           type="text"
           class="border py-1 px-3 rounded-md"
@@ -62,7 +69,7 @@ async function handleSubmit() {
       <div class="flex flex-col">
         <label>Spesialis</label>
         <select
-          v-model="dokterFormData.poliId"
+          v-model="dokterFormData.poli_id"
           placeholder="Pilih Poli"
           label="Poli"
           class="border py-1 px-3 rounded-md"
@@ -73,7 +80,7 @@ async function handleSubmit() {
       <div class="flex flex-col">
         <label>Jam mulai kerja</label>
         <input
-          v-model="dokterFormData.jamMulai"
+          v-model="dokterFormData.jam_kerja_start"
           type="time"
           class="border py-1 px-3 rounded-md"
         >
@@ -81,7 +88,7 @@ async function handleSubmit() {
       <div class="flex flex-col">
         <label>Jam berakhir kerja</label>
         <input
-          v-model="dokterFormData.jamSelesai"
+          v-model="dokterFormData.jam_kerja_end"
           type="time"
           class="border py-1 px-3 rounded-md"
         >
@@ -97,7 +104,7 @@ async function handleSubmit() {
       <div class="flex flex-col">
         <label>No Telp</label>
         <input
-          v-model="dokterFormData.noTelp"
+          v-model="dokterFormData.phone"
           type="text"
           class="border py-1 px-3 rounded-md"
           @keypress="validateInputNumber"
@@ -114,7 +121,7 @@ async function handleSubmit() {
         >
       </div>
       <div class="flex items-end">
-        <button type="submit" class="w-full h-10 bg-blue-400 rounded-md text-white"> Tambah Dokter </button>
+        <button type="submit" class="w-full h-10 bg-blue-400 rounded-md text-white">Submit</button>
       </div>
     </form>
   </div>

@@ -11,14 +11,20 @@ import {
 } from 'radix-vue'
 import SolarCheckCircleBoldDuotone from '~icons/solar/check-circle-bold-duotone'
 
-defineProps<{
+const { bookingActivityId } = defineProps<{
   bookingActivityId: number
 }>()
 const emit = defineEmits<{
-  delete: [bookingActivityId: number, penyakit: string, resep: string]
+  done: [bookingActivityId: number, penyakit: string, resep: string]
 }>()
 const penyakit = ref('')
 const resep = ref('')
+const aturanMinum = ref('')
+
+function handleSubmit() {
+  const resep2 = `${resep.value}::${aturanMinum.value}`
+  emit('done', bookingActivityId, penyakit.value, resep2)
+}
 </script>
 
 <template>
@@ -60,6 +66,15 @@ const resep = ref('')
                 required
               />
             </label>
+            <label class="flex flex-col gap-1">
+              Aturan Minum
+              <textarea
+                v-model="aturanMinum"
+                placeholder="Masukkan Aturan Minum"
+                class="border px-2 py-1 rounded-md"
+                required
+              />
+            </label>
           </div>
         </DialogDescription>
         <div class="mt-[25px] flex gap-4 justify-end">
@@ -74,7 +89,7 @@ const resep = ref('')
             <button
               type="button"
               class="bg-green-200 reen hover:bg-green-400 hover:text-green-800 transition-all duration-300 focus:shadow-green-300 inline-flex h-[35px] items-center justify-center rounded-[4px] px-[15px] font-semibold leading-none focus:shadow-[0_0_0_2px] focus:outline-none"
-              @click="emit('delete', bookingActivityId, penyakit, resep)"
+              @click="handleSubmit"
             >
               Selesai
             </button>

@@ -18,29 +18,8 @@ import {
 import RadixIconsChevronDown from '~icons/radix-icons/chevron-down'
 import RadixIconsCheck from '~icons/radix-icons/check'
 import RadixIconsChevronUp from '~icons/radix-icons/chevron-up'
-
-function createTimeSlots(): { id: string, name: string }[] {
-  const timeSlots: { id: string, name: string }[] = []
-  let id = 1
-
-  for (let hour = 8; hour <= 16; hour++) {
-    const start = `${hour.toString().padStart(2, '0')}:00`
-    const end = `${(hour + 1).toString().padStart(2, '0')}:00`
-    timeSlots.push({ id: id.toString(), name: `${start} - ${end}` })
-    id++
-  }
-
-  return timeSlots
-}
-
-function getTimeSlotById(id: string, timeSlots: { id: string, name: string }[]): { start: string, end: string } | undefined {
-  const timeSlot = timeSlots.find(slot => slot.id === id)
-  if (timeSlot) {
-    const [start, end] = timeSlot.name.split(' - ')
-    return { start: `${start}:00`, end: `${end}:00` }
-  }
-  return undefined
-}
+import createTimeSlots from '@/utils/createTimeSlots'
+import getTimeSlotById from '@/utils/getTimeSlotById'
 
 const selectedValue = ref<string>('')
 
