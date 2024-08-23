@@ -7,6 +7,9 @@ import type { BookingActivity, BookingActivityForm } from '@/types/BookingActivi
 import getCurrentTime from '@/utils/getCurrentTime'
 import apiFetch from '@/ofetch'
 import { botSendMessage } from '@/bot'
+import createTimeFromString from '@/utils/createTimeFromString'
+import isTime1GreaterThanTime2 from '@/utils/isTime1GreaterThanTime2'
+import createTimeFromString2 from '@/utils/createTimeFromString2'
 
 export const useBookingActivityStore = defineStore('BookingActivity', () => {
   // Store untuk data aktivitas booking
@@ -86,6 +89,26 @@ eluhan: ${booking_activity.keluhan}
     } else {
       return null
     }
+  }
+
+  const getQueueNumber = (baId: number) => {
+    const ba2 = bookingActivityList.value.find(ba => ba.id === baId)
+    if (ba2) {
+      const baListWithSameDate = bookingActivityList.value.filter(ba => ba.date === ba2.date).sort((a, b) => {
+        const aDate = createTimeFromString2(a.created_at!)
+        const bDate = createTimeFromString2(b.created_at!)
+        // console.log(isTime1GreaterThanTime2(aDate, bDate) ? 1 : -1)
+        return isTime1GreaterThanTime2(aDate, bDate) ? 1 : -1
+      })
+
+      const index = baListWithSameDate.findIndex(ba => ba.id === baId)
+
+      // console.log(baListWithSameDate)
+      // console.log(index)
+
+      return index + 1
+    }
+    return null
   }
 
   const handleDoneBooking = async (bookingId: number, { penyakit, resep }: { penyakit: string, resep: string }) => {
@@ -171,5 +194,6 @@ eluhan: ${booking_activity.keluhan}
     getBookingActivityByDoctorIdAndDate,
     handlePatientArrived,
     getBookingActivityByDoctorId,
+    getQueueNumber,
   }
 })

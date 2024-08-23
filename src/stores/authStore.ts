@@ -150,6 +150,33 @@ export const useAuthStore = defineStore('auth', () => {
     profile.value!.password = password
   }
 
+  const changeBirthDate = async (birthdate: string) => {
+
+    await apiFetch(`/patients/${profile.value?.id}/birthdate`, {
+      method: 'PATCH',
+      body: {
+        birthdate,
+      },
+    })
+    profile.value!.birthdate = birthdate
+  }
+
+  const isProfileComplete = computed(() => {
+    if (
+      profile.value?.address
+      && profile.value?.email
+      && profile.value?.phone
+      && profile.value?.nik
+      && profile.value?.name
+      && profile.value?.password
+      && profile.value.address
+      && profile.value.birthdate
+    ) {
+      return true
+    }
+    return false
+  })
+
   return {
     profile,
     userBooking,
@@ -162,5 +189,7 @@ export const useAuthStore = defineStore('auth', () => {
     changeEmail,
     changePhone,
     changePassword,
+    changeBirthDate,
+    isProfileComplete
   }
 })

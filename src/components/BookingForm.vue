@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { storeToRefs } from 'pinia'
+import { useToast } from 'vue-toast-notification'
 import SelectTime from './BookingForm/SelectTime.vue'
 import { useAuthStore } from '@/stores/authStore'
 import type { BookingActivityForm } from '@/types/BookingActivity'
@@ -8,7 +9,8 @@ import { usePoliStore } from '@/stores/poliStore'
 import { useBookingActivityStore } from '@/stores/bookingActivityStore'
 
 const router = useRouter()
-const { profile } = useAuthStore()
+const toast = useToast()
+const { profile, isProfileComplete } = useAuthStore()
 const { doctorList } = storeToRefs(useDoctorStore())
 const { getBookingActivityByDoctorIdAndDate } = useBookingActivityStore()
 const { poliList } = usePoliStore()
@@ -67,6 +69,10 @@ function checkIfDoctorIsAvailable({ doctorId, date, startsAt, endsAt }: { doctor
 }
 
 async function handleBooking() {
+  if (!isProfileComplete) {
+    toast.warning('Lengkapi profil terlebih dahulu')
+    return
+  }
   await addBookingActivity(bookingFormData)
   router.go(0)
 }

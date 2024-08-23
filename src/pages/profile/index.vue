@@ -8,7 +8,7 @@ import SolarCheckSquareLineDuotone from '~icons/solar/check-square-line-duotone'
 import Header from '@/components/Header.vue'
 import validateInputNumber from '@/utils/validateInputNumber'
 
-const { changeAddress, changePhone, changePassword, changeEmail, logout } = useAuthStore()
+const { changeAddress, changePhone, changePassword, changeEmail, changeBirthDate, logout } = useAuthStore()
 const { profile } = storeToRefs(useAuthStore())
 const router = useRouter()
 
@@ -40,6 +40,14 @@ const passwordText = ref(profile.value?.password ?? '')
 async function handleChangePassword() {
   changePassword(passwordText.value)
   isEditPassword.value = false
+}
+const isEditBirthDate = ref(false)
+const birthDateEl = ref<HTMLInputElement | null>(null)
+const birthDateText = ref(profile.value?.birthdate ?? '')
+async function handleChangeBirthDate() {
+  // changePassword(passwordText.value)
+  changeBirthDate(birthDateText.value)
+  isEditBirthDate.value = false
 }
 
 function handleLogout() {
@@ -152,15 +160,45 @@ onMounted(() => {
               ref="phoneEl"
               v-model="phoneText"
               type="text"
-              @keypress="validateInputNumber"
               class="px-1 py-1 w-full border"
               placeholder="Masukkan nomor baru anda"
+              @keypress="validateInputNumber"
             >
             <div class="flex gap-3">
               <button @click="isEditPhone = false">
                 <SolarCloseSquareLineDuotone class="text-red-400" />
               </button>
               <button @click="handleChangePhone">
+                <SolarCheckSquareLineDuotone class="text-green-400" />
+              </button>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <th>Tanggal Lahir</th>
+        <td>
+          <div v-if="!isEditBirthDate" class="flex justify-between">
+            <p>
+              {{ profile.birthdate ?? 'Belum diatur' }}
+            </p>
+            <button @click="isEditBirthDate = true">
+              <SolarPen2BoldDuotone class="text-orange-400" />
+            </button>
+          </div>
+          <div v-else class="flex justify-between p-1">
+            <input
+              ref="birthDateEl"
+              v-model="birthDateText"
+              type="date"
+              class="px-1 py-1 w-full border"
+              placeholder="Masukkan password baru anda"
+            >
+            <div class="flex gap-3">
+              <button @click="isEditBirthDate = false">
+                <SolarCloseSquareLineDuotone class="text-red-400" />
+              </button>
+              <button @click="handleChangeBirthDate">
                 <SolarCheckSquareLineDuotone class="text-green-400" />
               </button>
             </div>

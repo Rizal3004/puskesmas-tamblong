@@ -59,7 +59,7 @@ async function handleDelete(authId: string) {
             <td class="text-start">{{ pasien.nik }}</td>
             <td class="text-start">{{ pasien.address }}</td>
             <td class="text-start">{{ pasien.phone }}</td>
-            <!-- <td class="text-start">{{ pasien.email }}</td> -->
+            <td class="text-start">{{ pasien.email }}</td>
             <td class="text-start">
               <template v-if="pasien.birthdate">
                 {{ pasien.birthdate }}

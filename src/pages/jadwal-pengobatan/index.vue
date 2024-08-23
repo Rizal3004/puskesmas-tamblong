@@ -9,7 +9,7 @@ import { useBookingActivityStore } from '@/stores/bookingActivityStore'
 
 const router = useRouter()
 const { userBooking } = storeToRefs(useAuthStore())
-const { handlePatientArrived, handleCancelBooking } = useBookingActivityStore()
+const { handlePatientArrived, handleCancelBooking, getQueueNumber } = useBookingActivityStore()
 const { getDoctorById } = useDoctorStore()
 
 const doctor = computed(() => {
@@ -51,6 +51,10 @@ onMounted(() => {
       <p>Pasien diharapkan datang 15 menit sebelum waktu yang ditentukan</p>
       <div v-if="userBooking" class="">
         <table class="[&>*>*]:border [&>*>*]:text-start [&>*>*]:px-2">
+          <tr>
+            <th>Nomor Antrian</th>
+            <td>{{ getQueueNumber(userBooking?.id) }}</td>
+          </tr>
           <tr>
             <th>Tanggal</th>
             <td>{{ formatDate(userBooking?.date) }}</td>

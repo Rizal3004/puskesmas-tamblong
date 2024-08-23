@@ -43,7 +43,7 @@ const { userBooking } = storeToRefs(useAuthStore())
         </a>
         <RouterLink to="/profile" class="px-4 py-1">Profil</RouterLink>
       </div>
-      <a v-if="!userBooking" href="#booking" class="px-4 py-1 bg-slate-700 text-white rounded-md">
+      <a v-if="!userBooking" href="/#booking" class="px-4 py-1 bg-slate-700 text-white rounded-md">
         Booking Dokter
       </a>
       <template v-else>

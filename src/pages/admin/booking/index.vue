@@ -13,7 +13,7 @@ import extractTime from '@/utils/extractTime'
 import { usePoliStore } from '@/stores/poliStore'
 
 const { bookingActivityList } = storeToRefs(useBookingActivityStore())
-const { handleDoneBooking, handleCancelBooking } = useBookingActivityStore()
+const { handleDoneBooking, handleCancelBooking, getQueueNumber } = useBookingActivityStore()
 const { getPatientById } = usePatientsStore()
 const { getDoctorById } = useDoctorStore()
 const { poliList } = usePoliStore()
@@ -95,7 +95,7 @@ async function handleDone(bookingActivityId: number, penyakit: string, resep: st
             <th class="text-start">Nama dokter</th>
             <th class="text-start">Tanggal</th>
             <th class="text-start">Jam</th>
-            <th class="text-start">Jam Sampai</th>
+            <th class="text-start">Nomor Antrian</th>
             <!-- <th class="text-start">Status</th> -->
             <th class="text-start">Keluhan</th>
             <th class="text-start" />
@@ -123,7 +123,7 @@ async function handleDone(bookingActivityId: number, penyakit: string, resep: st
             <td class="text-start">{{ ba.doctor?.name }}</td>
             <td class="text-start">{{ ba.date }}</td>
             <td class="text-start">{{ ba?.starts_at }} - {{ ba?.ends_at }}</td>
-            <td class="text-start">{{ ba.arrived_at ? extractTime(ba.arrived_at) : '' }}</td>
+            <td class="text-start">{{ getQueueNumber(ba.id) }}</td>
             <!-- <td class="text-start">{{ ba.status }}</td> -->
             <td class="text-start">
               <div class="flex items-center gap-2">
