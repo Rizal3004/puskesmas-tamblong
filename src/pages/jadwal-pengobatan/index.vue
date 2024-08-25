@@ -84,11 +84,14 @@ onMounted(() => {
             <td class="capitalize">{{ userBooking.keluhan }}</td>
           </tr>
         </table>
-        <p class="text-end text-sm mt-2" v-if="!userBooking.arrived_at">Klik Tombol 'Sampai ke Puskesmas' jika anda telah berada di puskesmas</p>
-        <div class="flex justify-between mt-4">
-          <button type="button" class="bg-red-300 px-4 rounded-md" @click="() => handleCancel(userBooking!.id)">
+        <p v-if="!userBooking.arrived_at" class="text-end text-sm mt-2">Klik Tombol 'Sampai ke Puskesmas' jika anda telah berada di puskesmas</p>
+        <div class="flex justify-end gap-4 mt-4">
+          <button type="button" class="border border-red-500 px-4 rounded-md" @click="() => handleCancel(userBooking!.id)">
             Batalkan booking
           </button>
+          <RouterLink to="/jadwal-pengobatan/tiket" type="button" class="border border-amber-500 px-4 rounded-md">
+            Lihat Tiket
+          </RouterLink>
           <button v-if="!userBooking.arrived_at" class="bg-green-300 text-sm px-2 py-1 rounded-md" @click="() => handleArrived(userBooking!.id)">
             Sampai ke Puskesmas
           </button>

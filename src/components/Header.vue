@@ -59,7 +59,7 @@ const { userBooking } = storeToRefs(useAuthStore())
       <SolarHamburgerMenuLinear />
     </RouterLink> -->
   </div>
-  <div class="px-4 py-2 border-t flex items-center justify-end gap-4">
+  <div class="md:hidden px-4 py-2 border-t flex items-center justify-end gap-4">
     <RouterLink to="/" class="flex items-center text-xs gap-1">
       <SolarHome2Outline />
       <span>Home</span>
