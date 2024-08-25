@@ -4,7 +4,6 @@ import { storeToRefs } from 'pinia'
 import MaterialSymbolsMail from '~icons/material-symbols/mail'
 import IcBaselineWhatsapp from '~icons/ic/baseline-whatsapp'
 import { useAuthStore } from '@/stores/authStore'
-import SolarHamburgerMenuLinear from '~icons/solar/hamburger-menu-linear'
 import SolarUserRoundedOutline from '~icons/solar/user-rounded-outline'
 import SolarHome2Outline from '~icons/solar/home-2-outline'
 
@@ -15,7 +14,7 @@ const { userBooking } = storeToRefs(useAuthStore())
   <div class="flex items-center justify-between border-b px-4 md:px-36 md:text-base text-xs">
     <p>Selamat Datang</p>
     <div class="flex divide-x">
-      <a class="flex items-center gap-2 px-4 py-2.5" href="#">
+      <a class="flex items-center gap-2 px-4 py-2.5" href="https://wa.me/6289668223131" target="_blank">
         <IcBaselineWhatsapp class="text-green-500" />
         <span>Whatsapp</span>
       </a>

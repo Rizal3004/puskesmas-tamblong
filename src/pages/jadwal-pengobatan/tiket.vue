@@ -24,6 +24,16 @@ const poli = computed(() => {
   const poli2 = getPoliById(dokter.value!.poli_id)
   return poli2
 })
+
+const elementToPrintRef = ref<HTMLElement | null>(null)
+const { handlePrint } = useVueToPrint({
+  content: () => elementToPrintRef.value!,
+  documentTitle: 'TIKET ANTRIAN BEROBAT',
+})
+
+function handlePrint2() {
+  handlePrint()
+}
 </script>
 
 <template>
@@ -39,7 +49,7 @@ const poli = computed(() => {
         Kembali
       </button>
       <p>Screenshot tiket ini untuk ditunjukkan ke admin</p>
-      <div class="px-4 md:px-16 py-6 overflow-x-scroll md:overflow-x-auto border">
+      <div ref="elementToPrintRef" class="px-4 md:px-16 py-6 md:overflow-x-auto border">
         <div class="mb-8">
           <div class="flex items-center gap-5">
             <div class="w-20 aspect-square">
@@ -49,12 +59,12 @@ const poli = computed(() => {
               <h2 class="font-semibold text-lg">Puskesmas Tamblong</h2>
               <p>No Surat: </p>
               <p>Alamat: Jl. Tamblong no. 66, Kb. Pisang, Kec. Sumur Bandung, Kota Bandung, Jawa Barat 40112</p>
-              <p>No Telp. 243214, Email: lkfjasdf, Website: puskesmas-tamblong.vercel.dev</p>
+              <p>No Telp. +6289668223131, Email: lkfjasdf, Website: puskesmas-tamblong.vercel.dev</p>
             </div>
           </div>
         </div>
         <h1 class="text-center text-2xl font-semibold">TIKET ANTRIAN BEROBAT</h1>
-        <div class="py-2 my-2 flex justify-between">
+        <div class="py-2 my-2 flex md:flex-row flex-col justify-between">
           <table class="">
             <tr>
               <td>Tanggal</td>
@@ -73,13 +83,16 @@ const poli = computed(() => {
               <td>: {{ dokter?.name }}</td>
             </tr>
           </table>
-          <div class="flex flex-col items-center w-3/12">
+          <div class="flex flex-col items-center md:py-0 py-8 md:w-3/12">
             <span class="text-2xl font-semibold">Antrian Ke:</span>
             <h1 class="text-6xl font-bold">{{ getQueueNumber(userBooking?.id!) }}</h1>
             <p class="text-center text-sm">Harap Datang 15 Menit sebelum jadwal berobat yang telah ditentukan</p>
           </div>
         </div>
-        <p class="text-xl font-semibold text-center">Silahkan membuat antrian baru jika antrian anda terlewatkan</p>
+        <p class="text-md md:text-xl font-semibold text-center">Silahkan membuat antrian baru jika antrian anda terlewatkan</p>
+      </div>
+      <div class="flex justify-end mt-8">
+        <button class="bg-sky-200 px-4 py-0.5 rounded-md" @click="handlePrint2">Print</button>
       </div>
     </div>
   </div>

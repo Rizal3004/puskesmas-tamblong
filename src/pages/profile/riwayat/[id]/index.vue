@@ -65,7 +65,7 @@ function handlePrint2() {
               <h2 class="font-semibold text-lg">Puskesmas Tamblong</h2>
               <p>No Surat: {{ createReferenceNumber(ba!) }}</p>
               <p>Alamat: Jl. Tamblong no. 66, Kb. Pisang, Kec. Sumur Bandung, Kota Bandung, Jawa Barat 40112</p>
-              <p>No Telp. 243214, Email: lkfjasdf, Website: puskesmas-tamblong.vercel.dev</p>
+              <p>No Telp. +6289668223131, Email: lkfjasdf, Website: puskesmas-tamblong.vercel.dev</p>
             </div>
           </div>
         </div>
