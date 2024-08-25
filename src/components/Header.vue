@@ -5,6 +5,8 @@ import MaterialSymbolsMail from '~icons/material-symbols/mail'
 import IcBaselineWhatsapp from '~icons/ic/baseline-whatsapp'
 import { useAuthStore } from '@/stores/authStore'
 import SolarHamburgerMenuLinear from '~icons/solar/hamburger-menu-linear'
+import SolarUserRoundedOutline from '~icons/solar/user-rounded-outline'
+import SolarHome2Outline from '~icons/solar/home-2-outline'
 
 const { userBooking } = storeToRefs(useAuthStore())
 </script>
@@ -52,11 +54,22 @@ const { userBooking } = storeToRefs(useAuthStore())
         </RouterLink>
       </template>
     </div>
-    <RouterLink v-if="userBooking" to="/jadwal-pengobatan" class="block md:hidden px-4 py-1 bg-slate-700 text-white rounded-md">
-      Jadwal Pengobatan
-    </RouterLink>
+
     <!-- <RouterLink to="/mobile-navigation">
       <SolarHamburgerMenuLinear />
     </RouterLink> -->
+  </div>
+  <div class="px-4 py-2 border-t flex items-center justify-end gap-4">
+    <RouterLink to="/" class="flex items-center text-xs gap-1">
+      <SolarHome2Outline />
+      <span>Home</span>
+    </RouterLink>
+    <RouterLink to="/profile" class="flex items-center text-xs gap-1">
+      <SolarUserRoundedOutline />
+      <span>Profile</span>
+    </RouterLink>
+    <RouterLink v-if="userBooking" to="/jadwal-pengobatan" class="text-xs md:text-base w-fit block md:hidden px-4 py-1 bg-slate-700 text-white rounded-md">
+      Jadwal Pengobatan
+    </RouterLink>
   </div>
 </template>
