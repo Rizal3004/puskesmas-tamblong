@@ -53,11 +53,11 @@ const bookingActivities2 = computed(() => {
 <template>
   <div class="">
     <!-- <Header class="" /> -->
-    <div class="px-36 py-4 space-y-3 border-t">
+    <div class="px-4 md:px-36 py-4 space-y-3 border-t">
       <button
         type="button"
         href="/admin/doctors"
-        class="flex items-center gap-2 hover:bg-slate-100 px-4 py-1 rounded-xl text-sm -translate-x-10 transition-all duration-300 w-fit"
+        class="flex items-center gap-2 hover:bg-slate-100 px-4 py-1 rounded-xl text-sm md:-translate-x-10 transition-all duration-300 w-fit"
         @click="router.go(-1)"
       >
         <img src="https://api.iconify.design/material-symbols-light:arrow-back-rounded.svg?color=%236e6e6e" alt="">
@@ -66,7 +66,7 @@ const bookingActivities2 = computed(() => {
       <div class="flex justify-between">
         <h1 class="text-2xl font-semibold">Riwayat Booking</h1>
       </div>
-      <div class="border rounded-md px-2 pb-3">
+      <div class="border rounded-md px-2 py-2 pb-3 md:overflow-x-auto overflow-x-scroll">
         <table class="w-full border-spacing-x-6 border-separate">
           <thead class="border-b">
             <tr class="h-12">
@@ -87,7 +87,7 @@ const bookingActivities2 = computed(() => {
             <tr class="h-1">
               <td colSpan="9" />
             </tr>
-            <tr v-for="ba in bookingActivities2" :key="ba.id">
+            <tr v-for="ba in bookingActivities2" :key="ba.id"  class="h-10">
               <!-- <td class="text-start">{{ ba.id }}</td> -->
               <!-- <td class="text-start">
                 <MaterialSymbolsCheckRounded
@@ -123,4 +123,12 @@ const bookingActivities2 = computed(() => {
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+table {
+  border-collapse: collapse;
+}
+
+tr {
+  border-bottom: 1pt solid #e2e8f0;
+}
+</style>

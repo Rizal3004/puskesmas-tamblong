@@ -45,17 +45,17 @@ function handlePrint2() {
 
 <template>
   <div>
-    <div class="px-36 py-4 space-y-3 border-t">
+    <div class="px-4 md:px-36 py-4 space-y-3 border-t">
       <button
         type="button"
         href="/admin/doctors"
-        class="flex items-center gap-2 hover:bg-slate-100 px-4 py-1 rounded-xl text-sm -translate-x-10 transition-all duration-300 w-fit"
+        class="flex items-center gap-2 hover:bg-slate-100 px-4 py-1 rounded-xl text-sm md:-translate-x-10 transition-all duration-300 w-fit"
         @click="router.go(-1)"
       >
         <img src="https://api.iconify.design/material-symbols-light:arrow-back-rounded.svg?color=%236e6e6e" alt="">
         Kembali
       </button>
-      <div class="px-16 py-6" ref="elementToPrintRef">
+      <div ref="elementToPrintRef" class="px-4 md:px-16 py-6 overflow-x-scroll md:overflow-x-auto border">
         <div class="mb-8">
           <div class="flex items-center gap-5">
             <div class="w-20 aspect-square">
