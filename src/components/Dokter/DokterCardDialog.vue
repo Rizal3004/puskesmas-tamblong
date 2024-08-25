@@ -38,10 +38,6 @@ const computedTimeSlots = computed(() => {
     const isBooked = baList?.some((ba) => {
       const baStartsAt = createTimeFromString(ba.starts_at)
       const baEndsAt = createTimeFromString(ba.ends_at)
-      console.log('baStartsAt', baStartsAt.toLocaleTimeString())
-      console.log('startTime', startTime.toLocaleTimeString())
-      console.log('baEndsAt', baEndsAt.toLocaleTimeString())
-      console.log('endTime', endTime.toLocaleTimeString())
       return isTime1GreaterThanOrEqualToTime2(startTime, baEndsAt) && isTime1GreaterThanOrEqualToTime2(baStartsAt, endTime)
     })
     return {
@@ -74,17 +70,17 @@ const computedTimeSlots = computed(() => {
           <p>Poli: {{ getPoliById(dokter.poli_id)?.name }}</p>
           <select>
             <template v-for="slot in computedTimeSlots">
-              <option v-if="slot" :key="slot.id" :value="slot.id">{{ slot.name }}{{ slot.isBooked }}</option>
+              <option v-if="slot" :key="slot.id" :value="slot.id">{{ slot.name }}</option>
             </template>
           </select>
         </div>
         <div class="mt-[25px] flex justify-end">
           <DialogClose asChild>
-            <button
+            <!-- <button
               class="bg-green4 text-green11 hover:bg-green5 focus:shadow-green7 inline-flex h-[35px] items-center justify-center rounded-[4px] px-[15px] font-semibold leading-none focus:shadow-[0_0_0_2px] focus:outline-none"
             >
               Save changes
-            </button>
+            </button> -->
           </DialogClose>
         </div>
         <DialogClose

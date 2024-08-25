@@ -13,7 +13,7 @@ import extractTime from '@/utils/extractTime'
 import { usePoliStore } from '@/stores/poliStore'
 
 const { bookingActivityList } = storeToRefs(useBookingActivityStore())
-const { handleDoneBooking, handleCancelBooking, getQueueNumber } = useBookingActivityStore()
+const { handleDoneBooking, handleCancelBooking, getQueueNumber, refetchBookingActivity } = useBookingActivityStore()
 const { getPatientById } = usePatientsStore()
 const { getDoctorById } = useDoctorStore()
 const { poliList } = usePoliStore()
@@ -62,6 +62,15 @@ async function handleDone(bookingActivityId: number, penyakit: string, resep: st
   await handleDoneBooking(bookingActivityId, { resep, penyakit })
 }
 
+let intervalId: NodeJS.Timeout
+
+onMounted(() => {
+  intervalId = setInterval(refetchBookingActivity, 1000 * 20)
+})
+
+onUnmounted(() => {
+  clearInterval(intervalId)
+})
 </script>
 
 <template>
@@ -79,7 +88,7 @@ async function handleDone(bookingActivityId: number, penyakit: string, resep: st
         </div>
         <select v-model="poliId" class="border px-4 py-1 rounded-md">
           <option :value="undefined">Semua Poli</option>
-          <option :value="poli.id" v-for="poli in poliList" :key="poli.id">{{ poli.name }}</option>
+          <option v-for="poli in poliList" :key="poli.id" :value="poli.id">{{ poli.name }}</option>
         </select>
       </div>
     </div>

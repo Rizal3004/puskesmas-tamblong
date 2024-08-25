@@ -32,6 +32,11 @@ export const useBookingActivityStore = defineStore('BookingActivity', () => {
     }
   }
 
+  const refetchBookingActivity = async () => {
+    getBookingActivity()
+    console.log('refetch booking activity')
+  }
+
   const addBookingActivity = async (data: BookingActivityForm) => {
     const toast = useToast()
     const { setUserBooking } = useAuthStore()
@@ -97,7 +102,6 @@ eluhan: ${booking_activity.keluhan}
       const baListWithSameDate = bookingActivityList.value.filter(ba => ba.date === ba2.date).sort((a, b) => {
         const aDate = createTimeFromString2(a.created_at!)
         const bDate = createTimeFromString2(b.created_at!)
-        // console.log(isTime1GreaterThanTime2(aDate, bDate) ? 1 : -1)
         return isTime1GreaterThanTime2(aDate, bDate) ? 1 : -1
       })
 
@@ -195,5 +199,6 @@ eluhan: ${booking_activity.keluhan}
     handlePatientArrived,
     getBookingActivityByDoctorId,
     getQueueNumber,
+    refetchBookingActivity,
   }
 })

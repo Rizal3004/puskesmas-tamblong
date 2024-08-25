@@ -30,10 +30,10 @@ const carouselItems = [
     wrapAround
   >
     <Slide v-for="(item, i) in carouselItems" :key="i">
-      <div class="h-[70vh] w-full px-28 flex text-white flex-col relative items-center justify-center bg-center bg-cover -z-20" :style="{backgroundImage: `url(${item.imgSrc})`}">
+      <div class="h-[70vh] w-full px-10 md:px-28 flex text-white flex-col relative items-center justify-center bg-center bg-cover -z-20" :style="{ backgroundImage: `url(${item.imgSrc})` }">
         <div class="h-full bg-black opacity-45 absolute w-full -z-10" />
-        <h2 className="text-5xl font-semibold">{{ item.title }}</h2>
-        <p class="text-center w-8/12 mt-4 text-xl">{{ item.description }}</p>
+        <h2 className="text-3xl md:text-5xl font-semibold">{{ item.title }}</h2>
+        <p class="text-center w-8/12 mt-4 md:text-xl">{{ item.description }}</p>
         <button className="btn bg-blue-600 text-white border-none mt-7 px-4 py-1 rounded-md">Bertemu Dokter</button>
       </div>
     </Slide>

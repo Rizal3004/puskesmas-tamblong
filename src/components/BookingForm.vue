@@ -79,8 +79,8 @@ async function handleBooking() {
 </script>
 
 <template>
-  <div id="booking" class="relative grid items-center px-36 grid-cols-2 gap-8 py-16 ">
-    <div>
+  <div id="booking" class="relative grid items-center px-4 md:px-36 md:grid-cols-2 gap-8 py-16 ">
+    <div class="hidden md:block">
       <img
         src="/images/booking.jpg"
         alt=""
