@@ -68,7 +68,7 @@ Booking baru untuk dokter <b>${getDoctorById(booking_activity.dokter_id)?.name}<
 Tanggal: ${booking_activity.date}
 Jam: ${booking_activity.starts_at} - ${booking_activity.ends_at}
 
-eluhan: ${booking_activity.keluhan}
+Keluhan: ${booking_activity.keluhan}
       `)
     toast.success('Anda telah melakukan booking dokter, silahkan melihat detail booking anda dengan menekan tombol "jadwal pengobatan"')
   }
