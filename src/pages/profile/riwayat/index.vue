@@ -113,7 +113,7 @@ const bookingActivities2 = computed(() => {
                 </div>
               </td>
               <td>
-                <RouterLink :to="`/profile/riwayat/${ba.id}`" class="bg-sky-200 px-3 py-0.5 rounded-md">Detail</RouterLink>
+                <RouterLink :to="`/profile/riwayat/${ba.id}`" class="bg-sky-200 px-3 py-0.5 rounded-md">Cetak</RouterLink>
               </td>
             </tr>
           </tbody>
