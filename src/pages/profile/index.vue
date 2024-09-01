@@ -1,3 +1,4 @@
+<!-- eslint-disable no-alert -->
 <script lang="ts" setup>
 import { storeToRefs } from 'pinia'
 import { useAuthStore } from '@/stores/authStore'
@@ -17,6 +18,7 @@ const emailEl = ref<HTMLInputElement | null>(null)
 const emailText = ref('')
 async function handleChangeEmail() {
   await changeEmail(emailText.value)
+  alert('Email berhasil diubah')
   isEditEmail.value = false
 }
 
@@ -25,6 +27,7 @@ const addressEl = ref<HTMLInputElement | null>(null)
 const addressText = ref(profile.value?.address ?? '')
 async function handleChangeAddress() {
   changeAddress(addressText.value)
+  alert('Alamat berhasil diubah')
   isEditAddress.value = false
 }
 const isEditPhone = ref(false)
@@ -32,6 +35,7 @@ const phoneEl = ref<HTMLInputElement | null>(null)
 const phoneText = ref(profile.value?.phone ?? '')
 async function handleChangePhone() {
   changePhone(phoneText.value)
+  alert('Nomor telepon berhasil diubah')
   isEditPhone.value = false
 }
 const isEditPassword = ref(false)
@@ -39,15 +43,8 @@ const passwordEl = ref<HTMLInputElement | null>(null)
 const passwordText = ref(profile.value?.password ?? '')
 async function handleChangePassword() {
   changePassword(passwordText.value)
+  alert('Password berhasil diubah')
   isEditPassword.value = false
-}
-const isEditBirthDate = ref(false)
-const birthDateEl = ref<HTMLInputElement | null>(null)
-const birthDateText = ref(profile.value?.birthdate ?? '')
-async function handleChangeBirthDate() {
-  // changePassword(passwordText.value)
-  changeBirthDate(birthDateText.value)
-  isEditBirthDate.value = false
 }
 
 function handleLogout() {
@@ -70,7 +67,7 @@ onMounted(() => {
       <SolarArrowLeftLinear class="" />
       <span class="">Kembali</span>
     </RouterLink>
-    <h1 class="text-2xl font-semibold">Profile</h1>
+    <h1 class="text-2xl font-semibold">Profil</h1>
     <table v-if="profile" class="w-8/12 [&>*>*]:border [&>*>*]:px-2 [&>*>*]:text-start">
       <!-- <tr>
         <th>ID</th>
@@ -178,31 +175,9 @@ onMounted(() => {
       <tr>
         <th>Tanggal Lahir</th>
         <td>
-          <div v-if="!isEditBirthDate" class="flex justify-between">
-            <p>
-              {{ profile.birthdate ?? 'Belum diatur' }}
-            </p>
-            <button @click="isEditBirthDate = true">
-              <SolarPen2BoldDuotone class="text-orange-400" />
-            </button>
-          </div>
-          <div v-else class="flex justify-between p-1">
-            <input
-              ref="birthDateEl"
-              v-model="birthDateText"
-              type="date"
-              class="w-full border p-1"
-              placeholder="Masukkan password baru anda"
-            >
-            <div class="flex gap-3">
-              <button @click="isEditBirthDate = false">
-                <SolarCloseSquareLineDuotone class="text-red-400" />
-              </button>
-              <button @click="handleChangeBirthDate">
-                <SolarCheckSquareLineDuotone class="text-green-400" />
-              </button>
-            </div>
-          </div>
+          <p>
+            {{ profile.birthdate ?? 'Belum diatur' }}
+          </p>
         </td>
       </tr>
       <tr>

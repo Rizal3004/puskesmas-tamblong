@@ -37,10 +37,12 @@ export const useBookingActivityStore = defineStore('BookingActivity', () => {
   }
 
   const addBookingActivity = async (data: BookingActivityForm) => {
+    // inisialize composables
     const toast = useToast()
     const { setUserBooking } = useAuthStore()
     const { getDoctorById } = useDoctorStore()
 
+    // the new booking activity data
     const newBookingActivityData = {
       starts_at: data.starts_at,
       ends_at: data.ends_at,
@@ -52,11 +54,13 @@ export const useBookingActivityStore = defineStore('BookingActivity', () => {
       keluhan: data.keluhan,
     }
 
+    // send the new booking activity data to the server
     const { booking_activity } = await apiFetch<{ booking_activity: BookingActivity }>('/booking-activities', {
       method: 'POST',
       body: newBookingActivityData,
       onResponseError: (error) => {
-        console.error(error)
+        toast.error('Dokter tidak tersedia pada jam tersebut')
+        return console.error(error)
       },
     })
 

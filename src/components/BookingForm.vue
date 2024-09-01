@@ -33,40 +33,10 @@ const doctorList2 = computed(() => {
   if (!bookingFormData.date) return []
   if (!bookingFormData.starts_at) return []
   if (!bookingFormData.ends_at) return []
-  return doctorList.value.map((d) => {
-    return {
-      ...d,
-      isAvailable: checkIfDoctorIsAvailable({
-        doctorId: d.id,
-        date: bookingFormData.date!,
-        startsAt: bookingFormData.starts_at!,
-        endsAt: bookingFormData.ends_at!,
-      }),
-    }
-  }).filter((d) => {
+  return doctorList.value.filter((d) => {
     return d.poli_id === selectedPoliId.value
   })
 })
-
-function checkIfDoctorIsAvailable({ doctorId, date, startsAt, endsAt }: { doctorId: number, date: string, startsAt: string, endsAt: string }) {
-  const ba = getBookingActivityByDoctorIdAndDate(doctorId, date)
-  if (!ba) return true
-
-  const isAvailable = ba.some((b) => {
-    const startsAtTime = new Date(`${date}T${startsAt}`).getTime()
-    const endsAtTime = new Date(`${date}T${endsAt}`).getTime()
-    const bookingStartsAtTime = new Date(`${date}T${b.starts_at}`).getTime()
-    const bookingEndsAtTime = new Date(`${date}T${b.ends_at}`).getTime()
-
-    // TODO: check if the booking is overlapping
-    if (startsAtTime >= bookingStartsAtTime && startsAtTime <= bookingEndsAtTime) return false
-    // disini
-    if (endsAtTime >= bookingStartsAtTime && endsAtTime <= bookingEndsAtTime) return false
-    return true
-  })
-
-  return isAvailable
-}
 
 async function handleBooking() {
   if (!isProfileComplete) {
@@ -124,7 +94,6 @@ async function handleBooking() {
                 v-for="dokter in doctorList2"
                 :key="dokter.id"
                 :value="dokter.id"
-                :disabled="!dokter.isAvailable"
               >{{ dokter.name }}</option>
             </select>
           </label>

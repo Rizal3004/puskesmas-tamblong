@@ -7,7 +7,7 @@ export const usePatientsStore = defineStore('Patients', () => {
   const patientsList = ref<Patient[]>([])
 
   const getAllPatients = async () => {
-    const { patients } = await apiFetch<{ patients: Patient[] }>('/patients')
+    const patients = await apiFetch<Patient[]>('/patients')
     patientsList.value = patients
   }
 

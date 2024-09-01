@@ -45,96 +45,98 @@ async function handleRegister() {
 </script>
 
 <template>
-  <div class="grid h-screen md:grid-cols-2">
-    <div class="hidden h-screen overflow-hidden bg-slate-700 md:block">
-      <img src="/images/image2.jpg" alt="">
-    </div>
-    <div class="relative flex flex-col justify-center gap-8 px-6 md:px-16">
-      <div class="space-y-2 *:text-start">
-        <h1 class="text-4xl font-bold text-sky-600">
-          Daftar
-        </h1>
-        <!-- <p class="text-slate-500">
-          Masukkan data anda untuk daftar
-        </p> -->
+  <div class="flex h-screen items-center justify-center">
+    <div class="grid w-8/12 overflow-hidden rounded-2xl border shadow-lg sm:grid-cols-2">
+      <div class="hidden overflow-hidden bg-slate-700 md:block">
+        <img src="/images/image2.jpg" alt="" class="object-center">
       </div>
-      <div class="">
-        <form class="flex flex-col gap-3" @submit.prevent="handleRegister">
-          <abbr title="Nama lengkap">
-            <label class="selection:color-white inline-flex w-full border-b gap-3 items-center py-2">
-              <SolarUserRoundedLinear />
-              <input
-                v-model="formDataRegister.name"
-                required
-                class="w-full bg-transparent focus:outline-none"
-                type="text"
-                placeholder="Masukkan nama lengkap"
-              >
-            </label>
-          </abbr>
-          <abbr title="NIK">
-            <label class="selection:color-white inline-flex w-full border-b gap-3 items-center py-2">
-              <SolarCardOutline />
-              <input
-                v-model="formDataRegister.nik"
-                required
-                class="w-full bg-transparent focus:outline-none"
-                type="text"
-                placeholder="Masukkan NIK"
-              >
-            </label>
-          </abbr>
-          <abbr title="Email">
-            <label class="selection:color-white inline-flex w-full border-b gap-3 items-center py-2">
-              <SolarLetterLinear />
-              <input
-                v-model="formDataRegister.email"
-                required
-                class="w-full bg-transparent focus:outline-none"
-                type="email"
-                placeholder="Masukkan email"
-              >
-            </label>
-          </abbr>
-          <abbr title="Password">
-            <label class="selection:color-white inline-flex w-full border-b gap-3 items-center py-2">
-              <SolarLockPasswordLinear />
-              <input
-                v-model="formDataRegister.password"
-                required
-                class="w-full bg-transparent focus:outline-none"
-                :type="showPassword ? 'text' : 'password' "
-                placeholder="Masukkan password"
-              >
-              <button type="button" @click="showPassword = !showPassword">
-                <SolarEyeClosedLinear v-if="showPassword" />
-                <SolarEyeLinear v-else />
-              </button>
-            </label>
-          </abbr>
-          <abbr title="Konfirmasi Password">
-            <label class="selection:color-white inline-flex w-full border-b gap-3 items-center py-2">
-              <SolarLockPasswordLinear />
-              <input
-                v-model="passwordConfirmation"
-                required
-                class="w-full bg-transparent focus:outline-none"
-                :type="showPasswordConfirmation ? 'text' : 'password' "
-                placeholder="Masukkan password"
-              >
-              <button type="button" @click="showPasswordConfirmation = !showPasswordConfirmation">
-                <SolarEyeClosedLinear v-if="showPasswordConfirmation" />
-                <SolarEyeLinear v-else />
-              </button>
-            </label>
-          </abbr>
-          <button type="submit" class="w-full rounded-md bg-zinc-700 py-1.5 text-white">Daftar</button>
-        </form>
+      <div class="relative flex flex-col justify-center gap-8 px-6 md:px-16">
+        <div class="space-y-2 *:text-start">
+          <h1 class="text-4xl font-bold text-sky-600">
+            Daftar
+          </h1>
+          <!-- <p class="text-slate-500">
+            Masukkan data anda untuk daftar
+          </p> -->
+        </div>
+        <div class="">
+          <form class="flex flex-col gap-3" @submit.prevent="handleRegister">
+            <abbr title="Nama lengkap">
+              <label class="selection:color-white inline-flex w-full border-b gap-3 items-center py-2">
+                <SolarUserRoundedLinear />
+                <input
+                  v-model="formDataRegister.name"
+                  required
+                  class="w-full bg-transparent focus:outline-none"
+                  type="text"
+                  placeholder="Masukkan nama lengkap"
+                >
+              </label>
+            </abbr>
+            <abbr title="NIK">
+              <label class="selection:color-white inline-flex w-full border-b gap-3 items-center py-2">
+                <SolarCardOutline />
+                <input
+                  v-model="formDataRegister.nik"
+                  required
+                  class="w-full bg-transparent focus:outline-none"
+                  type="text"
+                  placeholder="Masukkan NIK"
+                >
+              </label>
+            </abbr>
+            <abbr title="Email">
+              <label class="selection:color-white inline-flex w-full border-b gap-3 items-center py-2">
+                <SolarLetterLinear />
+                <input
+                  v-model="formDataRegister.email"
+                  required
+                  class="w-full bg-transparent focus:outline-none"
+                  type="email"
+                  placeholder="Masukkan email"
+                >
+              </label>
+            </abbr>
+            <abbr title="Password">
+              <label class="selection:color-white inline-flex w-full border-b gap-3 items-center py-2">
+                <SolarLockPasswordLinear />
+                <input
+                  v-model="formDataRegister.password"
+                  required
+                  class="w-full bg-transparent focus:outline-none"
+                  :type="showPassword ? 'text' : 'password' "
+                  placeholder="Masukkan password"
+                >
+                <button type="button" @click="showPassword = !showPassword">
+                  <SolarEyeClosedLinear v-if="showPassword" />
+                  <SolarEyeLinear v-else />
+                </button>
+              </label>
+            </abbr>
+            <abbr title="Konfirmasi Password">
+              <label class="selection:color-white inline-flex w-full border-b gap-3 items-center py-2">
+                <SolarLockPasswordLinear />
+                <input
+                  v-model="passwordConfirmation"
+                  required
+                  class="w-full bg-transparent focus:outline-none"
+                  :type="showPasswordConfirmation ? 'text' : 'password' "
+                  placeholder="Masukkan password"
+                >
+                <button type="button" @click="showPasswordConfirmation = !showPasswordConfirmation">
+                  <SolarEyeClosedLinear v-if="showPasswordConfirmation" />
+                  <SolarEyeLinear v-else />
+                </button>
+              </label>
+            </abbr>
+            <button type="submit" class="w-full rounded-md bg-zinc-700 py-1.5 text-white">Daftar</button>
+          </form>
+        </div>
+        <p>
+          Sudah punya akun? 
+          <RouterLink to="/auth/login" class="text-sky-600">Login</RouterLink>
+        </p>
       </div>
-      <p>
-        Already have an account?
-        <RouterLink to="/auth/login" class="text-sky-600">Login</RouterLink>
-      </p>
     </div>
   </div>
 </template>
