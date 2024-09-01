@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { g } from 'node_modules/unplugin-vue-router/dist/types-CRPDwP9n'
 import apiFetch from '@/ofetch'
 import type { BookingActivity } from '@/types/BookingActivity'
 import type { Doctor } from '@/types/Doctor'
