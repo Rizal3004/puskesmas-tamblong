@@ -1,5 +1,5 @@
 import { storeToRefs } from 'pinia'
-import { createRouter, createWebHistory } from 'vue-router'
+import { type NavigationGuardReturn, createRouter, createWebHistory } from 'vue-router'
 import { routes } from 'vue-router/auto-routes'
 import { useAuthStore } from './stores/authStore'
 
@@ -8,7 +8,7 @@ const router = createRouter({
   routes,
 })
 
-router.beforeEach(async (to) => {
+router.beforeEach(async (to): Promise<NavigationGuardReturn> => {
   const { profile } = storeToRefs(useAuthStore())
   const { getUserData } = useAuthStore()
 
@@ -18,7 +18,7 @@ router.beforeEach(async (to) => {
   }
 
   if (to.name === '/admin') {
-    return { name: '/admin/pasien/' }
+    return { name: '/admin/pasien/', message: 'Redirecting to /admin/pasien/' }
   }
 
   if (to.name === '/' && !profile.value) {
@@ -26,6 +26,7 @@ router.beforeEach(async (to) => {
   } else if ((to.name === '/auth/login' || to.name === '/auth/register') && profile.value) {
     return {
       name: '/',
+      message: 'You are already logged in',
     }
   }
 })
