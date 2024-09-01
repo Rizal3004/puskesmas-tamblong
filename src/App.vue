@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import { RouterView } from 'vue-router'
-import { useAuthStore } from '@/stores/authStore'
 import { useBookingActivityStore } from '@/stores/bookingActivityStore'
 import { useDoctorStore } from '@/stores/doctorStore'
 import { usePatientsStore } from '@/stores/patientsStore'

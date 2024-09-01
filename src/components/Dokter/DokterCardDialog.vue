@@ -1,9 +1,7 @@
 <script setup lang="ts">
-import { start } from 'node:repl'
 import {
   DialogClose,
   DialogContent,
-  DialogDescription,
   DialogOverlay,
   DialogPortal,
   DialogRoot,
@@ -51,14 +49,14 @@ const computedTimeSlots = computed(() => {
 <template>
   <DialogRoot>
     <DialogTrigger
-      class="text-grass11 font-semibold shadow-blackA7 hover:bg-mauve3 inline-flex h-[35px] items-center justify-center rounded-[4px] bg-white px-[15px] leading-none border focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
+      class="hover:bg-mauve3 inline-flex h-[35px] items-center justify-center rounded-[4px] border bg-white px-[15px] font-semibold leading-none text-grass11 shadow-blackA7 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
     >
       Lihat
     </DialogTrigger>
     <DialogPortal>
-      <DialogOverlay class="bg-blackA9 data-[state=open]:animate-overlayShow fixed inset-0 z-30" />
+      <DialogOverlay class="fixed inset-0 z-30 bg-blackA9 data-[state=open]:animate-overlayShow" />
       <DialogContent
-        class="data-[state=open]:animate-contentShow fixed top-[50%] left-[50%] max-h-[85vh] w-[90vw] max-w-[450px] translate-x-[-50%] translate-y-[-50%] rounded-[6px] bg-white p-[25px] shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] focus:outline-none z-[100]"
+        class="fixed left-[50%] top-[50%] z-[100] max-h-[85vh] w-[90vw] max-w-[450px] translate-x-[-50%] translate-y-[-50%] rounded-[6px] bg-white p-[25px] shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] focus:outline-none data-[state=open]:animate-contentShow"
       >
         <DialogTitle class="text-mauve12 m-0 text-[17px] font-semibold">
           Data Dokter
@@ -84,7 +82,7 @@ const computedTimeSlots = computed(() => {
           </DialogClose>
         </div>
         <DialogClose
-          class="text-grass11 hover:bg-green4 focus:shadow-green7 absolute top-[10px] right-[10px] inline-flex h-[25px] w-[25px] appearance-none items-center justify-center rounded-full focus:shadow-[0_0_0_2px] focus:outline-none"
+          class="absolute right-[10px] top-[10px] inline-flex size-[25px] appearance-none items-center justify-center rounded-full text-grass11 hover:bg-green4 focus:shadow-[0_0_0_2px] focus:shadow-green7 focus:outline-none"
           aria-label="Close"
         >
           <LucideX />

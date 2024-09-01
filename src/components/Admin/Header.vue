@@ -1,11 +1,11 @@
 <template>
-  <header class="px-20 h-16 flex items-center justify-between">
+  <header class="flex h-16 items-center justify-between px-20">
     <div class="flex gap-2">
       <img
-        class="w-7 object-contain aspect-square"
+        class="aspect-square w-7 object-contain"
         src="/logo_puskesmas-tamblong.png"
       >
-      <div class="*:block -space-y-1">
+      <div class="-space-y-1 *:block">
         <span class="font-semibold">Admin</span>
         <span class="text-xs">Puskesmas Tamblong</span>
       </div>

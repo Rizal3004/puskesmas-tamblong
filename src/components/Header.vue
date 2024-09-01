@@ -11,7 +11,7 @@ const { userBooking } = storeToRefs(useAuthStore())
 </script>
 
 <template>
-  <div class="flex items-center justify-between border-b px-4 md:px-36 md:text-base text-xs">
+  <div class="flex items-center justify-between border-b px-4 text-xs md:px-36 md:text-base">
     <p>Selamat Datang</p>
     <div class="flex divide-x">
       <a class="flex items-center gap-2 px-4 py-2.5" href="https://wa.me/6289668223131" target="_blank">
@@ -24,14 +24,14 @@ const { userBooking } = storeToRefs(useAuthStore())
       </div>
     </div>
   </div>
-  <div class="sticky top-0 z-50 flex md:px-36 px-4 py-2 md:py-4 bg-white">
-    <div class="flex-1 flex items-center gap-2">
-      <img src="/logo_puskesmas-tamblong.png" alt="" class="w-9 object-contain aspect-square">
-      <h1 class="text-base md:text-xl font-semibold">
+  <div class="sticky top-0 z-50 flex bg-white px-4 py-2 md:px-36 md:py-4">
+    <div class="flex flex-1 items-center gap-2">
+      <img src="/logo_puskesmas-tamblong.png" alt="" class="aspect-square w-9 object-contain">
+      <h1 class="text-base font-semibold md:text-xl">
         Puskesmas Tamblong
       </h1>
     </div>
-    <div class="flex-none hidden md:flex gap-5">
+    <div class="hidden flex-none gap-5 md:flex">
       <div class="flex">
         <a href="/#" class="px-4 py-1">
           Home
@@ -44,11 +44,11 @@ const { userBooking } = storeToRefs(useAuthStore())
         </a>
         <RouterLink to="/profile" class="px-4 py-1">Profil</RouterLink>
       </div>
-      <a v-if="!userBooking" href="/#booking" class="px-4 py-1 bg-slate-700 text-white rounded-md">
+      <a v-if="!userBooking" href="/#booking" class="rounded-md bg-slate-700 px-4 py-1 text-white">
         Booking Dokter
       </a>
       <template v-else>
-        <RouterLink to="/jadwal-pengobatan" class="px-4 py-1 bg-slate-700 text-white rounded-md">
+        <RouterLink to="/jadwal-pengobatan" class="rounded-md bg-slate-700 px-4 py-1 text-white">
           Jadwal Pengobatan
         </RouterLink>
       </template>
@@ -58,16 +58,16 @@ const { userBooking } = storeToRefs(useAuthStore())
       <SolarHamburgerMenuLinear />
     </RouterLink> -->
   </div>
-  <div class="md:hidden px-4 py-2 border-t flex items-center justify-end gap-4">
-    <RouterLink to="/" class="flex items-center text-xs gap-1">
+  <div class="flex items-center justify-end gap-4 border-t px-4 py-2 md:hidden">
+    <RouterLink to="/" class="flex items-center gap-1 text-xs">
       <SolarHome2Outline />
       <span>Home</span>
     </RouterLink>
-    <RouterLink to="/profile" class="flex items-center text-xs gap-1">
+    <RouterLink to="/profile" class="flex items-center gap-1 text-xs">
       <SolarUserRoundedOutline />
       <span>Profile</span>
     </RouterLink>
-    <RouterLink v-if="userBooking" to="/jadwal-pengobatan" class="text-xs md:text-base w-fit block md:hidden px-4 py-1 bg-slate-700 text-white rounded-md">
+    <RouterLink v-if="userBooking" to="/jadwal-pengobatan" class="block w-fit rounded-md bg-slate-700 px-4 py-1 text-xs text-white md:hidden md:text-base">
       Jadwal Pengobatan
     </RouterLink>
   </div>

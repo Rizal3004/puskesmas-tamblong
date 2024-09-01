@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <div class="flex items-center justify-center h-screen">
+  <div class="flex h-screen items-center justify-center">
     <h2 class="text-3xl">Loading ...</h2>
   </div>
 </template>

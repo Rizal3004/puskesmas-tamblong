@@ -9,7 +9,7 @@ export const usePoliStore = defineStore('Poli', () => {
   // Fungsi untuk mengambil data pol
   const getAllPoli = async () => {
     // const { data } = await supabase.from('poli').select('*')
-    const { poli } = await apiFetch<{poli: Poli[]}>('/poli')
+    const poli = await apiFetch<Poli[]>('/poli')
     poliList.value = poli
   }
 

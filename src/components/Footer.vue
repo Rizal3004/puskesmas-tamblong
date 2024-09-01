@@ -8,20 +8,20 @@ import SolarArrowUpLinear from '~icons/solar/arrow-up-linear'
 </script>
 
 <template>
-  <footer id="kontak" class="py-20 px-6 flex md:block gap-6 flex-col md:px-36">
-    <div class="grid md:grid-cols-2 gap-10">
+  <footer id="kontak" class="flex flex-col gap-6 px-6 py-20 md:block md:px-36">
+    <div class="grid gap-10 md:grid-cols-2">
       <div class="space-y-4" data-aos="fade-right">
         <h4 class="text-2xl font-bold">Contact info</h4>
         <p>Hubungi kami di nomor telepon atau email untuk informasi lebih lanjut.</p>
         <div class="space-y-2">
           <div class="flex items-center gap-2">
-            <div class="flex items-center justify-center rounded-full bg-slate-700 size-8">
+            <div class="flex size-8 items-center justify-center rounded-full bg-slate-700">
               <SolarPhoneBoldDuotone class="text-white" />
             </div>
             <span>123123123123</span>
           </div>
           <div class="flex items-center gap-2">
-            <div class="flex items-center justify-center rounded-full bg-slate-700 size-8">
+            <div class="flex size-8 items-center justify-center rounded-full bg-slate-700">
               <SolarMailboxBoldDuotone class="text-white" />
             </div>
             <span>123123123123</span>
@@ -70,13 +70,13 @@ import SolarArrowUpLinear from '~icons/solar/arrow-up-linear'
       </div>
     </div>
     <a href="#" class="flex items-center">
-      <div class="w-full h-0.5 bg-zinc-200" />
-      <div class="p-2 border flex items-center gap-2 rounded-md">
+      <div class="h-0.5 w-full bg-zinc-200" />
+      <div class="flex items-center gap-2 rounded-md border p-2">
         <p class="text-nowrap">Back to top</p>
         <SolarArrowUpLinear />
       </div>
     </a>
-    <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-10">
+    <div class="flex flex-col gap-2 md:flex-row md:items-center md:gap-10">
       <p>Copyright © 2024 Telkom University | Design : Rizal Ihsan</p>
       <div class="flex items-center gap-4">
         <a href="#">Privacy Policy</a>

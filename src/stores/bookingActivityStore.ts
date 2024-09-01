@@ -7,7 +7,6 @@ import type { BookingActivity, BookingActivityForm } from '@/types/BookingActivi
 import getCurrentTime from '@/utils/getCurrentTime'
 import apiFetch from '@/ofetch'
 import { botSendMessage } from '@/bot'
-import createTimeFromString from '@/utils/createTimeFromString'
 import isTime1GreaterThanTime2 from '@/utils/isTime1GreaterThanTime2'
 import createTimeFromString2 from '@/utils/createTimeFromString2'
 

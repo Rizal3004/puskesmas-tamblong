@@ -45,24 +45,24 @@ function handlePrint2() {
 
 <template>
   <div>
-    <div class="px-4 md:px-36 py-4 space-y-3 border-t">
+    <div class="space-y-3 border-t p-4 md:px-36">
       <button
         type="button"
         href="/admin/doctors"
-        class="flex items-center gap-2 hover:bg-slate-100 px-4 py-1 rounded-xl text-sm md:-translate-x-10 transition-all duration-300 w-fit"
+        class="flex w-fit items-center gap-2 rounded-xl px-4 py-1 text-sm transition-all duration-300 hover:bg-slate-100 md:-translate-x-10"
         @click="router.go(-1)"
       >
         <img src="https://api.iconify.design/material-symbols-light:arrow-back-rounded.svg?color=%236e6e6e" alt="">
         Kembali
       </button>
-      <div ref="elementToPrintRef" class="px-4 md:px-16 py-6 overflow-x-scroll md:overflow-x-auto border">
+      <div ref="elementToPrintRef" class="overflow-x-scroll border px-4 py-6 md:overflow-x-auto md:px-16">
         <div class="mb-8">
           <div class="flex items-center gap-5">
-            <div class="w-20 aspect-square">
+            <div class="aspect-square w-20">
               <img src="/logo_puskesmas-tamblong.png" alt="">
             </div>
             <div class="flex flex-col text-xs">
-              <h2 class="font-semibold text-lg">Puskesmas Tamblong</h2>
+              <h2 class="text-lg font-semibold">Puskesmas Tamblong</h2>
               <p>No Surat: {{ createReferenceNumber(ba!) }}</p>
               <p>Alamat: Jl. Tamblong no. 66, Kb. Pisang, Kec. Sumur Bandung, Kota Bandung, Jawa Barat 40112</p>
               <p>No Telp. +6289668223131, Email: lkfjasdf, Website: puskesmas-tamblong.vercel.dev</p>
@@ -70,7 +70,7 @@ function handlePrint2() {
           </div>
         </div>
         <h1 class="text-center text-2xl font-semibold">LAPORAN DATA CATATAN PENGOBATAN PASIEN</h1>
-        <div class="border-y py-2 my-2">
+        <div class="my-2 border-y py-2">
           <table class="">
             <tr>
               <td>Nama</td>
@@ -98,7 +98,7 @@ function handlePrint2() {
             </tr>
           </table>
         </div>
-        <table class="w-full border-solid [&>tr>*]:border [&>tr>*]:text-start [&>tr>*]:px-3">
+        <table class="w-full border-solid [&>tr>*]:border [&>tr>*]:px-3 [&>tr>*]:text-start">
           <tr>
             <th>Tanggal</th>
             <th>Dokter</th>
@@ -122,8 +122,8 @@ function handlePrint2() {
           </div>
         </div>
       </div>
-      <div class="flex justify-end mt-8">
-        <button class="bg-sky-200 px-4 py-0.5 rounded-md" @click="handlePrint2">Print</button>
+      <div class="mt-8 flex justify-end">
+        <button class="rounded-md bg-sky-200 px-4 py-0.5" @click="handlePrint2">Print</button>
       </div>
     </div>
   </div>

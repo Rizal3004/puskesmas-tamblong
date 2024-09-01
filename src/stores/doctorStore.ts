@@ -58,7 +58,6 @@ export const useDoctorStore = defineStore('Doctor', () => {
   }
 
   const updateDoctor = async (id: number, doctor: Partial<DoctorForm>) => {
-
     const formData = new FormData()
     formData.append('email', doctor.email!)
     formData.append('jam_kerja_end', doctor.jam_kerja_end!)

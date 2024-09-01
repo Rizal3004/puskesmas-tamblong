@@ -3,9 +3,9 @@ import AdminHeader from '@/components/Admin/Header.vue'
 </script>
 
 <template>
-  <div class="bg-gradient-to-br from-slate-100 to-slate-200 min-h-screen">
+  <div class="min-h-screen bg-gradient-to-br from-slate-100 to-slate-200">
     <AdminHeader />
-    <main class="px-12 py-6 space-y-3 min-h-[calc(100vh-5rem)] rounded-xl bg-white mx-2 shadow-inner">
+    <main class="mx-2 min-h-[calc(100vh-5rem)] space-y-3 rounded-xl bg-white px-12 py-6 shadow-inner">
       <RouterView />
     </main>
   </div>

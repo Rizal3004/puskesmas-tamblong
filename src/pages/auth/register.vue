@@ -45,23 +45,23 @@ async function handleRegister() {
 </script>
 
 <template>
-  <div class="h-screen grid md:grid-cols-2">
-    <div class="bg-slate-700 hidden md:block h-screen overflow-hidden">
+  <div class="grid h-screen md:grid-cols-2">
+    <div class="hidden h-screen overflow-hidden bg-slate-700 md:block">
       <img src="/images/image2.jpg" alt="">
     </div>
-    <div class="md:px-44 px-6 flex flex-col gap-8 justify-center relative">
-      <div class="*:text-center space-y-2">
-        <h1 class="text-4xl font-bold text-slate-900">
+    <div class="relative flex flex-col justify-center gap-8 px-6 md:px-16">
+      <div class="space-y-2 *:text-start">
+        <h1 class="text-4xl font-bold text-sky-600">
           Daftar
         </h1>
-        <p class="text-slate-500">
+        <!-- <p class="text-slate-500">
           Masukkan data anda untuk daftar
-        </p>
+        </p> -->
       </div>
       <div class="">
         <form class="flex flex-col gap-3" @submit.prevent="handleRegister">
           <abbr title="Nama lengkap">
-            <label class="bg-blackA5/5 text-black shadow-blackA9 gap-2 inline-flex py-2 appearance-none items-center justify-start rounded-[4px] px-[10px] text-[15px] leading-none shadow-[0_0_0_1px] outline-none focus:shadow-[0_0_0_2px_black] selection:color-white selection:bg-blackA9 w-full">
+            <label class="selection:color-white inline-flex w-full border-b gap-3 items-center py-2">
               <SolarUserRoundedLinear />
               <input
                 v-model="formDataRegister.name"
@@ -73,7 +73,7 @@ async function handleRegister() {
             </label>
           </abbr>
           <abbr title="NIK">
-            <label class="bg-blackA5/5 text-black shadow-blackA9 gap-2 inline-flex py-2 appearance-none items-center justify-start rounded-[4px] px-[10px] text-[15px] leading-none shadow-[0_0_0_1px] outline-none focus:shadow-[0_0_0_2px_black] selection:color-white selection:bg-blackA9 w-full">
+            <label class="selection:color-white inline-flex w-full border-b gap-3 items-center py-2">
               <SolarCardOutline />
               <input
                 v-model="formDataRegister.nik"
@@ -85,7 +85,7 @@ async function handleRegister() {
             </label>
           </abbr>
           <abbr title="Email">
-            <label class="bg-blackA5/5 text-black shadow-blackA9 gap-2 inline-flex py-2 appearance-none items-center justify-start rounded-[4px] px-[10px] text-[15px] leading-none shadow-[0_0_0_1px] outline-none focus:shadow-[0_0_0_2px_black] selection:color-white selection:bg-blackA9 w-full">
+            <label class="selection:color-white inline-flex w-full border-b gap-3 items-center py-2">
               <SolarLetterLinear />
               <input
                 v-model="formDataRegister.email"
@@ -97,7 +97,7 @@ async function handleRegister() {
             </label>
           </abbr>
           <abbr title="Password">
-            <label class="bg-blackA5/5 text-black shadow-blackA9 gap-2 inline-flex py-2 appearance-none items-center justify-start rounded-[4px] px-[10px] text-[15px] leading-none shadow-[0_0_0_1px] outline-none focus:shadow-[0_0_0_2px_black] selection:color-white selection:bg-blackA9 w-full">
+            <label class="selection:color-white inline-flex w-full border-b gap-3 items-center py-2">
               <SolarLockPasswordLinear />
               <input
                 v-model="formDataRegister.password"
@@ -113,7 +113,7 @@ async function handleRegister() {
             </label>
           </abbr>
           <abbr title="Konfirmasi Password">
-            <label class="bg-blackA5/5 text-black shadow-blackA9 gap-2 inline-flex py-2 appearance-none items-center justify-start rounded-[4px] px-[10px] text-[15px] leading-none shadow-[0_0_0_1px] outline-none focus:shadow-[0_0_0_2px_black] selection:color-white selection:bg-blackA9 w-full">
+            <label class="selection:color-white inline-flex w-full border-b gap-3 items-center py-2">
               <SolarLockPasswordLinear />
               <input
                 v-model="passwordConfirmation"
@@ -128,10 +128,13 @@ async function handleRegister() {
               </button>
             </label>
           </abbr>
-          <button type="submit" class="bg-sky-500 w-full text-white py-1.5 rounded-md">Daftar</button>
+          <button type="submit" class="w-full rounded-md bg-zinc-700 py-1.5 text-white">Daftar</button>
         </form>
       </div>
-      <RouterLink to="/auth/login" class="px-6 py-1 hover:bg-slate-100 w-fit rounded-md font-semibold absolute top-6 right-6">Login</RouterLink>
+      <p>
+        Already have an account?
+        <RouterLink to="/auth/login" class="text-sky-600">Login</RouterLink>
+      </p>
     </div>
   </div>
 </template>

@@ -8,8 +8,6 @@ import Header from '@/components/Header.vue'
 import Hero from '@/components/Hero.vue'
 import BookingForm from '@/components/BookingForm.vue'
 import Footer from '@/components/Footer.vue'
-import { baseURL } from '@/ofetch'
-import DokterCardDialog from '@/components/Dokter/DokterCardDialog.vue'
 import DaftarDokter from '@/components/DaftarDokter.vue'
 
 const { getPoliById, poliList } = usePoliStore()
@@ -31,9 +29,9 @@ const computedDoctors = computed(() => {
     <Header class="-z-20" />
     <Hero />
     <!-- About ===================================================================================== -->
-    <div id="about" class="px-6 md:px-36 pt-10 md:pt-0 md:h-[80dvh] md:flex items-center bg-[#f5f5f5] relative overflow-hidden">
-      <div class="md:w-7/12 space-y-8">
-        <h2 class="text-xl md:text-6xl font-bold" data-aos="fade-up">
+    <div id="about" class="relative items-center overflow-hidden bg-[#f5f5f5] px-6 pt-10 md:flex md:h-[80dvh] md:px-36 md:pt-0">
+      <div class="space-y-8 md:w-7/12">
+        <h2 class="text-xl font-bold md:text-6xl" data-aos="fade-up">
           Selamat Datang di Puskesmas Tamblong
         </h2>
         <div class="space-y-2" data-aos="fade-up">
@@ -42,7 +40,7 @@ const computedDoctors = computed(() => {
         </div>
         <div class="flex gap-4" data-aos="fade-up">
           <div class="avatar">
-            <div class="w-16 rounded-full aspect-square overflow-hidden">
+            <div class="aspect-square w-16 overflow-hidden rounded-full">
               <img src="https://plus.unsplash.com/premium_photo-1661764878654-3d0fc2eefcca?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
             </div>
           </div>
@@ -57,14 +55,14 @@ const computedDoctors = computed(() => {
       <img
         src="/images/about-bg.jpg"
         alt=""
-        class="md:absolute right-32 w-1/2 mx-auto md:mx-0 md:w-4/12 bottom-[-30%]"
+        class="bottom-[-30%] right-32 mx-auto w-1/2 md:absolute md:mx-0 md:w-4/12"
         data-aos="fade-up"
       >
     </div>
 
     <!-- Cards Dokter =========================================================================== -->
-    <div id="info-dokter" class="py-6 md:py-20 px-6 md:px-36 space-y-8 md:space-y-0">
-      <div class="flex md:flex-row flex-col justify-between md:items-center">
+    <div id="info-dokter" class="space-y-8 p-6 md:space-y-0 md:px-36 md:py-20">
+      <div class="flex flex-col justify-between md:flex-row md:items-center">
         <h2 class="mb-6 text-3xl font-semibold" data-aos="fade-up">
           Daftar Dokter
         </h2>

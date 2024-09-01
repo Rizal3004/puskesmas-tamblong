@@ -65,13 +65,13 @@ onMounted(() => {
 
 <template>
   <Header />
-  <div class="px-6 md:px-36 py-4 space-y-3">
-    <RouterLink to="/" class="hidden md:flex items-center gap-3 text-slate-700 px-3.5 py-1 rounded-md transition-all duration-500 hover:bg-slate-100 w-fit">
+  <div class="space-y-3 px-6 py-4 md:px-36">
+    <RouterLink to="/" class="hidden w-fit items-center gap-3 rounded-md px-3.5 py-1 text-slate-700 transition-all duration-500 hover:bg-slate-100 md:flex">
       <SolarArrowLeftLinear class="" />
       <span class="">Kembali</span>
     </RouterLink>
     <h1 class="text-2xl font-semibold">Profile</h1>
-    <table v-if="profile" class="w-8/12 [&>*>*]:border [&>*>*]:text-start [&>*>*]:px-2">
+    <table v-if="profile" class="w-8/12 [&>*>*]:border [&>*>*]:px-2 [&>*>*]:text-start">
       <!-- <tr>
         <th>ID</th>
         <td>{{ profile.id }}</td>
@@ -100,7 +100,7 @@ onMounted(() => {
               ref="emailEl"
               v-model="emailText"
               type="email"
-              class="px-1 py-1 w-full border"
+              class="w-full border p-1"
               placeholder="Masukkan email baru anda"
             >
             <div class="flex gap-3">
@@ -130,7 +130,7 @@ onMounted(() => {
               ref="addressEl"
               v-model="addressText"
               type="text"
-              class="px-1 py-1 w-full border"
+              class="w-full border p-1"
               placeholder="Masukkan alamat baru anda"
             >
             <div class="flex gap-3">
@@ -160,7 +160,7 @@ onMounted(() => {
               ref="phoneEl"
               v-model="phoneText"
               type="text"
-              class="px-1 py-1 w-full border"
+              class="w-full border p-1"
               placeholder="Masukkan nomor baru anda"
               @keypress="validateInputNumber"
             >
@@ -191,7 +191,7 @@ onMounted(() => {
               ref="birthDateEl"
               v-model="birthDateText"
               type="date"
-              class="px-1 py-1 w-full border"
+              class="w-full border p-1"
               placeholder="Masukkan password baru anda"
             >
             <div class="flex gap-3">
@@ -221,7 +221,7 @@ onMounted(() => {
               ref="passwordEl"
               v-model="passwordText"
               type="text"
-              class="px-1 py-1 w-full border"
+              class="w-full border p-1"
               placeholder="Masukkan password baru anda"
             >
             <div class="flex gap-3">
@@ -237,8 +237,8 @@ onMounted(() => {
       </tr>
     </table>
     <div class="flex gap-5">
-      <button class="px-3 py-1 bg-red-500 text-white rounded-md" @click="handleLogout">Logout</button>
-      <RouterLink to="/profile/riwayat" class="px-3 py-1 bg-zinc-100 border border-zinc-400 rounded-md">Riwayat berobat</RouterLink>
+      <button class="rounded-md bg-red-500 px-3 py-1 text-white" @click="handleLogout">Logout</button>
+      <RouterLink to="/profile/riwayat" class="rounded-md border border-zinc-400 bg-zinc-100 px-3 py-1">Riwayat berobat</RouterLink>
     </div>
   </div>
 </template>

@@ -1,12 +1,10 @@
 <script lang="ts" setup>
-import { ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useBookingActivityStore } from '@/stores/bookingActivityStore'
 import { usePatientsStore } from '@/stores/patientsStore'
 import { useDoctorStore } from '@/stores/doctorStore'
 import ShowKeluhan from '@/components/Booking/ShowKeluhan.vue'
 import { useAuthStore } from '@/stores/authStore'
-import Header from '@/components/Header.vue'
 
 const { bookingActivityList } = storeToRefs(useBookingActivityStore())
 const { profile } = useAuthStore()
@@ -47,17 +45,16 @@ const bookingActivities2 = computed(() => {
     return timeA.localeCompare(timeB) // Both are non-null, compare normally
   })
 })
-
 </script>
 
 <template>
   <div class="">
     <!-- <Header class="" /> -->
-    <div class="px-4 md:px-36 py-4 space-y-3 border-t">
+    <div class="space-y-3 border-t p-4 md:px-36">
       <button
         type="button"
         href="/admin/doctors"
-        class="flex items-center gap-2 hover:bg-slate-100 px-4 py-1 rounded-xl text-sm md:-translate-x-10 transition-all duration-300 w-fit"
+        class="flex w-fit items-center gap-2 rounded-xl px-4 py-1 text-sm transition-all duration-300 hover:bg-slate-100 md:-translate-x-10"
         @click="router.go(-1)"
       >
         <img src="https://api.iconify.design/material-symbols-light:arrow-back-rounded.svg?color=%236e6e6e" alt="">
@@ -66,8 +63,8 @@ const bookingActivities2 = computed(() => {
       <div class="flex justify-between">
         <h1 class="text-2xl font-semibold">Riwayat Booking</h1>
       </div>
-      <div class="border rounded-md px-2 py-2 pb-3 md:overflow-x-auto overflow-x-scroll">
-        <table class="w-full border-spacing-x-6 border-separate">
+      <div class="overflow-x-scroll rounded-md border p-2 pb-3 md:overflow-x-auto">
+        <table class="w-full border-separate border-spacing-x-6">
           <thead class="border-b">
             <tr class="h-12">
               <!-- <th class="text-start">ID</th> -->
@@ -87,7 +84,7 @@ const bookingActivities2 = computed(() => {
             <tr class="h-1">
               <td colSpan="9" />
             </tr>
-            <tr v-for="ba in bookingActivities2" :key="ba.id"  class="h-10">
+            <tr v-for="ba in bookingActivities2" :key="ba.id" class="h-10">
               <!-- <td class="text-start">{{ ba.id }}</td> -->
               <!-- <td class="text-start">
                 <MaterialSymbolsCheckRounded
@@ -113,7 +110,7 @@ const bookingActivities2 = computed(() => {
                 </div>
               </td>
               <td>
-                <RouterLink :to="`/profile/riwayat/${ba.id}`" class="bg-sky-200 px-3 py-0.5 rounded-md">Cetak</RouterLink>
+                <RouterLink :to="`/profile/riwayat/${ba.id}`" class="rounded-md bg-sky-200 px-3 py-0.5">Cetak</RouterLink>
               </td>
             </tr>
           </tbody>

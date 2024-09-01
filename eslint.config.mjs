@@ -1,4 +1,5 @@
 import antfu from '@antfu/eslint-config'
+import eslintTailwind from 'eslint-plugin-tailwindcss'
 
 export default antfu(
   {
@@ -28,7 +29,14 @@ export default antfu(
       'antfu/if-newline': 'off',
       'unused-imports/no-unused-vars': 'warn',
       'ts/consistent-type-definitions': 'off',
-      'node/prefer-global/buffer': 'off'
+      'node/prefer-global/buffer': 'off',
     },
   },
+  ...eslintTailwind.configs['flat/recommended'],
+  {
+    rules: {
+      'tailwindcss/no-custom-classname': 'off',
+    },
+  },
+
 )

@@ -26,7 +26,6 @@ async function getImgSrc() {
 
   // imgSrc.value = data as unknown as string
   imgSrc.value = `data:image/png;base64,${data}`
-
 }
 
 onMounted(() => {
@@ -44,12 +43,12 @@ onMounted(() => {
     <td class="text-start">{{ dokter.phone }}</td>
     <td class="text-start">{{ dokter.email }}</td>
     <td class="text-start">
-      <img :src="`${baseURL}doctors/image/${dokter.id}`" alt="Foto dokter" class="w-16 aspect-video object-cover">
+      <img :src="`${baseURL}doctors/image/${dokter.id}`" alt="Foto dokter" class="aspect-video w-16 object-cover">
     </td>
     <td class="text-start">
       <div class="flex items-center gap-2 pl-10">
         <RouterLink :to="`/admin/dokter/${dokter.id}/update`">
-          <MaterialSymbolsEdit class="text-amber-500" />  
+          <MaterialSymbolsEdit class="text-amber-500" />
         </RouterLink>
         <DeleteDialog :dokterId="dokter.id" @delete="handleDelete" />
       </div>

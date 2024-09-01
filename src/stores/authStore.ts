@@ -28,7 +28,7 @@ export const useAuthStore = defineStore('auth', () => {
       onResponseError: (error) => {
         console.error(error)
         toast.error(error.response._data)
-      }
+      },
     })
 
     localStorage.setItem('auth_token', token)
@@ -45,7 +45,7 @@ export const useAuthStore = defineStore('auth', () => {
     // Redirect ke halaman home
     setTimeout(() => {
       router.replace('/')
-    }, 1200);
+    }, 1200)
   }
 
   const signup = async (profileData: PatientForm) => {
@@ -69,12 +69,12 @@ export const useAuthStore = defineStore('auth', () => {
       onResponseError: (error) => {
         console.error(error)
         toast.error(error.response._data)
-      }
+      },
     })
     toast.success('Registrasi berhasil, silahkan login')
     setTimeout(() => {
       router.replace('/auth/login')
-    }, 1600);
+    }, 1600)
   }
 
   const logout = async () => {
@@ -91,13 +91,13 @@ export const useAuthStore = defineStore('auth', () => {
     const { patient } = await apiFetch<{ patient: Patient }>('/auth/verify', {
       method: 'POST',
       headers: {
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${token}`,
       },
       onResponseError: (error) => {
         localStorage.removeItem('auth_token')
         console.error(error)
         router.replace('/auth/login')
-      }
+      },
     })
 
     const { bookingActivity } = await apiFetch<{ bookingActivity: BookingActivity }>(`/booking-activities/patient/${patient.id}`)
@@ -151,7 +151,6 @@ export const useAuthStore = defineStore('auth', () => {
   }
 
   const changeBirthDate = async (birthdate: string) => {
-
     await apiFetch(`/patients/${profile.value?.id}/birthdate`, {
       method: 'PATCH',
       body: {
@@ -190,6 +189,6 @@ export const useAuthStore = defineStore('auth', () => {
     changePhone,
     changePassword,
     changeBirthDate,
-    isProfileComplete
+    isProfileComplete,
   }
 })

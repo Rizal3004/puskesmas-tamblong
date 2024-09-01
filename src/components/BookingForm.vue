@@ -79,12 +79,12 @@ async function handleBooking() {
 </script>
 
 <template>
-  <div id="booking" class="relative grid items-center px-4 md:px-36 md:grid-cols-2 gap-8 py-16 ">
+  <div id="booking" class="relative grid items-center gap-8 px-4 py-16 md:grid-cols-2 md:px-36 ">
     <div class="hidden md:block">
       <img
         src="/images/booking.jpg"
         alt=""
-        class="absolute left-28 bottom-0 h-[95%]"
+        class="absolute bottom-0 left-28 h-[95%]"
         data-aos="fade-right"
       >
     </div>
@@ -100,13 +100,13 @@ async function handleBooking() {
             <input
               v-model="bookingFormData.date"
               type="date"
-              class="border px-2 py-1 rounded-md"
+              class="rounded-md border px-2 py-1"
               required
             >
           </label>
           <label class="flex flex-col gap-1">
             Poli
-            <select v-model="selectedPoliId" class="border px-2 py-1 rounded-md" required>
+            <select v-model="selectedPoliId" class="rounded-md border px-2 py-1" required>
               <option v-for="poli in poliList" :key="poli.id" :value="poli.id">{{ poli.name }}</option>
             </select>
           </label>
@@ -119,7 +119,7 @@ async function handleBooking() {
           </label>
           <label class="flex flex-col gap-1">
             Dokter
-            <select v-model="bookingFormData.dokter_id" class="border px-2 py-1 rounded-md" required>
+            <select v-model="bookingFormData.dokter_id" class="rounded-md border px-2 py-1" required>
               <option
                 v-for="dokter in doctorList2"
                 :key="dokter.id"
@@ -132,7 +132,7 @@ async function handleBooking() {
             Jenis Pasien
             <select
               v-model="bookingFormData.patient_type"
-              class="border px-2 py-1 rounded-md"
+              class="rounded-md border px-2 py-1"
               required
               @change="bookingFormData.bpjs_number = null"
             >
@@ -146,7 +146,7 @@ async function handleBooking() {
               v-model="bookingFormData.bpjs_number"
               type="text"
               required
-              class="border px-2 py-1 rounded-md"
+              class="rounded-md border px-2 py-1"
             >
           </label>
         </div>
@@ -154,12 +154,12 @@ async function handleBooking() {
           Gejala
           <textarea
             v-model="bookingFormData.keluhan"
-            class="block w-full border py-1 px-2 rounded-md"
+            class="block w-full rounded-md border px-2 py-1"
             required
             placeholder="Masukkan Gejala"
           />
         </label>
-        <button class="w-full text-lg text-white rounded py-1 bg-slate-600" data-aos="fade-up">
+        <button class="w-full rounded bg-slate-600 py-1 text-lg text-white" data-aos="fade-up">
           Booking
         </button>
       </form>

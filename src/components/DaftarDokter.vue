@@ -22,18 +22,18 @@ const { getPoliById } = usePoliStore()
     :touchDrag="true"
     snapAlign="start"
 
-    class="w-full carousel-dokter"
+    class="carousel-dokter w-full"
   >
     <Slide v-for="(dokter) in dokterList" :key="dokter.id">
       <div class="px-2">
         <div
           :key="dokter.id"
-          class="flex-col overflow-hidden border shadow-lg carousel-item rounded-lg"
+          class="carousel-item flex-col overflow-hidden rounded-lg border shadow-lg"
           data-aos="fade-up"
         >
-          <img :src="`${baseURL}doctors/image/${dokter.id}`" alt="Burger" class="object-cover w-full aspect-square">
+          <img :src="`${baseURL}doctors/image/${dokter.id}`" alt="Burger" class="aspect-square w-full object-cover">
           <div class="px-3 pt-2">
-            <p class="text-xl mb-1 capitalize">
+            <p class="mb-1 text-xl capitalize">
               {{ dokter.name }}
             </p>
             <p>{{ getPoliById(dokter.poli_id)?.name }}</p>

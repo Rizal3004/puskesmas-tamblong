@@ -24,23 +24,23 @@ async function handleLogin() {
 </script>
 
 <template>
-  <div class="h-screen grid sm:grid-cols-2">
-    <div class="bg-slate-700 hidden md:block h-screen overflow-hidden">
+  <div class="grid h-screen sm:grid-cols-2">
+    <div class="hidden h-screen overflow-hidden bg-slate-700 md:block">
       <img src="/images/image1.jpg" alt="">
     </div>
-    <div class="px-6 md:px-44 flex flex-col gap-8 justify-center relative">
-      <div class="*:text-center space-y-2">
-        <h1 class="text-4xl font-bold text-slate-900">
+    <div class="relative flex flex-col justify-center items-start gap-8 px-6 md:px-16">
+      <div class="space-y-2 *:text-start">
+        <h1 class="text-4xl font-bold text-sky-500">
           Masuk
         </h1>
-        <p class="text-slate-500">
+        <!-- <p class="text-slate-500">
           Welcome back! Please login to your account.
-        </p>
+        </p> -->
       </div>
-      <div class="">
-        <form class="flex flex-col gap-3" @submit.prevent="handleLogin">
-          <abbr title="Email">
-            <label class="bg-blackA5/5 text-black shadow-blackA9 gap-2 inline-flex py-2 appearance-none items-center justify-start rounded-[4px] px-[10px] text-[15px] leading-none shadow-[0_0_0_1px] outline-none focus:shadow-[0_0_0_2px_black] selection:color-white selection:bg-blackA9 w-full">
+      <div class="w-full">
+        <form class="flex flex-col gap-3 w-full" @submit.prevent="handleLogin">
+          <abbr title="Email" class="w-full">
+            <label class="selection:color-white inline-flex items-center py-2 gap-3 border-b w-full">
               <SolarLetterLinear />
               <input
                 v-model="loginData.email"
@@ -51,8 +51,8 @@ async function handleLogin() {
               >
             </label>
           </abbr>
-          <abbr title="Password">
-            <label class="bg-blackA5/5 text-black shadow-blackA9 gap-2 inline-flex py-2 appearance-none items-center justify-start rounded-[4px] px-[10px] text-[15px] leading-none shadow-[0_0_0_1px] outline-none focus:shadow-[0_0_0_2px_black] selection:color-white selection:bg-blackA9 w-full">
+          <abbr title="Password" class="w-full">
+            <label class="selection:color-white inline-flex items-center py-2 gap-3 border-b w-full">
               <SolarLockPasswordLinear />
               <input
                 v-model="loginData.password"
@@ -70,10 +70,20 @@ async function handleLogin() {
           <div class="flex justify-end">
             <!-- <RouterLink to="/auth/forget-password" class="text-sm text-slate-600">Lupa Password</RouterLink> -->
           </div>
-          <button type="submit" class="bg-sky-500 w-full text-white py-1.5 rounded-md">Login</button>
+          <button type="submit" class="w-full rounded-md bg-zinc-700 py-1.5 text-white">Login</button>
         </form>
       </div>
-      <RouterLink to="/auth/register" class="px-6 py-1 hover:bg-slate-100 w-fit rounded-md font-semibold absolute top-6 right-6">Daftar</RouterLink>
+      
+      <div class="">
+        <p>
+          Don't have an account? 
+          <RouterLink to="/auth/register" class="text-sky-500">Sign Up</RouterLink>
+        </p>
+        <p>
+          Need an emergency booking?
+          <RouterLink to="/booking-darurat" class="text-sky-500">Emergency Booking</RouterLink>
+        </p>
+      </div>
     </div>
   </div>
 </template>

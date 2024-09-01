@@ -41,16 +41,16 @@ onMounted(() => {
 
 <template>
   <Header />
-  <div class="px-6 md:px-36 py-4 space-y-3">
+  <div class="space-y-3 px-6 py-4 md:px-36">
     <div class="md:w-8/12">
-      <RouterLink to="/" class="flex items-center gap-3 text-slate-700 px-3.5 py-1 rounded-md transition-all duration-500 hover:bg-slate-100 w-fit">
+      <RouterLink to="/" class="flex w-fit items-center gap-3 rounded-md px-3.5 py-1 text-slate-700 transition-all duration-500 hover:bg-slate-100">
         <SolarArrowLeftLinear class="" />
         <span class="">Kembali</span>
       </RouterLink>
       <h1 class="text-2xl font-semibold">Jadwal Pengobatan</h1>
       <p>Pasien diharapkan datang 15 menit sebelum waktu yang ditentukan</p>
       <div v-if="userBooking" class="">
-        <table class="[&>*>*]:border [&>*>*]:text-start [&>*>*]:px-2">
+        <table class="[&>*>*]:border [&>*>*]:px-2 [&>*>*]:text-start">
           <tr>
             <th>Nomor Antrian</th>
             <td>{{ getQueueNumber(userBooking?.id) }}</td>
@@ -84,18 +84,18 @@ onMounted(() => {
             <td class="capitalize">{{ userBooking.keluhan }}</td>
           </tr>
         </table>
-        <p v-if="!userBooking.arrived_at" class="text-end text-sm mt-2">Klik Tombol 'Sampai ke Puskesmas' jika anda telah berada di puskesmas</p>
-        <div class="flex justify-end gap-4 mt-4">
-          <button type="button" class="border border-red-500 px-4 rounded-md" @click="() => handleCancel(userBooking!.id)">
+        <p v-if="!userBooking.arrived_at" class="mt-2 text-end text-sm">Klik Tombol 'Sampai ke Puskesmas' jika anda telah berada di puskesmas</p>
+        <div class="mt-4 flex justify-end gap-4">
+          <button type="button" class="rounded-md border border-red-500 px-4" @click="() => handleCancel(userBooking!.id)">
             Batalkan booking
           </button>
-          <RouterLink to="/jadwal-pengobatan/tiket" type="button" class="border border-amber-500 px-4 rounded-md">
+          <RouterLink to="/jadwal-pengobatan/tiket" type="button" class="rounded-md border border-amber-500 px-4">
             Lihat Tiket
           </RouterLink>
-          <button v-if="!userBooking.arrived_at" class="bg-green-300 text-sm px-2 py-1 rounded-md" @click="() => handleArrived(userBooking!.id)">
+          <button v-if="!userBooking.arrived_at" class="rounded-md bg-green-300 px-2 py-1 text-sm" @click="() => handleArrived(userBooking!.id)">
             Sampai ke Puskesmas
           </button>
-          <p v-else class="text-sm px-2 py-1 rounded-md">
+          <p v-else class="rounded-md px-2 py-1 text-sm">
             Silahkan menunggu
           </p>
         </div>
