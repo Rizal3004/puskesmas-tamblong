@@ -5,12 +5,16 @@ import { useBookingActivityStore } from '@/stores/bookingActivityStore'
 import { useDoctorStore } from '@/stores/doctorStore'
 import { usePoliStore } from '@/stores/poliStore'
 import { useAuthStore } from '@/stores/authStore'
+import createReferenceNumber from '@/utils/createReferenceNumber'
+import { usePatientsStore } from '@/stores/patientsStore'
+import capitalizeFirstLetterOfEachWord from '@/utils/capitalizeFirstLetterOfEachWord'
 
 const router = useRouter()
 
 const { userBooking } = storeToRefs(useAuthStore())
 const { getDoctorById } = useDoctorStore()
 const { getPoliById } = usePoliStore()
+const { getPatientById } = usePatientsStore()
 const { getQueueNumber } = useBookingActivityStore()
 
 const dokter = computed(() => {
@@ -55,7 +59,7 @@ function handlePrint2() {
             </div>
             <div class="flex flex-col text-xs">
               <h2 class="text-lg font-semibold">Puskesmas Tamblong</h2>
-              <p>No Surat: </p>
+              <p>No Surat: {{ createReferenceNumber(userBooking!) }}</p>
               <p>Alamat: Jl. Tamblong no. 66, Kb. Pisang, Kec. Sumur Bandung, Kota Bandung, Jawa Barat 40112</p>
               <p>No Telp. +6289668223131, Email: lkfjasdf, Website: puskesmas-tamblong.vercel.dev</p>
             </div>
@@ -64,6 +68,10 @@ function handlePrint2() {
         <h1 class="text-center text-2xl font-semibold">TIKET ANTRIAN BEROBAT</h1>
         <div class="my-2 flex flex-col justify-between py-2 md:flex-row">
           <table class="">
+            <tr>
+              <td>Tanggal</td>
+              <td>: {{ capitalizeFirstLetterOfEachWord(getPatientById(userBooking?.pasien_id!.toString()!)?.name!) }}</td>
+            </tr>
             <tr>
               <td>Tanggal</td>
               <td>: {{ userBooking?.date }}</td>

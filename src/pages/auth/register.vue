@@ -18,6 +18,7 @@ const formDataRegister = reactive<PatientForm>({
   nik: '',
   email: '',
   password: '',
+  birthdate: ''
 })
 const passwordConfirmation = ref('')
 
@@ -94,6 +95,17 @@ async function handleRegister() {
                   class="w-full bg-transparent focus:outline-none"
                   type="email"
                   placeholder="Masukkan email"
+                >
+              </label>
+            </abbr>
+            <abbr title="Tanggal Lahir">
+              <label class="selection:color-white inline-flex w-full border-b gap-3 items-center py-2">
+                <SolarLetterLinear />
+                <input
+                  v-model="formDataRegister.birthdate"
+                  required
+                  class="w-full bg-transparent focus:outline-none"
+                  type="date"
                 >
               </label>
             </abbr>

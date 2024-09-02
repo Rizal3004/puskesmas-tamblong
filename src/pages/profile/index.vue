@@ -9,7 +9,7 @@ import SolarCheckSquareLineDuotone from '~icons/solar/check-square-line-duotone'
 import Header from '@/components/Header.vue'
 import validateInputNumber from '@/utils/validateInputNumber'
 
-const { changeAddress, changePhone, changePassword, changeEmail, changeBirthDate, logout } = useAuthStore()
+const { changeAddress, changePhone, changePassword, changeEmail, logout } = useAuthStore()
 const { profile } = storeToRefs(useAuthStore())
 const router = useRouter()
 
@@ -17,8 +17,13 @@ const isEditEmail = ref(false)
 const emailEl = ref<HTMLInputElement | null>(null)
 const emailText = ref('')
 async function handleChangeEmail() {
-  await changeEmail(emailText.value)
-  alert('Email berhasil diubah')
+  const confirmChange = confirm('Apakah anda yakin ingin mengubah email?')
+  if (confirmChange) {
+    await changeEmail(emailText.value)
+    alert('Email berhasil diubah')
+  } else {
+    emailText.value = profile.value?.email ?? ''
+  }
   isEditEmail.value = false
 }
 
@@ -26,28 +31,46 @@ const isEditAddress = ref(false)
 const addressEl = ref<HTMLInputElement | null>(null)
 const addressText = ref(profile.value?.address ?? '')
 async function handleChangeAddress() {
-  changeAddress(addressText.value)
-  alert('Alamat berhasil diubah')
+  const confirmChange = confirm('Apakah anda yakin ingin mengubah alamat?')
+  if (confirmChange) {
+    changeAddress(addressText.value)
+    alert('Alamat berhasil diubah')
+  } else {
+    addressText.value = profile.value?.address ?? ''
+  }
   isEditAddress.value = false
 }
 const isEditPhone = ref(false)
 const phoneEl = ref<HTMLInputElement | null>(null)
 const phoneText = ref(profile.value?.phone ?? '')
 async function handleChangePhone() {
-  changePhone(phoneText.value)
-  alert('Nomor telepon berhasil diubah')
+  const confirmChange = confirm('Apakah anda yakin ingin mengubah nomor telepon?')
+  if (confirmChange) {
+    changePhone(phoneText.value)
+    alert('Nomor telepon berhasil diubah')
+  } else {
+    phoneText.value = profile.value?.phone ?? ''
+  }
   isEditPhone.value = false
 }
 const isEditPassword = ref(false)
 const passwordEl = ref<HTMLInputElement | null>(null)
 const passwordText = ref(profile.value?.password ?? '')
 async function handleChangePassword() {
-  changePassword(passwordText.value)
-  alert('Password berhasil diubah')
+  const confirmChange = confirm('Apakah anda yakin ingin mengubah password?')
+  if (confirmChange) {
+    changePassword(passwordText.value)
+    alert('Password berhasil diubah')
+  } else {
+    passwordText.value = profile.value?.password ?? ''
+  }
   isEditPassword.value = false
 }
 
 function handleLogout() {
+  const confirmLogout = confirm('Apakah anda yakin ingin logout?')
+
+  if (!confirmLogout) return
   logout()
   router.push('/auth/login')
 }

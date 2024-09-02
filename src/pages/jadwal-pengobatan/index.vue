@@ -23,11 +23,17 @@ const doctor = computed(() => {
 // })
 
 async function handleArrived(bookingId: number) {
+  // eslint-disable-next-line no-alert
+  const confirmArrived = confirm('Apakah anda sudah sampai di puskesmas?')
+  if (!confirmArrived) return
   await handlePatientArrived(bookingId)
   router.go(0)
 }
 
 async function handleCancel(bookingId: number) {
+  // eslint-disable-next-line no-alert
+  const confirmCancel =  confirm('Apakah anda yakin ingin membatalkan booking?')
+  if (!confirmCancel) return
   await handleCancelBooking(bookingId)
   router.push('/')
 }
