@@ -14,6 +14,7 @@ const { doctorList } = storeToRefs(useDoctorStore())
 const { poliList } = usePoliStore()
 const { addBookingActivity } = useBookingActivityStore()
 
+const nik = ref()
 const bookingFormData = reactive<{
   name: string
   dokter_id: number
@@ -34,7 +35,10 @@ const doctorList2 = computed(() => {
 async function handleBooking() {
   const { booking_activity } = await apiFetch<{ booking_activity: BookingActivity }>('/booking-activities/emergency', {
     method: 'POST',
-    body: bookingFormData,
+    body: {
+      ...bookingFormData,
+      nik
+    },
   })
 
   localStorage.setItem('emergency_booking_id', booking_activity.id.toString())
@@ -63,6 +67,15 @@ async function handleBooking() {
               class="rounded-md border px-2 py-1"
               required
               placeholder="Masukkan Nama"
+            >
+          </label>
+          <label class="flex flex-col gap-1">
+            NIK
+            <input
+              v-model="nik"
+              class="rounded-md border px-2 py-1"
+              required
+              placeholder="Masukkan NIK anda"
             >
           </label>
           <label class="flex flex-col gap-1">

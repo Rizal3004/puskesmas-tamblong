@@ -12,8 +12,8 @@ const loginData = ref<{
   email: string
   password: string
 }>({
-  email: 'asep@example.com',
-  password: 'admin001',
+  email: '',
+  password: '',
 })
 
 const showPassword = ref(false)

@@ -9,6 +9,7 @@ import type { PatientForm } from '@/types/Patient'
 import { useAuthStore } from '@/stores/authStore'
 import SolarEyeClosedLinear from '~icons/solar/eye-closed-linear'
 import SolarEyeLinear from '~icons/solar/eye-linear'
+import StreamlineFoodCakeCandleBirthdayEventSpecialSweetCakeBake from '~icons/streamline/food-cake-candle-birthday-event-special-sweet-cake-bake'
 
 const { signup } = useAuthStore()
 const toast = useToast()
@@ -100,7 +101,7 @@ async function handleRegister() {
             </abbr>
             <abbr title="Tanggal Lahir">
               <label class="selection:color-white inline-flex w-full border-b gap-3 items-center py-2">
-                <SolarLetterLinear />
+                <StreamlineFoodCakeCandleBirthdayEventSpecialSweetCakeBake />
                 <input
                   v-model="formDataRegister.birthdate"
                   required
