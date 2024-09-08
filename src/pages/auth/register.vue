@@ -19,7 +19,7 @@ const formDataRegister = reactive<PatientForm>({
   nik: '',
   email: '',
   password: '',
-  birthdate: ''
+  birthdate: '',
 })
 const passwordConfirmation = ref('')
 
@@ -64,7 +64,7 @@ async function handleRegister() {
         <div class="">
           <form class="flex flex-col gap-3" @submit.prevent="handleRegister">
             <abbr title="Nama lengkap">
-              <label class="selection:color-white inline-flex w-full border-b gap-3 items-center py-2">
+              <label class="selection:color-white inline-flex w-full items-center gap-3 border-b py-2">
                 <SolarUserRoundedLinear />
                 <input
                   v-model="formDataRegister.name"
@@ -76,7 +76,7 @@ async function handleRegister() {
               </label>
             </abbr>
             <abbr title="NIK">
-              <label class="selection:color-white inline-flex w-full border-b gap-3 items-center py-2">
+              <label class="selection:color-white inline-flex w-full items-center gap-3 border-b py-2">
                 <SolarCardOutline />
                 <input
                   v-model="formDataRegister.nik"
@@ -88,7 +88,7 @@ async function handleRegister() {
               </label>
             </abbr>
             <abbr title="Email">
-              <label class="selection:color-white inline-flex w-full border-b gap-3 items-center py-2">
+              <label class="selection:color-white inline-flex w-full items-center gap-3 border-b py-2">
                 <SolarLetterLinear />
                 <input
                   v-model="formDataRegister.email"
@@ -99,19 +99,22 @@ async function handleRegister() {
                 >
               </label>
             </abbr>
-            <abbr title="Tanggal Lahir">
-              <label class="selection:color-white inline-flex w-full border-b gap-3 items-center py-2">
-                <StreamlineFoodCakeCandleBirthdayEventSpecialSweetCakeBake />
-                <input
-                  v-model="formDataRegister.birthdate"
-                  required
-                  class="w-full bg-transparent focus:outline-none"
-                  type="date"
-                >
-              </label>
-            </abbr>
+            <div class="">
+              <p>Tanggal lahir</p>
+              <abbr title="Tanggal Lahir">
+                <label class="selection:color-white inline-flex w-full items-center gap-3 border-b py-2">
+                  <StreamlineFoodCakeCandleBirthdayEventSpecialSweetCakeBake />
+                  <input
+                    v-model="formDataRegister.birthdate"
+                    required
+                    class="w-full bg-transparent focus:outline-none"
+                    type="date"
+                  >
+                </label>
+              </abbr>
+            </div>
             <abbr title="Password">
-              <label class="selection:color-white inline-flex w-full border-b gap-3 items-center py-2">
+              <label class="selection:color-white inline-flex w-full items-center gap-3 border-b py-2">
                 <SolarLockPasswordLinear />
                 <input
                   v-model="formDataRegister.password"
@@ -127,7 +130,7 @@ async function handleRegister() {
               </label>
             </abbr>
             <abbr title="Konfirmasi Password">
-              <label class="selection:color-white inline-flex w-full border-b gap-3 items-center py-2">
+              <label class="selection:color-white inline-flex w-full items-center gap-3 border-b py-2">
                 <SolarLockPasswordLinear />
                 <input
                   v-model="passwordConfirmation"
@@ -146,7 +149,7 @@ async function handleRegister() {
           </form>
         </div>
         <p>
-          Sudah punya akun? 
+          Sudah punya akun?
           <RouterLink to="/auth/login" class="text-sky-600">Login</RouterLink>
         </p>
       </div>

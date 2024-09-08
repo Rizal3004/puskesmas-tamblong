@@ -12,17 +12,18 @@ import apiFetch from '@/ofetch'
 const router = useRouter()
 const { doctorList } = storeToRefs(useDoctorStore())
 const { poliList } = usePoliStore()
-const { addBookingActivity } = useBookingActivityStore()
 
 const nik = ref()
 const bookingFormData = reactive<{
   name: string
   dokter_id: number
   keluhan: string
+  phone: string
 }>({
   name: '',
   dokter_id: 0,
   keluhan: '',
+  phone: '',
 })
 
 const selectedPoliId = ref<number>()
@@ -37,13 +38,13 @@ async function handleBooking() {
     method: 'POST',
     body: {
       ...bookingFormData,
-      nik
+      nik: nik.value
     },
   })
 
   localStorage.setItem('emergency_booking_id', booking_activity.id.toString())
 
-  addBookingActivity(bookingFormData as BookingActivityForm)
+  // addBookingActivity(bookingFormData as BookingActivityForm)
 
   router.push('/booking-darurat/antrian')
 }
@@ -76,6 +77,15 @@ async function handleBooking() {
               class="rounded-md border px-2 py-1"
               required
               placeholder="Masukkan NIK anda"
+            >
+          </label>
+          <label class="flex flex-col gap-1">
+            No Telepon
+            <input
+              v-model="bookingFormData.phone"
+              class="rounded-md border px-2 py-1"
+              required
+              placeholder="Masukkan No Telepon anda"
             >
           </label>
           <label class="flex flex-col gap-1">
