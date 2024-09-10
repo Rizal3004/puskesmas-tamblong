@@ -24,6 +24,9 @@ const bookingActivities2 = computed(() => {
     }
   }).filter((ba) => {
     // const activeBooking = ba.status === 'booked'
+    if (ba.status === 'canceled') {
+      return false
+    }
     if (ba.pasien_id === profile?.id) {
       return true
     }
