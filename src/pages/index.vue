@@ -10,7 +10,7 @@ import BookingForm from '@/components/BookingForm.vue'
 import Footer from '@/components/Footer.vue'
 import DaftarDokter from '@/components/DaftarDokter.vue'
 
-const { getPoliById, poliList } = usePoliStore()
+const { poliList } = usePoliStore()
 const { doctorList } = useDoctorStore()
 const { userBooking } = storeToRefs(useAuthStore())
 
