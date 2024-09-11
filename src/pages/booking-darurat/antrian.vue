@@ -5,7 +5,6 @@ import type { Doctor } from '@/types/Doctor'
 import type { Patient } from '@/types/Patient'
 import type { Poli } from '@/types/Poli'
 import createReferenceNumber from '@/utils/createReferenceNumber'
-
 const emergencyBookingId = localStorage.getItem('emergency_booking_id')
 
 const queueNumber = ref<number>()
@@ -131,7 +130,7 @@ onMounted(async () => {
       </div>
       <div class="flex justify-end">
         <button v-if="!isArrived" class="rounded-md bg-slate-600 px-3 py-1 text-white" @click="handleArrived">Konfirmasi sampai</button>
-        <p v-else class="rounded-md bg-slate-200 px-3 py-1 text-black">Anda telah sampai</p>
+        <p v-else class="rounded-md bg-slate-200 px-3 py-1 text-black">Silahkan Menunggu Panggilan. Jika Belum di Panggil Mohon Konfirmasi Ke Admin</p>
       </div>
       <div class="mt-8 flex justify-end">
         <!-- <button class="rounded-md bg-sky-200 px-4 py-0.5" @click="handlePrint2">Print</button> -->

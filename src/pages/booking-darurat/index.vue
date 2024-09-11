@@ -3,12 +3,10 @@ import { storeToRefs } from 'pinia'
 import { useToast } from 'vue-toast-notification'
 import SelectTime from '@/components/BookingForm/SelectTime.vue'
 import { useAuthStore } from '@/stores/authStore'
-import type { BookingActivity, BookingActivityForm } from '@/types/BookingActivity'
+import type { BookingActivity } from '@/types/BookingActivity'
 import { useDoctorStore } from '@/stores/doctorStore'
 import { usePoliStore } from '@/stores/poliStore'
-import { useBookingActivityStore } from '@/stores/bookingActivityStore'
 import apiFetch from '@/ofetch'
-
 const router = useRouter()
 const { doctorList } = storeToRefs(useDoctorStore())
 const { poliList } = usePoliStore()
@@ -19,11 +17,15 @@ const bookingFormData = reactive<{
   dokter_id: number
   keluhan: string
   phone: string
+  starts_at: string
+  ends_at: string
 }>({
   name: '',
   dokter_id: 0,
   keluhan: '',
   phone: '',
+  starts_at: '',
+  ends_at: '',
 })
 
 const selectedPoliId = ref<number>()
@@ -34,24 +36,29 @@ const doctorList2 = computed(() => {
 })
 
 async function handleBooking() {
-  const { booking_activity } = await apiFetch<{ booking_activity: BookingActivity }>('/booking-activities/emergency', {
-    method: 'POST',
-    body: {
-      ...bookingFormData,
-      nik: nik.value
-    },
-  })
+  try {
+    const { booking_activity } = await apiFetch<{ booking_activity: BookingActivity }>('/booking-activities/emergency', {
+      method: 'POST',
+      body: {
+        ...bookingFormData,
+        nik: nik.value
+      },
+    })
 
-  localStorage.setItem('emergency_booking_id', booking_activity.id.toString())
+    localStorage.setItem('emergency_booking_id', booking_activity.id.toString())
 
-  // addBookingActivity(bookingFormData as BookingActivityForm)
-
-  router.push('/booking-darurat/antrian')
+    // Redirect ke halaman antrian setelah booking berhasil
+    router.push('/booking-darurat/antrian')
+  } catch (error) {
+    console.error('Error during booking:', error)
+    // Tampilkan pesan error ke user
+    useToast().error('Terjadi kesalahan saat melakukan booking')
+  }
 }
 </script>
 
 <template>
-  <div id="booking" class="relative block items-center gap-8 px-4 py-16 md:px-36 ">
+  <div id="booking" class="relative block items-center gap-8 px-4 py-16 md:px-36">
     <div class="space-y-4">
       <RouterLink to="/auth/login" class="rounded-md border px-4 py-0.5 text-sm">
         Login
@@ -68,7 +75,7 @@ async function handleBooking() {
               class="rounded-md border px-2 py-1"
               required
               placeholder="Masukkan Nama"
-            >
+            />
           </label>
           <label class="flex flex-col gap-1">
             NIK
@@ -77,7 +84,7 @@ async function handleBooking() {
               class="rounded-md border px-2 py-1"
               required
               placeholder="Masukkan NIK anda"
-            >
+            />
           </label>
           <label class="flex flex-col gap-1">
             No Telepon
@@ -86,7 +93,14 @@ async function handleBooking() {
               class="rounded-md border px-2 py-1"
               required
               placeholder="Masukkan No Telepon anda"
-            >
+            />
+          </label>
+          <label class="flex flex-col gap-1">
+            Jam Booking
+            <SelectTime
+              v-model:startsAt="bookingFormData.starts_at!"
+              v-model:endsAt="bookingFormData.ends_at!"
+            />
           </label>
           <label class="flex flex-col gap-1">
             Poli
@@ -97,11 +111,7 @@ async function handleBooking() {
           <label class="flex flex-col gap-1">
             Dokter
             <select v-model="bookingFormData.dokter_id" class="rounded-md border px-2 py-1" required>
-              <option
-                v-for="dokter in doctorList2"
-                :key="dokter.id"
-                :value="dokter.id"
-              >{{ dokter.name }}</option>
+              <option v-for="dokter in doctorList2" :key="dokter.id" :value="dokter.id">{{ dokter.name }}</option>
             </select>
           </label>
         </div>
@@ -123,5 +133,5 @@ async function handleBooking() {
 </template>
 
 <style scoped>
-
+/* Tambahkan gaya sesuai kebutuhan */
 </style>

@@ -77,7 +77,7 @@ import SolarArrowUpLinear from '~icons/solar/arrow-up-linear'
       </div>
     </a>
     <div class="flex flex-col gap-2 md:flex-row md:items-center md:gap-10">
-      <p>Copyright © 2024 Telkom University | Design : Rizal Ihsan</p>
+      <p>Copyright © 2024 Telkom University | Design : Rizal Ihsan Sihotang</p>
       <div class="flex items-center gap-4">
         <a href="#">Privacy Policy</a>
         <a href="#">Terms of Service</a>
