@@ -109,13 +109,6 @@ async function handleBooking() {
             >
           </label>
           <label class="flex flex-col gap-1">
-            Jam
-            <SelectTime
-              v-model:startsAt="bookingFormData.starts_at!"
-              v-model:endsAt="bookingFormData.ends_at!"
-            />
-          </label>
-          <label class="flex flex-col gap-1">
             Poli
             <select v-model="selectedPoliId" class="rounded-md border px-2 py-1" required>
               <option v-for="poli in poliList" :key="poli.id" :value="poli.id">{{ poli.name }}</option>
