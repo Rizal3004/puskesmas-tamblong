@@ -73,28 +73,28 @@ function handlePrint2() {
         <div class="my-2 border-y py-2">
           <table class="table-auto !border-collapse">
             <tr>
-              <td class="border">Nama</td>
-              <td class="border">: {{ ba?.patient?.name }}</td>
+              <td class="border px-2">Nama</td>
+              <td class="border px-2">: {{ ba?.patient?.name }}</td>
             </tr>
             <tr>
-              <td class="border">NIK</td>
-              <td class="border">: {{ ba?.patient?.nik }}</td>
+              <td class="border px-2">NIK</td>
+              <td class="border px-2">: {{ ba?.patient?.nik }}</td>
             </tr>
             <tr>
-              <td class="border">Tanggal Lahir</td>
-              <td class="border">: {{ ba?.patient?.birthdate ?? '-' }}</td>
+              <td class="border px-2">Tanggal Lahir</td>
+              <td class="border px-2">: {{ ba?.patient?.birthdate ?? '-' }}</td>
             </tr>
             <tr>
-              <td class="border">Email</td>
-              <td class="border">: {{ ba?.patient?.email }}</td>
+              <td class="border px-2">Email</td>
+              <td class="border px-2">: {{ ba?.patient?.email }}</td>
             </tr>
             <tr>
-              <td class="border">Nomor Telepon</td>
-              <td class="border">: {{ ba?.patient?.phone ?? '-' }}</td>
+              <td class="border px-2">Nomor Telepon</td>
+              <td class="border px-2">: {{ ba?.patient?.phone ?? '-' }}</td>
             </tr>
             <tr>
-              <td class="border">Alamat</td>
-              <td class="border">: {{ ba?.patient?.address ?? '-' }}</td>
+              <td class="border px-2">Alamat</td>
+              <td class="border px-2">: {{ ba?.patient?.address ?? '-' }}</td>
             </tr>
           </table>
         </div>
@@ -112,8 +112,8 @@ function handlePrint2() {
             <td>{{ ba?.doctor?.name }}</td>
             <td>{{ ba?.poli?.name }}</td>
             <td>{{ ba?.penyakit }}</td>
-            <td>{{ ba?.resep.split("::")[0] }}</td>
-            <td>{{ ba?.resep.split("::")[1] }}</td>
+            <td>{{ ba?.resep?.split("::")[0] }}</td>
+            <td>{{ ba?.resep?.split("::")[1] }}</td>
           </tr>
         </table>
         <div class="mt-6 flex justify-end">
