@@ -71,30 +71,30 @@ function handlePrint2() {
         </div>
         <h1 class="text-center text-2xl font-semibold">LAPORAN DATA CATATAN PENGOBATAN PASIEN</h1>
         <div class="my-2 border-y py-2">
-          <table class="">
+          <table class="table-auto !border-collapse">
             <tr>
-              <td>Nama</td>
-              <td>: {{ ba?.patient?.name }}</td>
+              <td class="border !text-center">Nama</td>
+              <td class="border !text-center">: {{ ba?.patient?.name }}</td>
             </tr>
             <tr>
-              <td>NIK</td>
-              <td>: {{ ba?.patient?.nik }}</td>
+              <td class="border !text-center">NIK</td>
+              <td class="border !text-center">: {{ ba?.patient?.nik }}</td>
             </tr>
             <tr>
-              <td>Tanggal Lahir</td>
-              <td>: {{ ba?.patient?.birthdate ?? '-' }}</td>
+              <td class="border !text-center">Tanggal Lahir</td>
+              <td class="border !text-center">: {{ ba?.patient?.birthdate ?? '-' }}</td>
             </tr>
             <tr>
-              <td>Email</td>
-              <td>: {{ ba?.patient?.email }}</td>
+              <td class="border !text-center">Email</td>
+              <td class="border !text-center">: {{ ba?.patient?.email }}</td>
             </tr>
             <tr>
-              <td>Nomor Telepon</td>
-              <td>: {{ ba?.patient?.phone ?? '-' }}</td>
+              <td class="border !text-center">Nomor Telepon</td>
+              <td class="border !text-center">: {{ ba?.patient?.phone ?? '-' }}</td>
             </tr>
             <tr>
-              <td>Alamat</td>
-              <td>: {{ ba?.patient?.address ?? '-' }}</td>
+              <td class="border !text-center">Alamat</td>
+              <td class="border !text-center">: {{ ba?.patient?.address ?? '-' }}</td>
             </tr>
           </table>
         </div>
