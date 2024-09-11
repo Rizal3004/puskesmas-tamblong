@@ -3,10 +3,9 @@ import { storeToRefs } from 'pinia'
 import { useToast } from 'vue-toast-notification'
 import SelectTime from '@/components/BookingForm/SelectTime.vue'
 import { useAuthStore } from '@/stores/authStore'
-import type { BookingActivity, BookingActivityForm } from '@/types/BookingActivity'
+import type { BookingActivity } from '@/types/BookingActivity'
 import { useDoctorStore } from '@/stores/doctorStore'
 import { usePoliStore } from '@/stores/poliStore'
-import { useBookingActivityStore } from '@/stores/bookingActivityStore'
 import apiFetch from '@/ofetch'
 
 const router = useRouter()
@@ -55,7 +54,7 @@ async function handleBooking() {
 </script>
 
 <template>
-  <div id="booking" class="relative block items-center gap-8 px-4 py-16 md:px-36 ">
+  <div id="booking" class="relative block items-center gap-8 px-4 py-16 md:px-36">
     <div class="space-y-4">
       <RouterLink to="/auth/login" class="rounded-md border px-4 py-0.5 text-sm">
         Login
@@ -94,12 +93,19 @@ async function handleBooking() {
             >
           </label>
           <label class="flex flex-col gap-1">
+            Jam Booking
+            <SelectTime
+              v-model:startsAt="bookingFormData.starts_at!"
+              v-model:endsAt="bookingFormData.ends_at!"
+            />
+          </label>
+          <label class="flex flex-col gap-1">
             Tanggal
             <input
               id=""
+              v-model="bookingFormData.date"
               type="date"
               name=""
-              v-model="bookingFormData.date"
               class="rounded-md border px-2 py-1"
             >
           </label>
@@ -119,11 +125,7 @@ async function handleBooking() {
           <label class="flex flex-col gap-1">
             Dokter
             <select v-model="bookingFormData.dokter_id" class="rounded-md border px-2 py-1" required>
-              <option
-                v-for="dokter in doctorList2"
-                :key="dokter.id"
-                :value="dokter.id"
-              >{{ dokter.name }}</option>
+              <option v-for="dokter in doctorList2" :key="dokter.id" :value="dokter.id">{{ dokter.name }}</option>
             </select>
           </label>
         </div>
@@ -145,5 +147,5 @@ async function handleBooking() {
 </template>
 
 <style scoped>
-
+/* Tambahkan gaya sesuai kebutuhan */
 </style>
