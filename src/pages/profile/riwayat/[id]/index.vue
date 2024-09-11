@@ -71,30 +71,30 @@ function handlePrint2() {
         </div>
         <h1 class="text-center text-2xl font-semibold">LAPORAN DATA CATATAN PENGOBATAN PASIEN</h1>
         <div class="my-2 border-y py-2">
-          <table class="">
+          <table class="table-auto !border-collapse">
             <tr>
-              <td>Nama</td>
-              <td>: {{ ba?.patient?.name }}</td>
+              <td class="border">Nama</td>
+              <td class="border">: {{ ba?.patient?.name }}</td>
             </tr>
             <tr>
-              <td>NIK</td>
-              <td>: {{ ba?.patient?.nik }}</td>
+              <td class="border">NIK</td>
+              <td class="border">: {{ ba?.patient?.nik }}</td>
             </tr>
             <tr>
-              <td>Tanggal Lahir</td>
-              <td>: {{ ba?.patient?.birthdate ?? '-' }}</td>
+              <td class="border">Tanggal Lahir</td>
+              <td class="border">: {{ ba?.patient?.birthdate ?? '-' }}</td>
             </tr>
             <tr>
-              <td>Email</td>
-              <td>: {{ ba?.patient?.email }}</td>
+              <td class="border">Email</td>
+              <td class="border">: {{ ba?.patient?.email }}</td>
             </tr>
             <tr>
-              <td>Nomor Telepon</td>
-              <td>: {{ ba?.patient?.phone ?? '-' }}</td>
+              <td class="border">Nomor Telepon</td>
+              <td class="border">: {{ ba?.patient?.phone ?? '-' }}</td>
             </tr>
             <tr>
-              <td>Alamat</td>
-              <td>: {{ ba?.patient?.address ?? '-' }}</td>
+              <td class="border">Alamat</td>
+              <td class="border">: {{ ba?.patient?.address ?? '-' }}</td>
             </tr>
           </table>
         </div>
@@ -105,13 +105,15 @@ function handlePrint2() {
             <th>Poli</th>
             <th>Penyakit</th>
             <th>Resep</th>
+            <th>Aturan Minum</th>
           </tr>
           <tr>
             <td>{{ ba?.date }}</td>
             <td>{{ ba?.doctor?.name }}</td>
             <td>{{ ba?.poli?.name }}</td>
             <td>{{ ba?.penyakit }}</td>
-            <td>{{ ba?.resep }}</td>
+            <td>{{ ba?.resep.split("::")[0] }}</td>
+            <td>{{ ba?.resep.split("::")[1] }}</td>
           </tr>
         </table>
         <div class="mt-6 flex justify-end">
