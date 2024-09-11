@@ -9,10 +9,11 @@ import { usePoliStore } from '@/stores/poliStore'
 import apiFetch from '@/ofetch'
 
 const router = useRouter()
+const toast = useToast()
 const { doctorList } = storeToRefs(useDoctorStore())
 const { poliList } = usePoliStore()
 
-const nik = ref()
+const nik = ref<string>()
 const bookingFormData = reactive<{
   name: string
   dokter_id: number
@@ -39,6 +40,12 @@ const doctorList2 = computed(() => {
 })
 
 async function handleBooking() {
+
+  if (nik.value?.length !== 16) {
+    toast.error('NIK harus 16 digit')
+    return
+  }
+
   const { booking_activity } = await apiFetch<{ booking_activity: BookingActivity }>('/booking-activities/emergency', {
     method: 'POST',
     body: {
