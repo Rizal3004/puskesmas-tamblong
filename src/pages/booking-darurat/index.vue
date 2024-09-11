@@ -62,7 +62,6 @@ async function handleBooking() {
       <h3 class="text-3xl" data-aos="fade-up">
         Booking Dokter
       </h3>
-      <p>{{ bookingFormData }}</p>
       <form class="space-y-4" @submit.prevent="handleBooking">
         <div class="grid grid-cols-2 gap-x-3.5 gap-y-3" data-aos="fade-up">
           <label class="flex flex-col gap-1">
