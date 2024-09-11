@@ -78,7 +78,7 @@ async function handleLogin() {
             <RouterLink to="/auth/register" class="text-sky-500">Daftar</RouterLink>
           </p>
           <p>
-            Butuh pemesanan darurat? 
+            Butuh pemesanan darurat? Belum punya akun? Booking aja dulu
             <RouterLink to="/booking-darurat" class="text-sky-500">Pesan Darurat</RouterLink>
           </p>
         </div>

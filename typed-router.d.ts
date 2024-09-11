@@ -24,6 +24,7 @@ declare module 'vue-router/auto-routes' {
     '/auth/register': RouteRecordInfo<'/auth/register', '/auth/register', Record<never, never>, Record<never, never>>,
     '/booking-darurat/': RouteRecordInfo<'/booking-darurat/', '/booking-darurat', Record<never, never>, Record<never, never>>,
     '/booking-darurat/antrian': RouteRecordInfo<'/booking-darurat/antrian', '/booking-darurat/antrian', Record<never, never>, Record<never, never>>,
+    '/booking-darurat/select': RouteRecordInfo<'/booking-darurat/select', '/booking-darurat/select', Record<never, never>, Record<never, never>>,
     '/jadwal-pengobatan/': RouteRecordInfo<'/jadwal-pengobatan/', '/jadwal-pengobatan', Record<never, never>, Record<never, never>>,
     '/jadwal-pengobatan/tiket': RouteRecordInfo<'/jadwal-pengobatan/tiket', '/jadwal-pengobatan/tiket', Record<never, never>, Record<never, never>>,
     '/profile/': RouteRecordInfo<'/profile/', '/profile', Record<never, never>, Record<never, never>>,

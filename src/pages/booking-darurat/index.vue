@@ -19,11 +19,17 @@ const bookingFormData = reactive<{
   dokter_id: number
   keluhan: string
   phone: string
+  date?: Date
+  starts_at: string
+  ends_at: string
 }>({
   name: '',
   dokter_id: 0,
   keluhan: '',
   phone: '',
+  date: undefined,
+  starts_at: '',
+  ends_at: '',
 })
 
 const selectedPoliId = ref<number>()
@@ -38,13 +44,11 @@ async function handleBooking() {
     method: 'POST',
     body: {
       ...bookingFormData,
-      nik: nik.value
+      nik: nik.value,
     },
   })
 
   localStorage.setItem('emergency_booking_id', booking_activity.id.toString())
-
-  // addBookingActivity(bookingFormData as BookingActivityForm)
 
   router.push('/booking-darurat/antrian')
 }
@@ -59,6 +63,7 @@ async function handleBooking() {
       <h3 class="text-3xl" data-aos="fade-up">
         Booking Dokter
       </h3>
+      <p>{{ bookingFormData }}</p>
       <form class="space-y-4" @submit.prevent="handleBooking">
         <div class="grid grid-cols-2 gap-x-3.5 gap-y-3" data-aos="fade-up">
           <label class="flex flex-col gap-1">
@@ -87,6 +92,23 @@ async function handleBooking() {
               required
               placeholder="Masukkan No Telepon anda"
             >
+          </label>
+          <label class="flex flex-col gap-1">
+            Tanggal
+            <input
+              id=""
+              type="date"
+              name=""
+              v-model="bookingFormData.date"
+              class="rounded-md border px-2 py-1"
+            >
+          </label>
+          <label class="flex flex-col gap-1">
+            Jam
+            <SelectTime
+              v-model:startsAt="bookingFormData.starts_at!"
+              v-model:endsAt="bookingFormData.ends_at!"
+            />
           </label>
           <label class="flex flex-col gap-1">
             Poli

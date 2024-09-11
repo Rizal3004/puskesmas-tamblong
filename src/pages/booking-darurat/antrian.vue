@@ -1,12 +1,15 @@
 <script lang="ts" setup>
+import { useRouter } from 'vue-router'
 import apiFetch from '@/ofetch'
 import type { BookingActivity } from '@/types/BookingActivity'
 import type { Doctor } from '@/types/Doctor'
 import type { Patient } from '@/types/Patient'
 import type { Poli } from '@/types/Poli'
 import createReferenceNumber from '@/utils/createReferenceNumber'
+import MaterialSymbolsDeleteRounded from '~icons/material-symbols/delete-rounded'
 
 const emergencyBookingId = localStorage.getItem('emergency_booking_id')
+const router = useRouter()
 
 const queueNumber = ref<number>()
 const ba = ref<BookingActivity>()
@@ -50,6 +53,17 @@ function handleArrived() {
 
   localStorage.setItem('arrived', 'true')
   isArrived.value = true
+}
+
+async function handleCancel() {
+  await apiFetch(`/booking-activities/${ba.value?.id}/cancel`, {
+    method: 'PATCH',
+  })
+
+  localStorage.removeItem('emergency_booking_id')
+  localStorage.removeItem('arrived')
+
+  router.replace('/auth/login')
 }
 
 onMounted(async () => {
@@ -129,9 +143,16 @@ onMounted(async () => {
         </div>
         <p class="text-md text-center font-semibold md:text-xl">Silahkan membuat antrian baru jika antrian anda terlewatkan</p>
       </div>
-      <div class="flex justify-end">
+      <div class="flex justify-center gap-8">
+        <button class="rounded-md bg-red-500 flex items-center gap-1 px-3 py-1 text-white" @click="handleCancel">
+          <MaterialSymbolsDeleteRounded />
+          Batalkan Booking
+        </button>
         <button v-if="!isArrived" class="rounded-md bg-slate-600 px-3 py-1 text-white" @click="handleArrived">Konfirmasi sampai</button>
         <p v-else class="rounded-md bg-slate-200 px-3 py-1 text-black">Anda telah sampai</p>
+      </div>
+      <div class="">
+        <p class="text-center text-xl">* Konfirmasi admin untuk mendaftarkan akun</p>
       </div>
       <div class="mt-8 flex justify-end">
         <!-- <button class="rounded-md bg-sky-200 px-4 py-0.5" @click="handlePrint2">Print</button> -->
