@@ -66,7 +66,6 @@ async function handleRegister() {
           <h1 class="text-4xl font-bold text-sky-600">
             Daftar
           </h1>
-          <p>{{ formDataRegister }}</p>
           <!-- <p class="text-slate-500">
             Masukkan data anda untuk daftar
           </p> -->
