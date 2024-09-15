@@ -51,6 +51,8 @@ export const useAuthStore = defineStore('auth', () => {
       name,
       nik,
       birthdate,
+      address,
+      phone,
     } = profileData
 
     await apiFetch('/auth/register', {
@@ -61,6 +63,8 @@ export const useAuthStore = defineStore('auth', () => {
         name,
         nik,
         birthdate,
+        address,
+        phone,
       },
       onResponseError: (error) => {
         console.error(error)

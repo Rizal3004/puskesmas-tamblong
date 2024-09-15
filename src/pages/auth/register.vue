@@ -10,6 +10,10 @@ import { useAuthStore } from '@/stores/authStore'
 import SolarEyeClosedLinear from '~icons/solar/eye-closed-linear'
 import SolarEyeLinear from '~icons/solar/eye-linear'
 import StreamlineFoodCakeCandleBirthdayEventSpecialSweetCakeBake from '~icons/streamline/food-cake-candle-birthday-event-special-sweet-cake-bake'
+import SolarPhoneOutline from '~icons/solar/phone-outline'
+import SolarHomeLineDuotone from '~icons/solar/home-line-duotone'
+import validateInputNumber from '@/utils/validateInputNumber'
+import SolarArrowLeftOutline from '~icons/solar/arrow-left-outline'
 
 const { signup } = useAuthStore()
 const toast = useToast()
@@ -17,6 +21,8 @@ const toast = useToast()
 const formDataRegister = reactive<PatientForm>({
   name: '',
   nik: '',
+  phone: '',
+  address: '',
   email: '',
   password: '',
   birthdate: '',
@@ -25,6 +31,8 @@ const passwordConfirmation = ref('')
 
 const showPassword = ref(false)
 const showPasswordConfirmation = ref(false)
+
+const halaman = ref<'pertama' | 'kedua'>('pertama')
 
 function validateForm() {
   if (formDataRegister.password !== passwordConfirmation.value) {
@@ -37,6 +45,7 @@ function validateForm() {
     toast.error('NIK harus 16 karakter')
     return false
   }
+
   return true
 }
 
@@ -57,95 +66,145 @@ async function handleRegister() {
           <h1 class="text-4xl font-bold text-sky-600">
             Daftar
           </h1>
+          <p>{{ formDataRegister }}</p>
           <!-- <p class="text-slate-500">
             Masukkan data anda untuk daftar
           </p> -->
         </div>
         <div class="">
           <form class="flex flex-col gap-3" @submit.prevent="handleRegister">
-            <abbr title="Nama lengkap">
-              <label class="selection:color-white inline-flex w-full items-center gap-3 border-b py-2">
-                <SolarUserRoundedLinear />
-                <input
-                  v-model="formDataRegister.name"
-                  required
-                  class="w-full bg-transparent focus:outline-none"
-                  type="text"
-                  placeholder="Masukkan nama lengkap"
-                >
-              </label>
-            </abbr>
-            <abbr title="NIK">
-              <label class="selection:color-white inline-flex w-full items-center gap-3 border-b py-2">
-                <SolarCardOutline />
-                <input
-                  v-model="formDataRegister.nik"
-                  required
-                  class="w-full bg-transparent focus:outline-none"
-                  type="text"
-                  placeholder="Masukkan NIK"
-                >
-              </label>
-            </abbr>
-            <abbr title="Email">
-              <label class="selection:color-white inline-flex w-full items-center gap-3 border-b py-2">
-                <SolarLetterLinear />
-                <input
-                  v-model="formDataRegister.email"
-                  required
-                  class="w-full bg-transparent focus:outline-none"
-                  type="email"
-                  placeholder="Masukkan email"
-                >
-              </label>
-            </abbr>
-            <div class="">
-              <p>Tanggal lahir</p>
-              <abbr title="Tanggal Lahir">
+            <template v-if="halaman === 'pertama'">
+              <abbr title="Nama lengkap">
                 <label class="selection:color-white inline-flex w-full items-center gap-3 border-b py-2">
-                  <StreamlineFoodCakeCandleBirthdayEventSpecialSweetCakeBake />
+                  <SolarUserRoundedLinear />
                   <input
-                    v-model="formDataRegister.birthdate"
+                    v-model="formDataRegister.name"
                     required
                     class="w-full bg-transparent focus:outline-none"
-                    type="date"
+                    type="text"
+                    placeholder="Masukkan nama lengkap"
                   >
                 </label>
               </abbr>
-            </div>
-            <abbr title="Password">
-              <label class="selection:color-white inline-flex w-full items-center gap-3 border-b py-2">
-                <SolarLockPasswordLinear />
-                <input
-                  v-model="formDataRegister.password"
-                  required
-                  class="w-full bg-transparent focus:outline-none"
-                  :type="showPassword ? 'text' : 'password' "
-                  placeholder="Masukkan password"
-                >
-                <button type="button" @click="showPassword = !showPassword">
-                  <SolarEyeClosedLinear v-if="showPassword" />
-                  <SolarEyeLinear v-else />
-                </button>
-              </label>
-            </abbr>
-            <abbr title="Konfirmasi Password">
-              <label class="selection:color-white inline-flex w-full items-center gap-3 border-b py-2">
-                <SolarLockPasswordLinear />
-                <input
-                  v-model="passwordConfirmation"
-                  required
-                  class="w-full bg-transparent focus:outline-none"
-                  :type="showPasswordConfirmation ? 'text' : 'password' "
-                  placeholder="Masukkan password"
-                >
-                <button type="button" @click="showPasswordConfirmation = !showPasswordConfirmation">
-                  <SolarEyeClosedLinear v-if="showPasswordConfirmation" />
-                  <SolarEyeLinear v-else />
-                </button>
-              </label>
-            </abbr>
-            <button type="submit" class="w-full rounded-md bg-zinc-700 py-1.5 text-white">Daftar</button>
+              <abbr title="NIK">
+                <label class="selection:color-white inline-flex w-full items-center gap-3 border-b py-2">
+                  <SolarCardOutline />
+                  <input
+                    v-model="formDataRegister.nik"
+                    required
+                    class="w-full bg-transparent focus:outline-none"
+                    type="text"
+                    placeholder="Masukkan NIK"
+                    @keypress="validateInputNumber"
+                  >
+                </label>
+              </abbr>
+              <abbr title="No Telepon">
+                <label class="selection:color-white inline-flex w-full items-center gap-3 border-b py-2">
+                  <SolarPhoneOutline />
+                  <input
+                    v-model="formDataRegister.phone"
+                    required
+                    class="w-full bg-transparent focus:outline-none"
+                    type="text"
+                    placeholder="Masukkan No Telp"
+                    @keypress="validateInputNumber"
+                  >
+                </label>
+              </abbr>
+              <abbr title="Alamat">
+                <label class="selection:color-white inline-flex w-full items-center gap-3 border-b py-2">
+                  <SolarHomeLineDuotone />
+                  <input
+                    v-model="formDataRegister.address"
+                    required
+                    class="w-full bg-transparent focus:outline-none"
+                    type="text"
+                    placeholder="Masukkan Alamat"
+                  >
+                </label>
+              </abbr>
+              <div class="">
+                <p>Tanggal lahir</p>
+                <abbr title="Tanggal Lahir">
+                  <label class="selection:color-white inline-flex w-full items-center gap-3 border-b py-2">
+                    <StreamlineFoodCakeCandleBirthdayEventSpecialSweetCakeBake />
+                    <input
+                      v-model="formDataRegister.birthdate"
+                      required
+                      class="w-full bg-transparent focus:outline-none"
+                      type="date"
+                    >
+                  </label>
+                </abbr>
+              </div>
+            </template>
+            <template v-else>
+              <abbr title="Email">
+                <label class="selection:color-white inline-flex w-full items-center gap-3 border-b py-2">
+                  <SolarLetterLinear />
+                  <input
+                    v-model="formDataRegister.email"
+                    required
+                    class="w-full bg-transparent focus:outline-none"
+                    type="email"
+                    placeholder="Masukkan email"
+                  >
+                </label>
+              </abbr>
+
+              <abbr title="Password">
+                <label class="selection:color-white inline-flex w-full items-center gap-3 border-b py-2">
+                  <SolarLockPasswordLinear />
+                  <input
+                    v-model="formDataRegister.password"
+                    required
+                    class="w-full bg-transparent focus:outline-none"
+                    :type="showPassword ? 'text' : 'password' "
+                    placeholder="Masukkan password"
+                  >
+                  <button type="button" @click="showPassword = !showPassword">
+                    <SolarEyeClosedLinear v-if="showPassword" />
+                    <SolarEyeLinear v-else />
+                  </button>
+                </label>
+              </abbr>
+              <abbr title="Konfirmasi Password">
+                <label class="selection:color-white inline-flex w-full items-center gap-3 border-b py-2">
+                  <SolarLockPasswordLinear />
+                  <input
+                    v-model="passwordConfirmation"
+                    required
+                    class="w-full bg-transparent focus:outline-none"
+                    :type="showPasswordConfirmation ? 'text' : 'password' "
+                    placeholder="Masukkan password"
+                  >
+                  <button type="button" @click="showPasswordConfirmation = !showPasswordConfirmation">
+                    <SolarEyeClosedLinear v-if="showPasswordConfirmation" />
+                    <SolarEyeLinear v-else />
+                  </button>
+                </label>
+              </abbr>
+            </template>
+            <button
+              v-if="halaman === 'pertama'"
+              type="button"
+              class="w-full rounded-md bg-zinc-700 py-1.5 text-white"
+              @click="halaman = 'kedua'"
+            >
+              Lanjut
+            </button>
+            <template v-else>
+              <button type="submit" class="w-full rounded-md bg-zinc-700 py-1.5 text-white">Daftar</button>
+              <button
+                type="button"
+                class="tombol-kembali w-full rounded-md py-1.5 text-zinc-700 gap-3 flex items-center justify-center text-sm"
+                @click="halaman = 'pertama'"
+              >
+                <SolarArrowLeftOutline />
+                Ke halaman sebelumnya
+              </button>
+            </template>
           </form>
         </div>
         <p>
@@ -157,4 +216,8 @@ async function handleRegister() {
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.tombol-kembali {
+  border: 1px solid #333;
+}
+</style>
