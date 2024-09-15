@@ -12,7 +12,7 @@ import DaftarDokter from '@/components/DaftarDokter.vue'
 
 const { poliList } = usePoliStore()
 const { doctorList } = useDoctorStore()
-const { userBooking } = storeToRefs(useAuthStore())
+// const { userBooking } = storeToRefs(useAuthStore())
 
 const selectedPoliId = ref<number | null>(null)
 
