@@ -6,8 +6,7 @@ export interface Doctor {
   name: string | null
   phone: string | null
   poli_id: number
+  status: "active" | "nonactive"
 }
 
-// export type Doctor2 = Doctor & { imgUrl: string }
-
-export type DoctorForm = Omit<Doctor, 'id'> & { imageFile?: File }
+export type DoctorForm = Omit<Doctor, 'id' | 'status'> & { imageFile?: File }

@@ -18,6 +18,8 @@ const selectedPoliId = ref<number | null>(null)
 
 const computedDoctors = computed(() => {
   return doctorList.filter((dokter) => {
+    if (dokter.status === 'nonactive') return false
+
     if (selectedPoliId.value === null) return true
     return dokter.poli_id === selectedPoliId.value
   })

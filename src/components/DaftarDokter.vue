@@ -6,13 +6,16 @@ import { usePoliStore } from '@/stores/poliStore'
 import type { Doctor } from '@/types/Doctor'
 import { baseURL } from '@/ofetch'
 
-defineProps<{
+const props = defineProps<{
   dokterList: Doctor[]
 }>()
 
 const { width } = useWindowSize()
 
 const { getPoliById } = usePoliStore()
+
+console.log(props.dokterList)
+
 </script>
 
 <template>
