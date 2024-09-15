@@ -116,14 +116,7 @@ function baBooked() {
               placeholder="Masukkan No Telepon anda"
             >
           </label>
-          <label class="flex flex-col gap-1">
-            Jam Booking
-            <SelectTime
-              v-model:startsAt="bookingFormData.starts_at!"
-              v-model:endsAt="bookingFormData.ends_at!"
-              :baBooked="baBooked()"
-            />
-          </label>
+
           <label class="flex flex-col gap-1">
             Tanggal
             <input
@@ -145,6 +138,14 @@ function baBooked() {
             <select v-model="bookingFormData.dokter_id" class="rounded-md border px-2 py-1" required>
               <option v-for="dokter in doctorList2" :key="dokter.id" :value="dokter.id">{{ dokter.name }}</option>
             </select>
+          </label>
+          <label class="flex flex-col gap-1">
+            Jam Booking
+            <SelectTime
+              v-model:startsAt="bookingFormData.starts_at!"
+              v-model:endsAt="bookingFormData.ends_at!"
+              :baBooked="baBooked()"
+            />
           </label>
         </div>
         <label class="flex flex-col gap-1" data-aos="fade-up">
