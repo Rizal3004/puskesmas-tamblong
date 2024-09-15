@@ -6,11 +6,13 @@ import type { BookingActivity } from '@/types/BookingActivity'
 import { useDoctorStore } from '@/stores/doctorStore'
 import { usePoliStore } from '@/stores/poliStore'
 import apiFetch from '@/ofetch'
+import { useBookingActivityStore } from '@/stores/bookingActivityStore'
 
 const router = useRouter()
 const toast = useToast()
 const { doctorList } = storeToRefs(useDoctorStore())
 const { poliList } = usePoliStore()
+const { bookingActivityList } = useBookingActivityStore()
 
 const nik = ref<string>()
 const bookingFormData = reactive<{
@@ -18,7 +20,7 @@ const bookingFormData = reactive<{
   dokter_id: number
   keluhan: string
   phone: string
-  date?: Date
+  date?: string
   starts_at: string
   ends_at: string
 }>({
@@ -56,6 +58,24 @@ async function handleBooking() {
 
   router.push('/booking-darurat/antrian')
 }
+
+function baBooked() {
+  return bookingActivityList.filter((ba) => {
+    if (ba.status === 'booked') {
+      return true
+    } else {
+      return false
+    }
+  }).filter((ba) => {
+    return ba.date === bookingFormData.date && ba.dokter_id === bookingFormData.dokter_id
+  })
+    .map((ba) => {
+      return {
+        starts_at: ba.starts_at,
+        ends_at: ba.ends_at,
+      }
+    })
+}
 </script>
 
 <template>
@@ -67,6 +87,7 @@ async function handleBooking() {
       <h3 class="text-3xl" data-aos="fade-up">
         Booking Dokter
       </h3>
+      <p>{{ bookingFormData.date }}</p>
       <form class="space-y-4" @submit.prevent="handleBooking">
         <div class="grid grid-cols-2 gap-x-3.5 gap-y-3" data-aos="fade-up">
           <label class="flex flex-col gap-1">
@@ -101,6 +122,7 @@ async function handleBooking() {
             <SelectTime
               v-model:startsAt="bookingFormData.starts_at!"
               v-model:endsAt="bookingFormData.ends_at!"
+              :baBooked="baBooked()"
             />
           </label>
           <label class="flex flex-col gap-1">

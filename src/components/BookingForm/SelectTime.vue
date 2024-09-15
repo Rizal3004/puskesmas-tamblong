@@ -46,12 +46,6 @@ function timeSlots() {
 
       const isBooked2 = (baStart >= timeSlotStart && baStart < timeSlotEnd) || (baEnd > timeSlotStart && baEnd <= timeSlotEnd)
 
-      if (isBooked2) {
-        console.log('timeSlotStart', timeSlotStart)
-        console.log('timeSlotEnd', timeSlotEnd)
-        console.log('isBooked2', isBooked2)
-      }
-
       return isBooked2
     })
 
@@ -62,7 +56,6 @@ function timeSlots() {
   })
 }
 
-console.log(timeSlots())
 
 watchEffect(() => {
   const timeSlot = getTimeSlotById(selectedValue.value, createTimeSlots())
