@@ -143,7 +143,7 @@ onMounted(async () => {
         <p class="text-md text-center font-semibold md:text-xl">Silahkan membuat antrian baru jika antrian anda terlewatkan</p>
       </div>
       <div class="flex justify-center gap-8">
-        <button class="rounded-md bg-red-500 flex items-center gap-1 px-3 py-1 text-white" @click="handleCancel">
+        <button class="flex items-center gap-1 rounded-md bg-red-500 px-3 py-1 text-white" @click="handleCancel">
           <MaterialSymbolsDeleteRounded />
           Batalkan Booking
         </button>

@@ -12,7 +12,7 @@ const router = useRouter()
 const toast = useToast()
 const { profile, isProfileComplete } = useAuthStore()
 const { doctorList } = storeToRefs(useDoctorStore())
-const { getBookingActivityByDoctorIdAndDate } = useBookingActivityStore()
+const { bookingActivityList } = useBookingActivityStore()
 const { poliList } = usePoliStore()
 const { addBookingActivity } = useBookingActivityStore()
 
@@ -31,8 +31,6 @@ const selectedPoliId = ref<number>()
 const doctorList2 = computed(() => {
   if (!selectedPoliId.value) return []
   if (!bookingFormData.date) return []
-  if (!bookingFormData.starts_at) return []
-  if (!bookingFormData.ends_at) return []
   return doctorList.value.filter((d) => {
     return d.poli_id === selectedPoliId.value
   })
@@ -45,6 +43,34 @@ async function handleBooking() {
   }
   await addBookingActivity(bookingFormData)
   router.go(0)
+}
+
+function baBooked() {
+  return bookingActivityList.filter((ba) => {
+    if (ba.status === 'booked') {
+      return true
+    } else {
+      return false
+    }
+  }).filter((ba) => {
+    return ba.date === bookingFormData.date && ba.dokter_id === bookingFormData.dokter_id
+  })
+    .map((ba) => {
+      return {
+        starts_at: ba.starts_at,
+        ends_at: ba.ends_at,
+      }
+    })
+}
+
+function checkIfDateAvailableToBook() {
+  const cannodBooked = bookingActivityList.some((ba) => {
+    return ba.pasien_id === profile?.id && ba.date === bookingFormData.date && ba.status === 'booked'
+  })
+  if (cannodBooked) {
+    toast.warning('Anda sudah booking pada tanggal tersebut')
+    bookingFormData.date = undefined
+  }
 }
 </script>
 
@@ -72,6 +98,8 @@ async function handleBooking() {
               type="date"
               class="rounded-md border px-2 py-1"
               required
+              :min="new Date().toISOString().split('T')[0]"
+              @change="checkIfDateAvailableToBook"
             >
           </label>
           <label class="flex flex-col gap-1">
@@ -80,13 +108,7 @@ async function handleBooking() {
               <option v-for="poli in poliList" :key="poli.id" :value="poli.id">{{ poli.name }}</option>
             </select>
           </label>
-          <label class="flex flex-col gap-1">
-            Jam Booking
-            <SelectTime
-              v-model:startsAt="bookingFormData.starts_at!"
-              v-model:endsAt="bookingFormData.ends_at!"
-            />
-          </label>
+
           <label class="flex flex-col gap-1">
             Dokter
             <select v-model="bookingFormData.dokter_id" class="rounded-md border px-2 py-1" required>
@@ -96,6 +118,14 @@ async function handleBooking() {
                 :value="dokter.id"
               >{{ dokter.name }}</option>
             </select>
+          </label>
+          <label class="flex flex-col gap-1">
+            Jam Booking
+            <SelectTime
+              v-model:startsAt="bookingFormData.starts_at!"
+              v-model:endsAt="bookingFormData.ends_at!"
+              :baBooked="baBooked()"
+            />
           </label>
           <label class="flex flex-col gap-1">
             Jenis Pasien

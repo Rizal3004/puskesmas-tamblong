@@ -3,9 +3,8 @@
 </script>
 
 <template>
-<div class="h-screen w-full flex items-center justify-center gap-5">
-  <button class="w-fit px-6 py-6 rounded-md border bg-zinc-100">Sudah Punya Akun</button>
-  <button class="w-fit px-6 py-6 rounded-md border bg-zinc-100">Belum Punya Akun</button>
-
-</div>
+  <div class="flex h-screen w-full items-center justify-center gap-5">
+    <button class="w-fit rounded-md border bg-zinc-100 p-6">Sudah Punya Akun</button>
+    <button class="w-fit rounded-md border bg-zinc-100 p-6">Belum Punya Akun</button>
+  </div>
 </template>

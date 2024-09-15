@@ -1,24 +1,27 @@
 <script lang="ts" setup>
 import { useVueToPrint } from 'vue-to-print'
-import { storeToRefs } from 'pinia'
 import { useBookingActivityStore } from '@/stores/bookingActivityStore'
 import { useDoctorStore } from '@/stores/doctorStore'
 import { usePoliStore } from '@/stores/poliStore'
-import { useAuthStore } from '@/stores/authStore'
 import createReferenceNumber from '@/utils/createReferenceNumber'
 import { usePatientsStore } from '@/stores/patientsStore'
 import capitalizeFirstLetterOfEachWord from '@/utils/capitalizeFirstLetterOfEachWord'
 
 const router = useRouter()
+const route = useRoute('/profile/riwayat/[id]/tiket')
 
-const { userBooking } = storeToRefs(useAuthStore())
 const { getDoctorById } = useDoctorStore()
 const { getPoliById } = usePoliStore()
 const { getPatientById } = usePatientsStore()
-const { getQueueNumber } = useBookingActivityStore()
+const { getQueueNumber, getBookingActivitybyId } = useBookingActivityStore()
+
+const ba = computed(() => {
+  const ba2 = getBookingActivitybyId(route.params.id)
+  return ba2!
+})
 
 const dokter = computed(() => {
-  const dokter2 = getDoctorById(userBooking.value!.dokter_id!)
+  const dokter2 = getDoctorById(ba.value.dokter_id)
   return dokter2
 })
 
@@ -59,7 +62,7 @@ function handlePrint2() {
             </div>
             <div class="flex flex-col text-xs">
               <h2 class="text-lg font-semibold">Puskesmas Tamblong</h2>
-              <p>No Surat: {{ createReferenceNumber(userBooking!) }}</p>
+              <p>No Surat: {{ createReferenceNumber(ba!) }}</p>
               <p>Alamat: Jl. Tamblong no. 66, Kb. Pisang, Kec. Sumur Bandung, Kota Bandung, Jawa Barat 40112</p>
               <p>No Telp. +6289668223131, Email: lkfjasdf, Website: puskesmas-tamblong.vercel.dev</p>
             </div>
@@ -70,15 +73,15 @@ function handlePrint2() {
           <table class="">
             <tr>
               <td>Tanggal</td>
-              <td>: {{ capitalizeFirstLetterOfEachWord(getPatientById(userBooking?.pasien_id!.toString()!)?.name!) }}</td>
+              <td>: {{ capitalizeFirstLetterOfEachWord(getPatientById(ba?.pasien_id!.toString()!)?.name!) }}</td>
             </tr>
             <tr>
               <td>Tanggal</td>
-              <td>: {{ userBooking?.date }}</td>
+              <td>: {{ ba?.date }}</td>
             </tr>
             <tr>
               <td>Jam Berobat</td>
-              <td>: {{ userBooking?.starts_at }} - {{ userBooking?.ends_at }}</td>
+              <td>: {{ ba?.starts_at }} - {{ ba?.ends_at }}</td>
             </tr>
             <tr>
               <td>Poli</td>
@@ -91,7 +94,7 @@ function handlePrint2() {
           </table>
           <div class="flex flex-col items-center py-8 md:w-3/12 md:py-0">
             <span class="text-2xl font-semibold">Antrian Ke:</span>
-            <h1 class="text-6xl font-bold">{{ getQueueNumber(userBooking?.id!) }}</h1>
+            <h1 class="text-6xl font-bold">{{ getQueueNumber(ba?.id!) }}</h1>
             <p class="text-center text-sm">Harap Datang 15 Menit sebelum jadwal berobat yang telah ditentukan</p>
           </div>
         </div>

@@ -83,7 +83,7 @@ const computedDoctors = computed(() => {
     </div>
 
     <!-- Booking Dokter ======================================================================================== -->
-    <BookingForm v-if="!userBooking" />
+    <BookingForm />
 
     <!-- Map =========================================================================== -->
     <section id="google-map" data-aos="fade-up">

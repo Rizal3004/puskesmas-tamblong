@@ -13,10 +13,11 @@ import createTimeFromString2 from '@/utils/createTimeFromString2'
 export const useBookingActivityStore = defineStore('BookingActivity', () => {
   // Store untuk data aktivitas booking
   const bookingActivityList = ref<BookingActivity[]>([])
+  const allBookingActivityList = ref<BookingActivity[]>([])
 
   const getBookingActivity = async () => {
-    const { setUserBooking } = useAuthStore()
-    const { profile } = useAuthStore()
+    // const { setUserBooking } = useAuthStore()
+    // const { profile } = useAuthStore()
 
     // Ambil data aktivitas booking dari table booking_activity
     // const { data } = await supabase.from('booking_activity').select('*')
@@ -25,11 +26,28 @@ export const useBookingActivityStore = defineStore('BookingActivity', () => {
     bookingActivityList.value = bookingActivities
 
     // Cari booking yang statusnya booked dan pasien_id nya sama dengan id user
-    const userBooking = bookingActivityList.value.find(ba => ba.status === 'booked' && ba.pasien_id === profile?.id)
-    if (userBooking) {
-      setUserBooking(userBooking)
-    }
+    // const userBooking = bookingActivityList.value.find(ba => ba.status === 'booked' && ba.pasien_id === profile?.id)
+    // if (userBooking) {
+    //   setUserBooking(userBooking)
+    // }
   }
+
+  // const getAllBookingActivity = async () => {
+  //   const { profile } = useAuthStore()
+
+  //   // Ambil data aktivitas booking dari table booking_activity
+  //   // const { data } = await supabase.from('booking_activity').select('*')
+  //   const { bookingActivities } = await apiFetch<{ bookingActivities: BookingActivity[] }>('/booking-activities')
+  //   if (!bookingActivities) return
+  //   bookingActivityList.value = bookingActivities
+
+  //   // Cari booking yang statusnya booked
+  //   const allBookingActivityList2 = bookingActivityList.value.find(ba => ba.status === 'booked')
+  //   if (allBookingActivityList2) {
+  //     allBookingActivityList.value = allBookingActivityList2
+  //   }
+
+  // }
 
   const refetchBookingActivity = async () => {
     getBookingActivity()
@@ -39,7 +57,7 @@ export const useBookingActivityStore = defineStore('BookingActivity', () => {
   const addBookingActivity = async (data: BookingActivityForm) => {
     // inisialize composables
     const toast = useToast()
-    const { setUserBooking } = useAuthStore()
+    // const { setUserBooking } = useAuthStore()
     const { getDoctorById } = useDoctorStore()
 
     // the new booking activity data
@@ -65,7 +83,7 @@ export const useBookingActivityStore = defineStore('BookingActivity', () => {
     })
 
     bookingActivityList.value.push(booking_activity)
-    setUserBooking(booking_activity)
+    // setUserBooking(booking_activity)
     botSendMessage(`
 Booking baru untuk dokter <b>${getDoctorById(booking_activity.dokter_id)?.name}</b> telah dibuat.
 Tanggal: ${booking_activity.date}
@@ -73,7 +91,7 @@ Jam: ${booking_activity.starts_at} - ${booking_activity.ends_at}
 
 Keluhan: ${booking_activity.keluhan}
       `)
-    toast.success('Anda telah melakukan booking dokter, silahkan melihat detail booking anda dengan menekan tombol "jadwal pengobatan"')
+    toast.success('Anda telah melakukan booking dokter, silahkan melihat detail booking anda dengan menekan tombol "jadwal pengobatan" pada halaman profile')
   }
 
   const getBookingActivitybyId = (id: string) => {

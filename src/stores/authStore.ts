@@ -2,18 +2,12 @@ import { defineStore } from 'pinia'
 import { useToast } from 'vue-toast-notification'
 import type { Patient, PatientForm } from '@/types/Patient'
 import { useBookingActivityStore } from '@/stores/bookingActivityStore'
-import type { BookingActivity } from '@/types/BookingActivity'
 import apiFetch from '@/ofetch'
 
 export const useAuthStore = defineStore('auth', () => {
   const router = useRouter()
 
   const profile = ref<Patient>()
-  const userBooking = ref<BookingActivity | null>(null)
-
-  const setUserBooking = (booking: BookingActivity) => {
-    userBooking.value = booking
-  }
 
   const login = async ({ email, password }: { email: string, password: string }) => {
     const toast = useToast()
@@ -35,10 +29,10 @@ export const useAuthStore = defineStore('auth', () => {
     profile.value = patient
 
     // Cari booking yang statusnya booked dan pasien_id nya sama dengan id user
-    const userBooking = bookingActivityList.find(ba => ba.status === 'booked' && ba.pasien_id === profile?.value?.id)
-    if (userBooking) {
-      setUserBooking(userBooking)
-    }
+    // const userBooking = bookingActivityList.find(ba => ba.status === 'booked' && ba.pasien_id === profile?.value?.id)
+    // if (userBooking) {
+    //   setUserBooking(userBooking)
+    // }
 
     toast.success('Login berhasil')
 
@@ -56,7 +50,7 @@ export const useAuthStore = defineStore('auth', () => {
       password,
       name,
       nik,
-      birthdate
+      birthdate,
     } = profileData
 
     await apiFetch('/auth/register', {
@@ -66,7 +60,7 @@ export const useAuthStore = defineStore('auth', () => {
         password,
         name,
         nik,
-        birthdate
+        birthdate,
       },
       onResponseError: (error) => {
         console.error(error)
@@ -82,7 +76,7 @@ export const useAuthStore = defineStore('auth', () => {
   const logout = async () => {
     localStorage.removeItem('auth_token')
     profile.value = undefined
-    userBooking.value = null
+    // userBooking.value = null
     router.replace('/auth/login')
   }
 
@@ -102,11 +96,11 @@ export const useAuthStore = defineStore('auth', () => {
       },
     })
 
-    const { bookingActivity } = await apiFetch<{ bookingActivity: BookingActivity }>(`/booking-activities/patient/${patient.id}`)
+    // const { bookingActivity } = await apiFetch<{ bookingActivity: BookingActivity }>(`/booking-activities/patient/${patient.id}`)
 
-    if (bookingActivity) {
-      setUserBooking(bookingActivity)
-    }
+    // if (bookingActivity) {
+    //   setUserBooking(bookingActivity)
+    // }
 
     profile.value = patient
   }
@@ -180,12 +174,12 @@ export const useAuthStore = defineStore('auth', () => {
 
   return {
     profile,
-    userBooking,
+    // userBooking,
     login,
     signup,
     logout,
     getUserData,
-    setUserBooking,
+    // setUserBooking,
     changeAddress,
     changeEmail,
     changePhone,

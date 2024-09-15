@@ -9,6 +9,8 @@ import SolarCheckSquareLineDuotone from '~icons/solar/check-square-line-duotone'
 import Header from '@/components/Header.vue'
 import validateInputNumber from '@/utils/validateInputNumber'
 
+// const { userBooking } = storeToRefs(useAuthStore())
+
 const { changeAddress, changePhone, changePassword, changeEmail, logout } = useAuthStore()
 const { profile } = storeToRefs(useAuthStore())
 const router = useRouter()
@@ -236,6 +238,7 @@ onMounted(() => {
     </table>
     <div class="flex gap-5">
       <button class="rounded-md bg-red-500 px-3 py-1 text-white" @click="handleLogout">Logout</button>
+      <!-- <RouterLink v-if="userBooking" to="/jadwal-pengobatan" class="rounded-md border border-zinc-400 bg-zinc-100 px-3 py-1">Jadwal Pengobatan</RouterLink> -->
       <RouterLink to="/profile/riwayat" class="rounded-md border border-zinc-400 bg-zinc-100 px-3 py-1">Riwayat berobat</RouterLink>
     </div>
   </div>

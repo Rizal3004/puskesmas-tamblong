@@ -25,10 +25,9 @@ declare module 'vue-router/auto-routes' {
     '/booking-darurat/': RouteRecordInfo<'/booking-darurat/', '/booking-darurat', Record<never, never>, Record<never, never>>,
     '/booking-darurat/antrian': RouteRecordInfo<'/booking-darurat/antrian', '/booking-darurat/antrian', Record<never, never>, Record<never, never>>,
     '/booking-darurat/select': RouteRecordInfo<'/booking-darurat/select', '/booking-darurat/select', Record<never, never>, Record<never, never>>,
-    '/jadwal-pengobatan/': RouteRecordInfo<'/jadwal-pengobatan/', '/jadwal-pengobatan', Record<never, never>, Record<never, never>>,
-    '/jadwal-pengobatan/tiket': RouteRecordInfo<'/jadwal-pengobatan/tiket', '/jadwal-pengobatan/tiket', Record<never, never>, Record<never, never>>,
     '/profile/': RouteRecordInfo<'/profile/', '/profile', Record<never, never>, Record<never, never>>,
     '/profile/riwayat/': RouteRecordInfo<'/profile/riwayat/', '/profile/riwayat', Record<never, never>, Record<never, never>>,
     '/profile/riwayat/[id]/': RouteRecordInfo<'/profile/riwayat/[id]/', '/profile/riwayat/:id', { id: ParamValue<true> }, { id: ParamValue<false> }>,
+    '/profile/riwayat/[id]/tiket': RouteRecordInfo<'/profile/riwayat/[id]/tiket', '/profile/riwayat/:id/tiket', { id: ParamValue<true> }, { id: ParamValue<false> }>,
   }
 }

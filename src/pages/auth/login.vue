@@ -74,7 +74,7 @@ async function handleLogin() {
 
         <div class="">
           <p>
-            Belum punya akun? 
+            Belum punya akun?
             <RouterLink to="/auth/register" class="text-sky-500">Daftar</RouterLink>
           </p>
           <p>

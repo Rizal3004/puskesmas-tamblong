@@ -2,7 +2,6 @@
 import { storeToRefs } from 'pinia'
 import { useToast } from 'vue-toast-notification'
 import SelectTime from '@/components/BookingForm/SelectTime.vue'
-import { useAuthStore } from '@/stores/authStore'
 import type { BookingActivity } from '@/types/BookingActivity'
 import { useDoctorStore } from '@/stores/doctorStore'
 import { usePoliStore } from '@/stores/poliStore'
@@ -40,7 +39,6 @@ const doctorList2 = computed(() => {
 })
 
 async function handleBooking() {
-
   if (nik.value?.length !== 16) {
     toast.error('NIK harus 16 digit')
     return

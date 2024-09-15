@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<!-- <script lang="ts" setup>
 import { storeToRefs } from 'pinia'
 import { useAuthStore } from '@/stores/authStore'
 import SolarArrowLeftLinear from '~icons/solar/arrow-left-linear'
@@ -115,4 +115,4 @@ th {
   width: 1%;
   white-space: nowrap;
 }
-</style>
+</style> -->

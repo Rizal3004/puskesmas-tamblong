@@ -20,11 +20,49 @@ import RadixIconsCheck from '~icons/radix-icons/check'
 import RadixIconsChevronUp from '~icons/radix-icons/chevron-up'
 import createTimeSlots from '@/utils/createTimeSlots'
 import getTimeSlotById from '@/utils/getTimeSlotById'
+import timeStringToDate from '@/utils/timeStringToDate'
+
+const props = defineProps<{
+  baBooked: {
+    starts_at: string
+    ends_at: string
+  }[]
+}>()
 
 const selectedValue = ref<string>('')
 
 const startAtValue = defineModel<string>('startsAt', { required: true })
 const endsAtValue = defineModel<string>('endsAt', { required: true })
+
+function timeSlots() {
+  return createTimeSlots().map((timeSlot) => {
+    const isBooked = props.baBooked.some((ba) => {
+      const [start, end] = timeSlot.name.split(' - ')
+
+      const timeSlotStart = timeStringToDate(start)
+      const timeSlotEnd = timeStringToDate(end)
+      const baStart = timeStringToDate(ba.starts_at)
+      const baEnd = timeStringToDate(ba.ends_at)
+
+      const isBooked2 = (baStart >= timeSlotStart && baStart < timeSlotEnd) || (baEnd > timeSlotStart && baEnd <= timeSlotEnd)
+
+      if (isBooked2) {
+        console.log('timeSlotStart', timeSlotStart)
+        console.log('timeSlotEnd', timeSlotEnd)
+        console.log('isBooked2', isBooked2)
+      }
+
+      return isBooked2
+    })
+
+    return {
+      ...timeSlot,
+      isBooked,
+    }
+  })
+}
+
+console.log(timeSlots())
 
 watchEffect(() => {
   const timeSlot = getTimeSlotById(selectedValue.value, createTimeSlots())
@@ -62,10 +100,12 @@ watchEffect(() => {
           </SelectLabel>
           <SelectGroup>
             <SelectItem
-              v-for="{ id, name } in createTimeSlots()"
+              v-for="{ id, name, isBooked } in timeSlots()"
               :key="id"
               class="data-[disabled]:text-mauve8 relative flex h-[25px] select-none items-center rounded-[3px] pl-[25px] pr-[35px] text-[13px] leading-none text-black data-[disabled]:pointer-events-none data-[highlighted]:bg-blackA9 data-[highlighted]:text-white data-[highlighted]:outline-none"
               :value="id.toString()"
+              :disabled="isBooked"
+              :class="isBooked ? 'text-slate-400' : 'text-black'"
             >
               <SelectItemIndicator class="absolute left-0 inline-flex w-[25px] items-center justify-center">
                 <RadixIconsCheck />
