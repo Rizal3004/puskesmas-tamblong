@@ -7,6 +7,7 @@ import createReferenceNumber from '@/utils/createReferenceNumber'
 import { usePatientsStore } from '@/stores/patientsStore'
 import capitalizeFirstLetterOfEachWord from '@/utils/capitalizeFirstLetterOfEachWord'
 import apiFetch from '@/ofetch'
+import DeleteDialog from '@/components/Booking/DeleteDialog.vue'
 
 const router = useRouter()
 const route = useRoute('/profile/riwayat/[id]/tiket')
@@ -14,7 +15,7 @@ const route = useRoute('/profile/riwayat/[id]/tiket')
 const { getDoctorById } = useDoctorStore()
 const { getPoliById } = usePoliStore()
 const { getPatientById } = usePatientsStore()
-const { getQueueNumber, getBookingActivitybyId, handlePatientArrived, handleCancelBooking } = useBookingActivityStore()
+const { getBookingActivitybyId, handlePatientArrived, handleCancelBooking } = useBookingActivityStore()
 
 const queueNumber = ref<number>()
 
@@ -130,7 +131,8 @@ async function getQueueNumber2(id: number) {
         <div class="flex items-center gap-2">
           <button v-if="!ba.arrived_at" class="rounded-md bg-green-200 px-4 py-0.5" @click="handlePatientArrived2">Sampai</button>
           <div v-else class="" />
-          <button class="rounded-md bg-red-200 px-4 py-0.5" @click="handleCancelBooking2">Batalkan pemesanan</button>
+          <DeleteDialog @delete="handleCancelBooking2" />
+          <!-- <button class="rounded-md bg-red-200 px-4 py-0.5" @click="handleCancelBooking2">Batalkan pemesanan</button> -->
         </div>
 
         <button class="rounded-md bg-sky-200 px-4 py-0.5" @click="handlePrint2">Print</button>

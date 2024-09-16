@@ -1,5 +1,5 @@
 import './assets/main.css'
-import './bot'
+// import './bot'
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'

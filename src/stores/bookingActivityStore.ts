@@ -117,24 +117,24 @@ export const useBookingActivityStore = defineStore('BookingActivity', () => {
     }
   }
 
-  const getQueueNumber = (baId: number) => {
-    const ba2 = bookingActivityList.value.find(ba => ba.id === baId)
-    if (ba2) {
-      const baListWithSameDate = bookingActivityList.value.filter(ba => ba.date === ba2.date).sort((a, b) => {
-        const aDate = createTimeFromString2(a.created_at!)
-        const bDate = createTimeFromString2(b.created_at!)
-        return isTime1GreaterThanTime2(aDate, bDate) ? 1 : -1
-      })
+  // const getQueueNumber = (baId: number) => {
+  //   const ba2 = bookingActivityList.value.find(ba => ba.id === baId)
+  //   if (ba2) {
+  //     const baListWithSameDate = bookingActivityList.value.filter(ba => ba.date === ba2.date).sort((a, b) => {
+  //       const aDate = createTimeFromString2(a.created_at!)
+  //       const bDate = createTimeFromString2(b.created_at!)
+  //       return isTime1GreaterThanTime2(aDate, bDate) ? 1 : -1
+  //     })
 
-      const index = baListWithSameDate.findIndex(ba => ba.id === baId)
+  //     const index = baListWithSameDate.findIndex(ba => ba.id === baId)
 
-      // console.log(baListWithSameDate)
-      // console.log(index)
+  //     // console.log(baListWithSameDate)
+  //     // console.log(index)
 
-      return index + 1
-    }
-    return null
-  }
+  //     return index + 1
+  //   }
+  //   return null
+  // }
 
   const handleDoneBooking = async (bookingId: number, { penyakit, resep }: { penyakit: string, resep: string }) => {
     await apiFetch(`/booking-activities/${bookingId}/done`, {
@@ -219,7 +219,7 @@ export const useBookingActivityStore = defineStore('BookingActivity', () => {
     getBookingActivityByDoctorIdAndDate,
     handlePatientArrived,
     getBookingActivityByDoctorId,
-    getQueueNumber,
+    // getQueueNumber,
     refetchBookingActivity,
   }
 })
