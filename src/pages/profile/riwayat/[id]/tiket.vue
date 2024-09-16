@@ -13,7 +13,7 @@ const route = useRoute('/profile/riwayat/[id]/tiket')
 const { getDoctorById } = useDoctorStore()
 const { getPoliById } = usePoliStore()
 const { getPatientById } = usePatientsStore()
-const { getQueueNumber, getBookingActivitybyId } = useBookingActivityStore()
+const { getQueueNumber, getBookingActivitybyId, handlePatientArrived, handleCancelBooking } = useBookingActivityStore()
 
 const ba = computed(() => {
   const ba2 = getBookingActivitybyId(route.params.id)
@@ -39,6 +39,16 @@ const { handlePrint } = useVueToPrint({
 function handlePrint2() {
   handlePrint()
 }
+
+function handlePatientArrived2() {
+  handlePatientArrived(ba.value.id)
+  router.go(-1)
+}
+
+function handleCancelBooking2() {
+  handleCancelBooking(ba.value.id)
+  router.go(-1)
+}
 </script>
 
 <template>
@@ -53,7 +63,7 @@ function handlePrint2() {
         <img src="https://api.iconify.design/material-symbols-light:arrow-back-rounded.svg?color=%236e6e6e" alt="">
         Kembali
       </button>
-      <p>Screenshot tiket ini untuk ditunjukkan ke admin</p>
+      <!-- <p>Screenshot tiket ini untuk ditunjukkan ke admin</p> -->
       <div ref="elementToPrintRef" class="border px-4 py-6 md:overflow-x-auto md:px-16">
         <div class="mb-8">
           <div class="flex items-center gap-5">
@@ -71,26 +81,28 @@ function handlePrint2() {
         <h1 class="text-center text-2xl font-semibold">TIKET ANTRIAN BEROBAT</h1>
         <div class="my-2 flex flex-col justify-between py-2 md:flex-row">
           <table class="">
-            <tr>
-              <td>Tanggal</td>
-              <td>: {{ capitalizeFirstLetterOfEachWord(getPatientById(ba?.pasien_id!.toString()!)?.name!) }}</td>
-            </tr>
-            <tr>
-              <td>Tanggal</td>
-              <td>: {{ ba?.date }}</td>
-            </tr>
-            <tr>
-              <td>Jam Berobat</td>
-              <td>: {{ ba?.starts_at }} - {{ ba?.ends_at }}</td>
-            </tr>
-            <tr>
-              <td>Poli</td>
-              <td>: {{ poli?.name }}</td>
-            </tr>
-            <tr>
-              <td>Dokter</td>
-              <td>: {{ dokter?.name }}</td>
-            </tr>
+            <tbody>
+              <tr>
+                <td>Tanggal</td>
+                <td>: {{ capitalizeFirstLetterOfEachWord(getPatientById(ba?.pasien_id!.toString()!)?.name!) }}</td>
+              </tr>
+              <tr>
+                <td>Tanggal</td>
+                <td>: {{ ba?.date }}</td>
+              </tr>
+              <tr>
+                <td>Jam Berobat</td>
+                <td>: {{ ba?.starts_at }} - {{ ba?.ends_at }}</td>
+              </tr>
+              <tr>
+                <td>Poli</td>
+                <td>: {{ poli?.name }}</td>
+              </tr>
+              <tr>
+                <td>Dokter</td>
+                <td>: {{ dokter?.name }}</td>
+              </tr>
+            </tbody>
           </table>
           <div class="flex flex-col items-center py-8 md:w-3/12 md:py-0">
             <span class="text-2xl font-semibold">Antrian Ke:</span>
@@ -100,7 +112,13 @@ function handlePrint2() {
         </div>
         <p class="text-md text-center font-semibold md:text-xl">Silahkan membuat antrian baru jika antrian anda terlewatkan</p>
       </div>
-      <div class="mt-8 flex justify-end">
+      <div class="mt-8 flex justify-between">
+        <div class="flex items-center gap-2">
+          <button v-if="!ba.arrived_at" class="rounded-md bg-green-200 px-4 py-0.5" @click="handlePatientArrived2">Sampai</button>
+          <div v-else class="" />
+          <button class="rounded-md bg-red-200 px-4 py-0.5" @click="handleCancelBooking2">Batalkan pemesanan</button>
+        </div>
+
         <button class="rounded-md bg-sky-200 px-4 py-0.5" @click="handlePrint2">Print</button>
       </div>
     </div>

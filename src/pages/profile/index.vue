@@ -250,5 +250,11 @@ onMounted(() => {
 th {
   width: 1%;
   white-space: nowrap;
+  text-align: left;
+  padding-inline: 1rem;
+}
+td {
+  border: 1px solid #e2e8f0;
+  padding-inline: 1rem;
 }
 </style>

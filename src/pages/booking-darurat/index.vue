@@ -7,6 +7,7 @@ import { useDoctorStore } from '@/stores/doctorStore'
 import { usePoliStore } from '@/stores/poliStore'
 import apiFetch from '@/ofetch'
 import { useBookingActivityStore } from '@/stores/bookingActivityStore'
+import validateInputNumber from '@/utils/validateInputNumber'
 
 const router = useRouter()
 const toast = useToast()
@@ -21,6 +22,7 @@ const bookingFormData = reactive<{
   keluhan: string
   phone: string
   date?: string
+  birthDate?: string
   starts_at: string
   ends_at: string
 }>({
@@ -28,6 +30,7 @@ const bookingFormData = reactive<{
   dokter_id: 0,
   keluhan: '',
   phone: '',
+  birthDate: undefined,
   date: undefined,
   starts_at: '',
   ends_at: '',
@@ -105,6 +108,7 @@ function baBooked() {
               class="rounded-md border px-2 py-1"
               required
               placeholder="Masukkan NIK anda"
+              @keypress="validateInputNumber"
             >
           </label>
           <label class="flex flex-col gap-1">
@@ -114,9 +118,21 @@ function baBooked() {
               class="rounded-md border px-2 py-1"
               required
               placeholder="Masukkan No Telepon anda"
+              @keypress="validateInputNumber"
             >
           </label>
 
+          <label class="flex flex-col gap-1">
+            Tanggal Lahir
+            <input
+              id=""
+              v-model="bookingFormData.birthDate"
+              required
+              type="date"
+              name=""
+              class="rounded-md border px-2 py-1"
+            >
+          </label>
           <label class="flex flex-col gap-1">
             Tanggal
             <input
@@ -124,6 +140,8 @@ function baBooked() {
               v-model="bookingFormData.date"
               type="date"
               name=""
+              required
+              :min="new Date().toISOString().split('T')[0]"
               class="rounded-md border px-2 py-1"
             >
           </label>
