@@ -6,6 +6,7 @@ import { usePoliStore } from '@/stores/poliStore'
 import createReferenceNumber from '@/utils/createReferenceNumber'
 import { usePatientsStore } from '@/stores/patientsStore'
 import capitalizeFirstLetterOfEachWord from '@/utils/capitalizeFirstLetterOfEachWord'
+import apiFetch from '@/ofetch'
 
 const router = useRouter()
 const route = useRoute('/profile/riwayat/[id]/tiket')
@@ -15,8 +16,12 @@ const { getPoliById } = usePoliStore()
 const { getPatientById } = usePatientsStore()
 const { getQueueNumber, getBookingActivitybyId, handlePatientArrived, handleCancelBooking } = useBookingActivityStore()
 
+const queueNumber = ref<number>()
+
 const ba = computed(() => {
   const ba2 = getBookingActivitybyId(route.params.id)
+
+  getQueueNumber2(ba2!.id)
   return ba2!
 })
 
@@ -48,6 +53,11 @@ function handlePatientArrived2() {
 function handleCancelBooking2() {
   handleCancelBooking(ba.value.id)
   router.go(-1)
+}
+
+async function getQueueNumber2(id: number) {
+  const { queue } = await apiFetch(`/booking-activities/${id}/queue`)
+  queueNumber.value = queue
 }
 </script>
 
@@ -106,7 +116,7 @@ function handleCancelBooking2() {
           </table>
           <div class="flex flex-col items-center py-8 md:w-3/12 md:py-0">
             <span class="text-2xl font-semibold">Antrian Ke:</span>
-            <h1 class="text-6xl font-bold">{{ getQueueNumber(ba?.id!) }}</h1>
+            <h1 class="text-6xl font-bold">{{ queueNumber }}</h1>
             <p class="text-center text-sm">Harap Datang 15 Menit sebelum jadwal berobat yang telah ditentukan</p>
           </div>
         </div>

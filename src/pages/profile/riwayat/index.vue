@@ -5,6 +5,7 @@ import { usePatientsStore } from '@/stores/patientsStore'
 import { useDoctorStore } from '@/stores/doctorStore'
 import ShowKeluhan from '@/components/Booking/ShowKeluhan.vue'
 import { useAuthStore } from '@/stores/authStore'
+import apiFetch from '@/ofetch'
 
 const { bookingActivityList } = storeToRefs(useBookingActivityStore())
 const { profile } = useAuthStore()
@@ -34,7 +35,6 @@ const bookingActivities2 = computed(() => {
     }
     return false
   }).filter((ba) => {
-    console.log(ba)
     if (riwayatOrSedangBerjalan.value === 'riwayat') {
       return ba.status === 'done'
     }
@@ -76,8 +76,8 @@ const bookingActivities2 = computed(() => {
         Kembali
       </button>
       <div class="flex justify-between">
-        <h1 class="text-2xl font-semibold">Riwayat Booking</h1>
-        <div class="flex items-center">
+        <h1 class="text-md md:text-2xl font-semibold">Riwayat Booking</h1>
+        <div class="flex items-center text-xs md:text-base">
           <label class="rounded-l-md border px-4 py-1" :class="{ 'bg-sky-100': riwayatOrSedangBerjalan === 'riwayat' }">
             Riwayat
             <input
@@ -89,7 +89,7 @@ const bookingActivities2 = computed(() => {
               class="hidden"
             >
           </label>
-          <label class="rounded-r-md border border-l-0 px-4 py-1" :class="{ 'bg-sky-100': riwayatOrSedangBerjalan === 'sedang-berjalan' }">
+          <label class="rounded-r-md border border-l-0 px-4 py-1 text-nowrap" :class="{ 'bg-sky-100': riwayatOrSedangBerjalan === 'sedang-berjalan' }">
             Sedang Berjalan
             <input
               id=""
@@ -120,21 +120,7 @@ const bookingActivities2 = computed(() => {
             </tr>
           </thead>
           <tbody class="text-sm">
-            <!-- <tr class="h-1">
-              <td colSpan="9" />
-            </tr> -->
             <tr v-for="ba in bookingActivities2" :key="ba.id" class="h-10">
-              <!-- <td class="text-start">{{ ba.id }}</td> -->
-              <!-- <td class="text-start">
-                <MaterialSymbolsCheckRounded
-                  v-if="ba.arrived_at"
-                  class="text-green-400"
-                />
-                <MaterialSymbolsNestClockFarsightAnalogOutlineRounded
-                  v-else
-                  class="text-amber-400"
-                />
-              </td> -->
               <td class="text-start">{{ ba.patient?.name }}</td>
               <td class="text-start">{{ ba.patient_type === 'umum' ? 'Umum' : `BPJS (${ba.bpjs_number})` }}</td>
               <td class="text-start">{{ ba.patient?.phone }}</td>
@@ -167,5 +153,10 @@ table {
 
 tr {
   border-bottom: 1pt solid #e2e8f0;
+}
+
+td, th {
+  border: 1pt solid #e2e8f0;
+  padding-inline: 0.75rem;
 }
 </style>
