@@ -6,7 +6,7 @@ import { useAuthStore } from '@/stores/authStore'
 import type { BookingActivity, BookingActivityForm } from '@/types/BookingActivity'
 import getCurrentTime from '@/utils/getCurrentTime'
 import apiFetch from '@/ofetch'
-import { botSendMessage } from '@/bot'
+// import { botSendMessage } from '@/bot'
 import isTime1GreaterThanTime2 from '@/utils/isTime1GreaterThanTime2'
 import createTimeFromString2 from '@/utils/createTimeFromString2'
 
@@ -84,13 +84,13 @@ export const useBookingActivityStore = defineStore('BookingActivity', () => {
 
     bookingActivityList.value.push(booking_activity)
     // setUserBooking(booking_activity)
-    botSendMessage(`
-Booking baru untuk dokter <b>${getDoctorById(booking_activity.dokter_id)?.name}</b> telah dibuat.
-Tanggal: ${booking_activity.date}
-Jam: ${booking_activity.starts_at} - ${booking_activity.ends_at}
+    //     botSendMessage(`
+    // Booking baru untuk dokter <b>${getDoctorById(booking_activity.dokter_id)?.name}</b> telah dibuat.
+    // Tanggal: ${booking_activity.date}
+    // Jam: ${booking_activity.starts_at} - ${booking_activity.ends_at}
 
-Keluhan: ${booking_activity.keluhan}
-      `)
+    // Keluhan: ${booking_activity.keluhan}
+    //       `)
     toast.success('Anda telah melakukan booking dokter, silahkan melihat detail booking anda dengan menekan tombol "jadwal pengobatan" pada halaman profile')
   }
 
