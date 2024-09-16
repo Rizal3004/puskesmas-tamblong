@@ -122,6 +122,10 @@ async function getQueueNumber2(id: number) {
         </div>
         <p class="text-md text-center font-semibold md:text-xl">Silahkan membuat antrian baru jika antrian anda terlewatkan</p>
       </div>
+      <div class="text-sm">
+        <p v-if="!ba.arrived_at">Klik sampai untuk memberitahu admin anda telah sampai</p>
+        <p v-else>Silahkan menunggu panggilan</p>
+      </div>
       <div class="mt-8 flex justify-between">
         <div class="flex items-center gap-2">
           <button v-if="!ba.arrived_at" class="rounded-md bg-green-200 px-4 py-0.5" @click="handlePatientArrived2">Sampai</button>
