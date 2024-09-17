@@ -32,7 +32,7 @@ function handleSubmit() {
     <DialogTrigger
       class=""
     >
-      <SolarCheckCircleBoldDuotone class="text-green-500" />
+      <SolarCheckCircleBoldDuotone class="text-green-600" />
     </DialogTrigger>
     <DialogPortal>
       <DialogOverlay class="fixed inset-0 z-30 bg-blackA9 data-[state=open]:animate-overlayShow" />

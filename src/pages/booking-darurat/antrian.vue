@@ -88,7 +88,7 @@ onMounted(async () => {
 <template>
   <div id="booking" class="relative block items-center gap-8 px-4 py-16 md:px-36 ">
     <div class="space-y-4">
-      <RouterLink to="/auth/login" class="rounded-md border px-4 py-0.5 text-sm">
+      <RouterLink to="/auth/login" class="bg-slate-400 text-white rounded-md border px-3 py-0.5 text-sm hover:bg-sky-600">
         Login
       </RouterLink>
       <h3 class="text-3xl" data-aos="fade-up">
@@ -143,11 +143,11 @@ onMounted(async () => {
         <p class="text-md text-center font-semibold md:text-xl">Silahkan membuat antrian baru jika antrian anda terlewatkan</p>
       </div>
       <div class="flex justify-center gap-8">
-        <button class="flex items-center gap-1 rounded-md bg-red-500 px-3 py-1 text-white" @click="handleCancel">
+        <button class="flex items-center gap-1 rounded-md bg-slate-500 px-3 py-1 text-white hover:bg-red-500" @click="handleCancel">
           <MaterialSymbolsDeleteRounded />
           Batalkan Booking
         </button>
-        <button v-if="!isArrived" class="rounded-md bg-slate-600 px-3 py-1 text-white" @click="handleArrived">Konfirmasi sampai</button>
+        <button v-if="!isArrived" class="rounded-md bg-green-500 px-3 py-1 text-white" @click="handleArrived">Konfirmasi sampai</button>
         <p v-else class="rounded-md bg-slate-200 px-3 py-1 text-black">Silahkan Menunggu Panggilan. Jika Belum di Panggil Mohon Konfirmasi Ke Admin</p>
       </div>
       <div class="">

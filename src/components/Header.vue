@@ -20,7 +20,7 @@ import SolarHome2Outline from '~icons/solar/home-2-outline'
           <span>Whatsapp</span>
         </a>
         <div class="flex items-center gap-2 px-4 py-2.5">
-          <MaterialSymbolsMail class="text-blue-500" />
+          <MaterialSymbolsMail class="text-blue-600" />
           <span>Email</span>
         </div>
       </div>
@@ -45,7 +45,7 @@ import SolarHome2Outline from '~icons/solar/home-2-outline'
           </a>
           <RouterLink to="/profile" class="px-4 py-1">Profil</RouterLink>
         </div>
-        <a href="/#booking" class="rounded-md bg-slate-700 px-4 py-1 text-white">
+        <a href="/#booking" class="rounded-md bg-slate-500 px-4 py-1 text-white hover:bg-sky-600">
           Booking Dokter
         </a>
       </div>

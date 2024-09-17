@@ -188,16 +188,16 @@ async function handleRegister() {
             <button
               v-if="halaman === 'pertama'"
               type="button"
-              class="w-full rounded-md bg-zinc-700 py-1.5 text-white"
+              class="w-full rounded-md bg-zinc-700 py-1.5 text-white hover:bg-sky-600"
               @click="halaman = 'kedua'"
             >
               Lanjut
             </button>
             <template v-else>
-              <button type="submit" class="w-full rounded-md bg-zinc-700 py-1.5 text-white">Daftar</button>
+              <button type="submit" class="w-full rounded-md bg-zinc-700 py-1.5 text-white hover:bg-sky-600">Daftar</button>
               <button
                 type="button"
-                class="tombol-kembali w-full rounded-md py-1.5 text-zinc-700 gap-3 flex items-center justify-center text-sm"
+                class="tombol-kembali w-full rounded-md py-1 text-zinc-700 gap-0 flex items-center justify-center text-sm hover:bg-sky-400"
                 @click="halaman = 'pertama'"
               >
                 <SolarArrowLeftOutline />
@@ -216,7 +216,5 @@ async function handleRegister() {
 </template>
 
 <style scoped>
-.tombol-kembali {
-  border: 1px solid #333;
-}
+
 </style>

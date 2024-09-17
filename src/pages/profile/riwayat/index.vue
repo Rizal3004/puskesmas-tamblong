@@ -78,7 +78,7 @@ const bookingActivities2 = computed(() => {
       <div class="flex justify-between">
         <h1 class="text-md md:text-2xl font-semibold">Riwayat Booking</h1>
         <div class="flex items-center text-xs md:text-base">
-          <label class="rounded-l-md border px-4 py-1" :class="{ 'bg-sky-100': riwayatOrSedangBerjalan === 'riwayat' }">
+          <label class="rounded-l-md border px-4 py-1" :class="{ 'bg-sky-200': riwayatOrSedangBerjalan === 'riwayat' }">
             Riwayat
             <input
               id=""
@@ -89,7 +89,7 @@ const bookingActivities2 = computed(() => {
               class="hidden"
             >
           </label>
-          <label class="rounded-r-md border border-l-0 px-4 py-1 text-nowrap" :class="{ 'bg-sky-100': riwayatOrSedangBerjalan === 'sedang-berjalan' }">
+          <label class="rounded-r-md border border-l-0 px-4 py-1 text-nowrap" :class="{ 'bg-sky-200': riwayatOrSedangBerjalan === 'sedang-berjalan' }">
             Sedang Berjalan
             <input
               id=""
@@ -136,7 +136,7 @@ const bookingActivities2 = computed(() => {
               </td>
               <td>
                 <RouterLink v-if="riwayatOrSedangBerjalan === 'riwayat'" :to="`/profile/riwayat/${ba.id}`" class="rounded-md bg-sky-200 px-3 py-0.5">Cetak</RouterLink>
-                <RouterLink v-else :to="`/profile/riwayat/${ba.id}/tiket`" class="rounded-md bg-sky-200 px-3 py-0.5">Detail</RouterLink>
+                <RouterLink v-else :to="`/profile/riwayat/${ba.id}/tiket`" class="rounded-md bg-sky-500 text-white px-3 py-0.5">Detail</RouterLink>
               </td>
             </tr>
           </tbody>

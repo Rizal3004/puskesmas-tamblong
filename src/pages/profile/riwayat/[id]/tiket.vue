@@ -129,7 +129,7 @@ async function getQueueNumber2(id: number) {
       </div>
       <div class="mt-8 flex justify-between">
         <div class="flex items-center gap-2">
-          <button v-if="!ba.arrived_at" class="rounded-md bg-green-200 px-4 py-0.5" @click="handlePatientArrived2">Sampai</button>
+          <button v-if="!ba.arrived_at" class="rounded-md bg-green-500 text-white px-4 py-0.5" @click="handlePatientArrived2">Sampai</button>
           <div v-else class="" />
           <DeleteDialog @delete="handleCancelBooking2" />
           <!-- <button class="rounded-md bg-red-200 px-4 py-0.5" @click="handleCancelBooking2">Batalkan pemesanan</button> -->

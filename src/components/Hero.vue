@@ -34,7 +34,7 @@ const carouselItems = [
         <div class="absolute -z-10 size-full bg-black opacity-45" />
         <h2 className="text-3xl md:text-5xl font-semibold">{{ item.title }}</h2>
         <p class="mt-4 w-8/12 text-center md:text-xl">{{ item.description }}</p>
-        <button className="btn bg-blue-600 text-white border-none mt-7 px-4 py-1 rounded-md">Bertemu Dokter</button>
+        <button className="btn bg-slate-600 text-white border-none mt-7 px-4 py-1 rounded-md hover:bg-sky-600">Bertemu Dokter</button>
       </div>
     </Slide>
 

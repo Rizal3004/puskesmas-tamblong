@@ -84,7 +84,7 @@ function baBooked() {
 <template>
   <div id="booking" class="relative block items-center gap-8 px-4 py-16 md:px-36">
     <div class="space-y-4">
-      <RouterLink to="/auth/login" class="rounded-md border px-4 py-0.5 text-sm">
+      <RouterLink to="/auth/login" class=" bg-slate-400 text-white rounded-md border px-3 py-0.5 text-sm hover:bg-sky-600">
         Login
       </RouterLink>
       <h3 class="text-3xl" data-aos="fade-up">
@@ -175,7 +175,7 @@ function baBooked() {
             placeholder="Masukkan Gejala"
           />
         </label>
-        <button class="w-fit rounded bg-slate-600 px-12 py-1 text-center text-lg text-white" data-aos="fade-up">
+        <button class="w-fit rounded bg-slate-600 px-12 py-1 text-center text-lg text-white hover:bg-sky-600" data-aos="fade-up">
           Booking
         </button>
       </form>

@@ -158,7 +158,7 @@ function checkIfDateAvailableToBook() {
             placeholder="Masukkan Gejala"
           />
         </label>
-        <button class="w-full rounded bg-slate-600 py-1 text-lg text-white" data-aos="fade-up">
+        <button class="w-full rounded bg-slate-600 py-1 text-lg text-white hover:bg-sky-600" data-aos="fade-up">
           Booking
         </button>
       </form>
