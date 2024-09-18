@@ -74,6 +74,7 @@ async function getQueueNumber2(id: number) {
         <img src="https://api.iconify.design/material-symbols-light:arrow-back-rounded.svg?color=%236e6e6e" alt="">
         Kembali
       </button>
+      <button class="rounded-md bg-sky-200 px-2 py-0.5" @click="handlePrint2">Print</button>
       <!-- <p>Screenshot tiket ini untuk ditunjukkan ke admin</p> -->
       <div ref="elementToPrintRef" class="border px-4 py-6 md:overflow-x-auto md:px-16">
         <div class="mb-8">
@@ -135,7 +136,6 @@ async function getQueueNumber2(id: number) {
           <!-- <button class="rounded-md bg-red-200 px-4 py-0.5" @click="handleCancelBooking2">Batalkan pemesanan</button> -->
         </div>
 
-        <button class="rounded-md bg-sky-200 px-4 py-0.5" @click="handlePrint2">Print</button>
       </div>
     </div>
   </div>

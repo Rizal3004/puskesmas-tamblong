@@ -7,6 +7,7 @@ import type { BookingActivityForm } from '@/types/BookingActivity'
 import { useDoctorStore } from '@/stores/doctorStore'
 import { usePoliStore } from '@/stores/poliStore'
 import { useBookingActivityStore } from '@/stores/bookingActivityStore'
+import validateInputNumber from '@/utils/validateInputNumber'
 
 const router = useRouter()
 const toast = useToast()
@@ -146,6 +147,7 @@ function checkIfDateAvailableToBook() {
               type="text"
               required
               class="rounded-md border px-2 py-1"
+              @keypress="validateInputNumber"
             >
           </label>
         </div>

@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { useRouter } from 'vue-router'
 import apiFetch from '@/ofetch'
+import { useVueToPrint } from 'vue-to-print'
 import type { BookingActivity } from '@/types/BookingActivity'
 import type { Doctor } from '@/types/Doctor'
 import type { Patient } from '@/types/Patient'
@@ -40,6 +41,16 @@ async function getPoliById(id: number) {
 async function getPatientById(id: number) {
   const patient = await apiFetch<Patient>(`/patients/${id}`)
   pasien.value = patient
+}
+
+const elementToPrintRef = ref<HTMLElement | null>(null)
+const { handlePrint } = useVueToPrint({
+  content: () => elementToPrintRef.value!,
+  documentTitle: 'TIKET ANTRIAN BEROBAT',
+})
+
+function handlePrint2() {
+  handlePrint()
 }
 
 function handleArrived() {
@@ -91,6 +102,7 @@ onMounted(async () => {
       <RouterLink to="/auth/login" class="bg-slate-400 text-white rounded-md border px-3 py-0.5 text-sm hover:bg-sky-600">
         Login
       </RouterLink>
+      <button class="rounded-md bg-sky-200 px-2 py-0.5" @click="handlePrint2">Print</button>
       <h3 class="text-3xl" data-aos="fade-up">
         Antrian
       </h3>
